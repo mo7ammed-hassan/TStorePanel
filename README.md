@@ -18,11 +18,11 @@ TStore Panel is a powerful and user-friendly admin dashboard designed to manage 
 ## 🚀 Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/tstore-panel.git
+   git clone https://github.com/mo7ammed-hassan/TStorePanel
    ```
 2. Navigate to the project directory:
    ```sh
-   cd tstore-panel
+   cd TStorePanel
    ```
 3. Install dependencies:
    ```sh
@@ -40,4 +40,4 @@ Contributions are welcome! Feel free to fork this repository and submit a pull r
 This project is licensed under the **MIT License**.
 
 ## 📬 Contact
-For any inquiries, feel free to reach out via [LinkedIn](https://linkedin.com/in/yourprofile) or email at **mo7amedhassan07**.
+For any inquiries, feel free to reach out via [LinkedIn](https://linkedin.com/in/mo7ammed-hassan) or email at **mo7amedhassan07@gmail.com**.
