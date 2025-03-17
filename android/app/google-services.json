@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "1053148190415",
+    "project_id": "ecommerceapp-a2faf",
+    "storage_bucket": "ecommerceapp-a2faf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053148190415:android:0e5375830e9817ca8cc9ba",
+        "android_client_info": {
+          "package_name": "com.codingwithme.t_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053148190415-0rfsbsmrq00n9us82ro1i44o0u5alsq7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codingwithme.t_store",
+            "certificate_hash": "4e07042f23fb0f5bba553b934de44d89ddf63308"
+          }
+        },
+        {
+          "client_id": "1053148190415-so72olfvb8ta5k4701cs4mrt05p02kjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Qq_maKuVmEU8yP4T3ZkMN6Yc2ICKKlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053148190415-so72olfvb8ta5k4701cs4mrt05p02kjg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1053148190415-4m9nrn3oot22hfp7asat5907la5726h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tStoreAdminPanel"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053148190415:android:1cbffdb13e6379938cc9ba",
+        "android_client_info": {
+          "package_name": "com.example.t_store_admin_panel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053148190415-so72olfvb8ta5k4701cs4mrt05p02kjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_Qq_maKuVmEU8yP4T3ZkMN6Yc2ICKKlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053148190415-so72olfvb8ta5k4701cs4mrt05p02kjg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1053148190415-4m9nrn3oot22hfp7asat5907la5726h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tStoreAdminPanel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+
+/// A circular loader widget with customizable foreground and background colors.
+class TCircularLoader extends StatelessWidget {
+  const TCircularLoader({
+    super.key,
+    this.foregroundColor = AppColors.white,
+    this.backgroundColor = AppColors.primary,
+  });
+
+  final Color? foregroundColor;
+  final Color? backgroundColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSizes.lg),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        shape: BoxShape.circle,
+      ), // Circular background
+      child: Center(
+        child: FittedBox(
+          child: CircularProgressIndicator(
+            color: foregroundColor,
+            backgroundColor: Colors.transparent,
+          ),
+        ), // Circular loader
+      ),
+    );
+  }
+}

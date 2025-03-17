@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:t_store_admin_panel/config/routes/routes.dart';
+import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/forgot_password/forgot_password_screen.dart';
+import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/login/login_screen.dart';
+import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/reset_password/reset_password_screen.dart';
+import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
+import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
+import 'package:t_store_admin_panel/test_screen.dart';
+
+class AppRouter {
+  static final Map<String, Widget Function(BuildContext)> _routes = {
+    // Main Screen
+    Routes.dashboard: (_) => const DashboardScreen(),
+
+    // --Authentication
+    // Login
+    Routes.login: (_) => const LoginScreen(),
+    // Forgot Password
+    Routes.forgotPassword: (_) => const ForgotPasswordScreen(),
+    // Reset Password
+    Routes.resetPassword: (_) => const ResetPasswordScreen(),
+
+    // --Side Bar Menu
+    // Media
+    Routes.media: (_) => const MediaScreen(),
+    // Categories
+    Routes.categories:
+        (_) => Scaffold(appBar: AppBar(title: const Text('Categories'))),
+    // Products
+    Routes.products:
+        (_) => Scaffold(appBar: AppBar(title: const Text('Products'))),
+    // Banners
+    Routes.banners:
+        (_) => Scaffold(appBar: AppBar(title: const Text('Banners'))),
+
+
+    Routes.testScreen : (_) => const TestScreen(),    
+  };
+
+  static Route<dynamic>? generateRoute(RouteSettings settings) {
+    final Uri uri = Uri.parse(settings.name ?? '');
+    final path =
+        (uri.pathSegments.length > 1) ? '/${uri.pathSegments[0]}' : uri.path;
+
+    final pageBuilder = _routes[path];
+
+    // if (pageBuilder != null) {
+    //   return RouteMiddleware.protectRoute(settings, pageBuilder);
+    // }
+    if (pageBuilder != null) {
+      return MaterialPageRoute(builder: pageBuilder, settings: settings);
+    }
+    return null;
+  }
+}
+
+//  final String path = uri.path;
+//  final String query = uri.query;
+//  final Map<String, String> queryParams =
+//  uri.queryParameters; // {email: some@gmail.com}
+// print('Path: $path');
+// print('Query: $query'); // هتكون 'users'
+// print('Query Parameters: $queryParams'); // {email: some@gmail.com}
+// print('Path Segments: ${uri.pathSegments}'); //  [reset-password, users]
+// print(
+//   'pathOfReset: ${(uri.pathSegments.length > 1) ? uri.pathSegments[0] : ''}',
+// ); //  [reset-password, users]
+// print(
+//   'ActulyPath: ${(uri.pathSegments.length > 1) ? '/${uri.pathSegments[0]}' : ''}',
+// );
