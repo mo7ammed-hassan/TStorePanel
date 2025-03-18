@@ -5,6 +5,7 @@ import 'package:t_store_admin_panel/features/authentiacation/presentation/screen
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/reset_password/reset_password_screen.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
+import 'package:t_store_admin_panel/features/products/presentation/screens/product_screen.dart';
 import 'package:t_store_admin_panel/test_screen.dart';
 
 class AppRouter {
@@ -27,14 +28,12 @@ class AppRouter {
     Routes.categories:
         (_) => Scaffold(appBar: AppBar(title: const Text('Categories'))),
     // Products
-    Routes.products:
-        (_) => Scaffold(appBar: AppBar(title: const Text('Products'))),
+    Routes.products: (_) => const ProductScreen(),
     // Banners
     Routes.banners:
         (_) => Scaffold(appBar: AppBar(title: const Text('Banners'))),
 
-
-    Routes.testScreen : (_) => const TestScreen(),    
+    Routes.testScreen: (_) => const TestScreen(),
   };
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {

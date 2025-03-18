@@ -72,6 +72,11 @@ class Sidebar extends StatelessWidget {
                           route: Routes.banners,
                         ),
                         const MenuItem(
+                          itemName: 'Products',
+                          icon: Iconsax.shopping_bag,
+                          route: Routes.products,
+                        ),
+                        const MenuItem(
                           itemName: 'Categories',
                           icon: Iconsax.category,
                           route: Routes.categories,
