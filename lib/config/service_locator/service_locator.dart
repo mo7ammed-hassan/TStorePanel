@@ -70,7 +70,7 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<MediaCubit>(
     () => MediaCubit(getIt<MediaRepository>()),
   );
-  getIt.registerFactory<MediaActionCubit>(() => MediaActionCubit());
+  getIt.registerLazySingleton<MediaActionCubit>(() => MediaActionCubit());
 }
 
 /// 🔄 Reset the user manager after logout

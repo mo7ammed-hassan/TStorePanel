@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/errors/error_model.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
@@ -14,6 +15,7 @@ import 'package:t_store_admin_panel/core/utils/utils/popups/full_screen_loader.d
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/domain/repositories/media/media_repository.dart';
+import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
 part 'media_state.dart';
 
 class MediaCubit extends Cubit<MediaState> {
@@ -51,6 +53,7 @@ class MediaCubit extends Cubit<MediaState> {
             ? _updateCorrespondingList(category).last.createdAt ??
                 DateTime.now()
             : lastFetchTime;
+    getIt<MediaActionCubit>().resetCheckBox();
     emit(SelectedCategoryState());
   }
 

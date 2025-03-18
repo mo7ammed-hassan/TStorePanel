@@ -8,7 +8,14 @@ import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_content/build_image_list.dart';
 
 class ContentImagePreview extends StatelessWidget {
-  const ContentImagePreview({super.key});
+  const ContentImagePreview({
+    super.key,
+    required this.allowMultiSelection,
+    required this.allowSelection,
+  });
+
+  final bool allowMultiSelection;
+  final bool allowSelection;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,11 @@ class ContentImagePreview extends StatelessWidget {
 
         if (state is FetchImagesSuccessState) {
           if (state.images.isEmpty) return _buildEmptyWidget();
-          return BuildImageList(images: state.images);
+          return BuildImageList(
+            images: state.images,
+            allowMultiSelection: allowMultiSelection,
+            allowSelection: allowSelection,
+          );
         }
 
         if (state is FetchImagesFailureState) {
@@ -43,7 +54,11 @@ class ContentImagePreview extends StatelessWidget {
 
         return (mediaCubit.selectedPath == MediaCategory.folders)
             ? _buildEmptyWidget()
-            : BuildImageList(images: images);
+            : BuildImageList(
+              images: images,
+              allowMultiSelection: allowMultiSelection,
+              allowSelection: allowSelection,
+            );
       },
     );
   }

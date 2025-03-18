@@ -7,21 +7,23 @@ import 'package:t_store_admin_panel/features/media/presentation/widget/media_upl
 /// This widget is used to toggle the media uploader section
 /// Depends on [MediaActionCubit] if showMediaUploaderSection is true then show the media uploader
 class MediaUploaderSection extends StatelessWidget {
-  const MediaUploaderSection({super.key});
-
+  const MediaUploaderSection({super.key, this.showUploderSection = false});
+  final bool showUploderSection;
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<MediaActionCubit, MediaActionState, bool>(
-      selector: (state) {
-        return state is ToggleMediaUploaderSection
-            ? state.showMediaUploaderSection
-            : context.read<MediaActionCubit>().showMediaUploaderSection;
-      },
-      builder: (context, showUploader) {
-        if (!showUploader) return const SizedBox.shrink();
+    return showUploderSection
+        ? const BuildMediaUploader()
+        : BlocSelector<MediaActionCubit, MediaActionState, bool>(
+          selector: (state) {
+            return state is ToggleMediaUploaderSection
+                ? state.showMediaUploaderSection
+                : context.read<MediaActionCubit>().showMediaUploaderSection;
+          },
+          builder: (context, showUploader) {
+            if (!showUploader) return const SizedBox.shrink();
 
-        return const BuildMediaUploader();
-      },
-    );
+            return const BuildMediaUploader();
+          },
+        );
   }
 }

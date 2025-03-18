@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
@@ -91,7 +92,7 @@ class TRoundedImage extends StatelessWidget {
               width: 75,
               shapeBorder: CircleBorder(),
             ),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+        errorWidget: (context, url, error) => const Icon(Iconsax.image),
       );
     } else {
       return Container();

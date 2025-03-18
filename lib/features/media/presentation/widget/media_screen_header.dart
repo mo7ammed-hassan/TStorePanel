@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store_admin_panel/core/shared/bottom_sheets/media_buttom_sheet.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
@@ -37,6 +38,14 @@ class MediaScreenHeader extends StatelessWidget {
               ),
               label: const FittedBox(child: Text('Upload Images')),
             ),
+          ),
+        ),
+
+        SizedBox(
+          width: AppSizes.buttonWidth * 1.5,
+          child: ElevatedButton(
+            onPressed: () => showMediaButtomSheet(context),
+            child: const Text('Show Media Sheet'),
           ),
         ),
       ],
