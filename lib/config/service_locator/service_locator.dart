@@ -67,7 +67,9 @@ void setupServiceLocator() {
   );
 
   // Manger
-  getIt.registerFactory<MediaCubit>(() => MediaCubit(getIt<MediaRepository>()));
+  getIt.registerLazySingleton<MediaCubit>(
+    () => MediaCubit(getIt<MediaRepository>()),
+  );
   getIt.registerFactory<MediaActionCubit>(() => MediaActionCubit());
 }
 

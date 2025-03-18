@@ -14,20 +14,20 @@ class BuildDragAndDropArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoundedContainer(
+    return const RoundedContainer(
       height: 250,
       width: double.infinity,
       showBorder: true,
       backgroundColor: AppColors.primaryBackground,
-      padding: const EdgeInsets.all(AppSizes.defaultSpace),
+      padding: EdgeInsets.all(AppSizes.defaultSpace),
       child: Column(
         children: [
           Expanded(
             child: Stack(
               children: [
-                if (kIsWeb) const WebDropzone(),
+                if (kIsWeb) WebDropzone(),
                 // if (_isDesktop && !kIsWeb) const DesktopDropTarget(),
-                if (!kIsWeb && _isDesktop) const MobileDropTarget(),
+                if (!kIsWeb) MobileDropTarget(),
               ],
             ),
           ),
@@ -36,10 +36,10 @@ class BuildDragAndDropArea extends StatelessWidget {
     );
   }
 
-  bool get _isDesktop =>
-      (defaultTargetPlatform == TargetPlatform.windows ||
-          defaultTargetPlatform == TargetPlatform.linux ||
-          defaultTargetPlatform == TargetPlatform.macOS);
+  // bool get _isDesktop =>
+  //     (defaultTargetPlatform == TargetPlatform.windows ||
+  //         defaultTargetPlatform == TargetPlatform.linux ||
+  //         defaultTargetPlatform == TargetPlatform.macOS);
 }
 
 class WebDropzone extends StatelessWidget {
