@@ -9,7 +9,7 @@ class MediaActionCubit extends Cubit<MediaActionState> {
   bool showMediaUploaderSection = false;
 
   final List<ImageModel> selectedImages = [];
-  // List<ImageModel> multiSelectionImages = [];
+  List<ImageModel> multiSelectionImages = [];
 
   void toggleMediaUploaderSection() {
     showMediaUploaderSection = !showMediaUploaderSection;
@@ -51,9 +51,10 @@ class MediaActionCubit extends Cubit<MediaActionState> {
         selectedImages.remove(image);
         emit(ToggleImageCheckBox(image));
       }
-      // if (allowMultibleSelection) {
-      //   multiSelectionImages = List.from(selectedImages);
-      // }
+
+      if (allowMultibleSelection) {
+        multiSelectionImages = List.from(selectedImages);
+      }
     }
 
     // debugPrint('Multi Selection Images Length: ${multiSelectionImages.length}');
@@ -73,5 +74,15 @@ class MediaActionCubit extends Cubit<MediaActionState> {
   void resetSelectedImages() {
     selectedImages.clear();
     debugPrint('Selected Images Length: ${selectedImages.length}');
+  }
+
+  /// Use it when add multiple images
+  void pickc() {
+    for (var image in multiSelectionImages) {
+      image.isSelected = true;
+      emit(ToggleImageCheckBox(image));
+    }
+    selectedImages.clear();
+    selectedImages.addAll(multiSelectionImages);
   }
 }

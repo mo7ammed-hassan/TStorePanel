@@ -46,6 +46,8 @@ class ProductCubit extends Cubit<ProductState> {
 
   /// -- Select Additional Images --
   void selectAdditionalImage() async {
+    //
+    mediaActionCubit.pickc();
     // pass select additional images from bottom sheet
     final List<ImageModel>? selectedImages = await mediaCubit
         .selectionImagesFromMedia(
