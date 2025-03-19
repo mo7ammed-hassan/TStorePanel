@@ -6,11 +6,12 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 class EditCategoryForm extends StatelessWidget {
   const EditCategoryForm({super.key,  this.category});
 
-  final String? category;
+  final CategoryModel? category;
 
   @override
   Widget build(BuildContext context) {

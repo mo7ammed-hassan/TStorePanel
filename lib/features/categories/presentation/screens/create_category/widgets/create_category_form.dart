@@ -9,6 +9,7 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.da
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
 import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 class CreateCategoryForm extends StatelessWidget {
   const CreateCategoryForm({super.key});
@@ -65,7 +66,7 @@ class CreateCategoryForm extends StatelessWidget {
               onIconButtonPressed:
                   () => context.pushNamedPage(
                     Routes.editCategory,
-                    arguments: 'category',
+                    arguments: CategoryModel.empty(),
                   ),
             ),
 
