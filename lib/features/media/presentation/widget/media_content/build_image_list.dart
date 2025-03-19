@@ -73,15 +73,20 @@ class BuildImageList extends StatelessWidget {
                         >(
                           selector: (state) {
                             if (state is ToggleImageCheckBox) {
-                              return state.selectedImagesCheckBox.contains(
-                                image,
-                              );
+                              if (state.selectedImageVal == image) {
+                                return state.selectedImageVal.isSelected;
+                              }
+                              return image.isSelected;
+                            } else {
+                              return image.isSelected;
                             }
-                            return false;
                           },
                           builder: (context, isSelected) {
+                            debugPrint(
+                              'isSelected: $isSelected ${image.fileName}',
+                            );
                             return Checkbox(
-                              value: isSelected,
+                              value: image.isSelected,
                               onChanged: (select) {
                                 context
                                     .read<MediaActionCubit>()

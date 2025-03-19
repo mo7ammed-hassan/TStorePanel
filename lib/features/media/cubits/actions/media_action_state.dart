@@ -11,7 +11,11 @@ final class ToggleMediaUploaderSection extends MediaActionState {
 }
 
 final class ToggleImageCheckBox extends MediaActionState {
-  final List<ImageModel> selectedImagesCheckBox;
+  // final List<ImageModel> selectedImagesCheckBox;
 
-  ToggleImageCheckBox(this.selectedImagesCheckBox);
+  // ToggleImageCheckBox(this.selectedImagesCheckBox);
+
+  final ImageModel selectedImageVal;
+
+  ToggleImageCheckBox(this.selectedImageVal);
 }

@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/errors/error_model.dart';
+import 'package:t_store_admin_panel/core/shared/bottom_sheets/media_buttom_sheet.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
@@ -15,7 +15,6 @@ import 'package:t_store_admin_panel/core/utils/utils/popups/full_screen_loader.d
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/domain/repositories/media/media_repository.dart';
-import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
 part 'media_state.dart';
 
 class MediaCubit extends Cubit<MediaState> {
@@ -53,7 +52,12 @@ class MediaCubit extends Cubit<MediaState> {
             ? _updateCorrespondingList(category).last.createdAt ??
                 DateTime.now()
             : lastFetchTime;
-    getIt<MediaActionCubit>().resetCheckBox();
+    // we can handle reset checkbox to remove any selection when change category
+    // and also we can keep it without reset selection to be able to select from any where
+    // getIt<MediaActionCubit>().resetCheckBox();
+    // getIt<MediaActionCubit>().resetSelectedImages();
+
+    // emit selected category
     emit(SelectedCategoryState());
   }
 
@@ -562,4 +566,17 @@ class MediaCubit extends Cubit<MediaState> {
   }
 
   /// -------  // ------- End of Delete Image -------  // -------
+  ///
+  /// Image Selection Bottom Sheet
+  Future<List<ImageModel>?> selectionImagesFromMedia({
+    bool allowMultiSelection = false,
+    List<String>? selectedImagesUrls = const [],
+  }) async {
+    return await showMediaButtomSheet(
+          AppContext.context,
+          allowMultiSelection: allowMultiSelection,
+          selectedImagesUrls: selectedImagesUrls,
+        ) ??
+        [];
+  }
 }

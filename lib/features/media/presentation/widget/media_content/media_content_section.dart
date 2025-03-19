@@ -17,8 +17,8 @@ class MediaContentSection extends StatelessWidget {
 
   final bool allowSelection;
   final bool allowMultiSelection;
-  final List<String> selectedImagesUrls;
-  final List<ImageModel> selectedImages;
+  final List<String>? selectedImagesUrls;
+  final List<ImageModel>? selectedImages;
   final Function(List<ImageModel>)? onSelectedImages;
 
   @override
@@ -30,7 +30,7 @@ class MediaContentSection extends StatelessWidget {
           /// Media Images Header
           MediaContentHeader(
             allowSelection: allowSelection,
-            selectedImages: selectedImages,
+            selectedImages: selectedImages ?? [],
           ),
           const SizedBox(height: AppSizes.spaceBtwSections),
 

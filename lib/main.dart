@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/app.dart';
+import 'package:t_store_admin_panel/bloc_observier.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentaication_local_data_source.dart';
 import 'package:t_store_admin_panel/data/services/user/user_manager.dart';
@@ -37,6 +39,9 @@ void main() async {
 
   // Check If User Is Aleady Logged In
   await AuthLocalDataSource.isLoggedIn();
+
+  // Bloc Observers
+  Bloc.observer = MyBlocObserver();
 
   // Main App Start
   runApp(const MyApp());
