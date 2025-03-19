@@ -26,7 +26,7 @@ class ProductDesktopScreen extends StatelessWidget {
                       width: AppSizes.buttonWidth * 1.5,
                       child: ElevatedButton(
                         onPressed: () => showMediaButtomSheet(context),
-                        child: FittedBox(child: const Text('Show Media Sheet')),
+                        child: const FittedBox(child: Text('Show Media Sheet')),
                       ),
                     ),
                   ),
@@ -40,7 +40,7 @@ class ProductDesktopScreen extends StatelessWidget {
                                 context
                                     .read<ProductCubit>()
                                     .selectThumbnailImage(),
-                        child: FittedBox(child: const Text('Slect Thumbnail')),
+                        child: const FittedBox(child: Text('Slect Thumbnail')),
                       ),
                     ),
                   ),
@@ -54,8 +54,8 @@ class ProductDesktopScreen extends StatelessWidget {
                                 context
                                     .read<ProductCubit>()
                                     .selectAdditionalImage(),
-                        child: FittedBox(
-                          child: const Text('Select Product Images'),
+                        child: const FittedBox(
+                          child: Text('Select Product Images'),
                         ),
                       ),
                     ),

@@ -3,6 +3,9 @@ import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/forgot_password/forgot_password_screen.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/login/login_screen.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/reset_password/reset_password_screen.dart';
+import 'package:t_store_admin_panel/features/categories/presentation/screens/all_categories/category_screen.dart';
+import 'package:t_store_admin_panel/features/categories/presentation/screens/create_category/create_category_screen.dart';
+import 'package:t_store_admin_panel/features/categories/presentation/screens/edit_category/edit_category_screen.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/product_screen.dart';
@@ -25,8 +28,9 @@ class AppRouter {
     // Media
     Routes.media: (_) => const MediaScreen(),
     // Categories
-    Routes.categories:
-        (_) => Scaffold(appBar: AppBar(title: const Text('Categories'))),
+    Routes.categories: (_) => const CategoryScreen(),
+    Routes.editCategory: (_) => const EditCategoryScreen(),
+    Routes.createCategory: (_) => const CreateCategoryScreen(),
     // Products
     Routes.products: (_) => const ProductScreen(),
     // Banners

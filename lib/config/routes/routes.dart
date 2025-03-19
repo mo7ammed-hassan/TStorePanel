@@ -5,6 +5,8 @@ class Routes {
   static const String resetPassword = '/reset-password';
   // Sidebar Routes
   static const String categories = '/categories';
+  static const String editCategory = '/edit-category';
+  static var createCategory = '/create-category';
   static const String products = '/products';
   static const String banners = '/banners';
   static const String media = '/media';
@@ -19,7 +21,6 @@ class Routes {
     products,
     banners,
   ];
-
   // Test Screen
   static const String testScreen = '/test-screen';
 }
