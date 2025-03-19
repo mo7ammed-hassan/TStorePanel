@@ -19,6 +19,8 @@ Future<List<ImageModel>?> showMediaButtomSheet(
   List<ImageModel>? selectedImages = await showModalBottomSheet(
     isScrollControlled: true,
     backgroundColor: isDark ? Colors.black : AppColors.primaryBackground,
+    useSafeArea: true,
+    // enableDrag: true,
     context: context,
     builder: (context) {
       return BlocProvider.value(

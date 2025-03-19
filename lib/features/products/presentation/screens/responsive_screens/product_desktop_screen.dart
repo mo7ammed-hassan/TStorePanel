@@ -26,7 +26,7 @@ class ProductDesktopScreen extends StatelessWidget {
                       width: AppSizes.buttonWidth * 1.5,
                       child: ElevatedButton(
                         onPressed: () => showMediaButtomSheet(context),
-                        child: const Text('Show Media Sheet'),
+                        child: FittedBox(child: const Text('Show Media Sheet')),
                       ),
                     ),
                   ),
@@ -40,7 +40,7 @@ class ProductDesktopScreen extends StatelessWidget {
                                 context
                                     .read<ProductCubit>()
                                     .selectThumbnailImage(),
-                        child: const Text('Slect Thumbnail'),
+                        child: FittedBox(child: const Text('Slect Thumbnail')),
                       ),
                     ),
                   ),
@@ -54,7 +54,9 @@ class ProductDesktopScreen extends StatelessWidget {
                                 context
                                     .read<ProductCubit>()
                                     .selectAdditionalImage(),
-                        child: const Text('Select Product Images'),
+                        child: FittedBox(
+                          child: const Text('Select Product Images'),
+                        ),
                       ),
                     ),
                   ),
@@ -70,15 +72,19 @@ class ProductDesktopScreen extends StatelessWidget {
                 buildWhen:
                     (previous, current) => current is SelectedThumbnailImage,
                 builder: (context, state) {
-                  return SizedBox(
-                    width: 200,
-                    height: 200,
-                    child: Image.network(
-                      context.read<ProductCubit>().selectedThumbnailImageUrl ??
-                          '',
-                      errorBuilder:
-                          (context, error, stackTrace) =>
-                              const Icon(Iconsax.image),
+                  return Flexible(
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 200,
+                      child: Image.network(
+                        context
+                                .read<ProductCubit>()
+                                .selectedThumbnailImageUrl ??
+                            '',
+                        errorBuilder:
+                            (context, error, stackTrace) =>
+                                const Icon(Iconsax.image),
+                      ),
                     ),
                   );
                 },
@@ -106,8 +112,8 @@ class ProductDesktopScreen extends StatelessWidget {
                               state.additionalProductImagesUrls
                                   .map(
                                     (e) => SizedBox(
-                                      width: 200,
-                                      height: 200,
+                                      width: 150,
+                                      height: 150,
                                       child: Image.network(e),
                                     ),
                                   )
