@@ -16,7 +16,7 @@ class BannerDataTable extends StatelessWidget {
       columns: const [
         DataColumn2(label: Text('Banner')),
         DataColumn2(label: Text('Redirect Screen')),
-        DataColumn2(label: Text('Active')),
+        DataColumn2(label: Text('Active'), fixedWidth: 50),
         DataColumn2(label: Text('Action'), fixedWidth: 100),
       ],
       source: BannerRows(),

@@ -18,9 +18,9 @@ class BrandDataTable extends StatelessWidget {
           fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,
         ),
         const DataColumn2(label: Text('Categories')),
-        DataColumn2(
-          label: const Text('Featured'),
-          fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 100,
+        const DataColumn2(
+          label: Text('Featured'),
+          fixedWidth: 50,
         ),
         DataColumn2(
           label: const Text('Date'),
