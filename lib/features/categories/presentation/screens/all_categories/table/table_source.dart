@@ -10,6 +10,7 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.da
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 class CategoryRows extends DataTableSource {
   @override
@@ -49,7 +50,7 @@ class CategoryRows extends DataTableSource {
             onEditPressed:
                 () => AppContext.context.pushNamedPage(
                   Routes.editCategory,
-                  arguments: 'Category',
+                  arguments: CategoryModel.empty(),
                 ),
             onDeletePressed: () {},
           ),

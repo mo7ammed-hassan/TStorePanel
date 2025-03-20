@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 
 class TableHeader extends StatelessWidget {
   final Function()? onPressed;
@@ -24,21 +25,25 @@ class TableHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
+        Flexible(
           flex: DeviceUtility.isDesktopScreen(context) ? 3 : 1,
           child: Row(
             children: [
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  child: Text(buttonText),
+              Flexible(
+                child: FittedBox(
+                  child: SizedBox(
+                    //width: 200,
+                    child: ElevatedButton(
+                      onPressed: onPressed,
+                      child: FittedBox(child: Text(buttonText)),
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
         ),
-
+        const SizedBox(width: AppSizes.md),
         Expanded(
           flex: DeviceUtility.isDesktopScreen(context) ? 2 : 1,
           child: TextFormField(

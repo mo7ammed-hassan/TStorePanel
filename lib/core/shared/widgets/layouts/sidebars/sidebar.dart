@@ -81,6 +81,11 @@ class Sidebar extends StatelessWidget {
                           icon: Iconsax.category,
                           route: Routes.categories,
                         ),
+                        const MenuItem(
+                          itemName: 'Brands',
+                          icon: Iconsax.dcube,
+                          route: Routes.brands,
+                        ),
                         GestureDetector(
                           onTap: () => getIt<UserCubit>().signOut(),
                           child: const MenuItem(

@@ -3,6 +3,9 @@ import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/forgot_password/forgot_password_screen.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/login/login_screen.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/screens/reset_password/reset_password_screen.dart';
+import 'package:t_store_admin_panel/features/banners/presentation/screens/all_brands/brand_screen.dart';
+import 'package:t_store_admin_panel/features/banners/presentation/screens/create_brands/create_brand_screen.dart';
+import 'package:t_store_admin_panel/features/banners/presentation/screens/edit_brands/edit_brand_screen.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/all_categories/category_screen.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/create_category/create_category_screen.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/edit_category/edit_category_screen.dart';
@@ -34,8 +37,11 @@ class AppRouter {
     // Products
     Routes.products: (_) => const ProductScreen(),
     // Banners
-    Routes.banners:
-        (_) => Scaffold(appBar: AppBar(title: const Text('Banners'))),
+    Routes.banners: (_) =>  Container(),
+    // Brands
+    Routes.brands: (_) => const BrandScreen(),
+    Routes.editBrand: (_) => const EditBrandScreen(),
+    Routes.createBrand: (_) => const CreateBrandScreen(),
 
     Routes.testScreen: (_) => const TestScreen(),
   };

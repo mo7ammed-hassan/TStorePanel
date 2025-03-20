@@ -19,7 +19,7 @@ class MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final menuCubit = context.read<SidebarCubit>();
     return InkWell(
-      onTap:  () => menuCubit.menuOnTap(context, route),
+      onTap: () => menuCubit.menuOnTap(context, route),
       onHover:
           (hovering) =>
               hovering

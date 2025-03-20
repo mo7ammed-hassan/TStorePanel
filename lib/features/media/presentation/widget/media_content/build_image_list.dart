@@ -115,12 +115,11 @@ class BuildImageList extends StatelessWidget {
         // To make button in center
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: AppSizes.buttonWidth + 10,
+          Flexible(
             child: ElevatedButton.icon(
               onPressed: () async => mediaCubit.fetchMoreImages(10),
               icon: const Icon(Iconsax.arrow_down, color: AppColors.white),
-              label: const Text('Load More'),
+              label: const FittedBox(child: Text('Load More')),
             ),
           ),
         ],

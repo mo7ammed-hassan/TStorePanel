@@ -7,9 +7,16 @@ class Routes {
   static const String categories = '/categories';
   static const String editCategory = '/edit-category';
   static var createCategory = '/create-category';
+
   static const String products = '/products';
+
   static const String banners = '/banners';
+
   static const String media = '/media';
+
+  static const String brands = '/brands';
+  static const String createBrand = '/create-brand';
+  static const String editBrand = '/edit-brand';
 
   static const String dashboard = '/dashboard';
 
@@ -18,6 +25,7 @@ class Routes {
     dashboard,
     media,
     categories,
+    brands,
     products,
     banners,
   ];
