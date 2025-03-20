@@ -5,10 +5,10 @@ import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_conta
 import 'package:t_store_admin_panel/core/shared/widgets/data_table/table_header.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
-import 'package:t_store_admin_panel/features/banners/presentation/screens/all_brands/table/data_table.dart';
+import 'package:t_store_admin_panel/features/banners/presentation/screens/all_banners/table/data_table.dart';
 
-class BrandDesktopScreen extends StatelessWidget {
-  const BrandDesktopScreen({super.key});
+class BannerDesktopScreen extends StatelessWidget {
+  const BannerDesktopScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class BrandDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const BreadcrumbWithHeading(
-                heading: 'Brands',
-                breadcrumbs: ['Brands'],
+                heading: 'Banners',
+                breadcrumbs: ['Banners'],
               ),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
@@ -29,14 +29,14 @@ class BrandDesktopScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TableHeader(
-                      buttonText: 'Create New Brand',
+                      buttonText: 'Create New Banners',
                       onPressed:
-                          () => context.pushNamedPage(Routes.createBrand),
+                          () => context.pushNamedPage(Routes.createBanner),
                     ),
                     const SizedBox(height: AppSizes.spaceBtwItems),
 
                     // table
-                    const BrandDataTable(),
+                    const BannerDataTable(),
                   ],
                 ),
               ),

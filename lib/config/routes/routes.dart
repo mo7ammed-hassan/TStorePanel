@@ -11,6 +11,8 @@ class Routes {
   static const String products = '/products';
 
   static const String banners = '/banners';
+  static const String createBanner = '/create-banner';
+  static const String editBanner = '/edit-banner';
 
   static const String media = '/media';
 

@@ -1,7 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/features/banners/presentation/screens/all_brands/table/table_scource.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/screens/all_brands/table/table_scource.dart';
 import 'package:t_store_admin_panel/features/dashboard/widgets/tables/custom_paginated_table.dart';
 
 class BrandDataTable extends StatelessWidget {

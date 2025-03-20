@@ -5,7 +5,7 @@ import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_conta
 import 'package:t_store_admin_panel/core/shared/widgets/data_table/table_header.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
-import 'package:t_store_admin_panel/features/banners/presentation/screens/all_brands/table/data_table.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/screens/all_brands/table/data_table.dart';
 
 class BrandTabletScreen extends StatelessWidget {
   const BrandTabletScreen({super.key});
