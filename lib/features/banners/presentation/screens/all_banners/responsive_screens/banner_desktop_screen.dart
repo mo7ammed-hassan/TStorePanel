@@ -29,7 +29,7 @@ class BannerDesktopScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TableHeader(
-                      buttonText: 'Create New Banners',
+                      buttonText: 'Create New Banner',
                       onPressed:
                           () => context.pushNamedPage(Routes.createBanner),
                     ),

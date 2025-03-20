@@ -25,7 +25,7 @@ class EditBannerDesktopScreen extends StatelessWidget {
               SizedBox(height: AppSizes.spaceBtwSections),
 
               // Form
-               EditBannerForm(),
+              EditBannerForm(),
             ],
           ),
         ),

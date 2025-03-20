@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/responsive_screens/widgets/edit_brand_form.dart';
+import 'package:t_store_admin_panel/features/banners/presentation/screens/edit_banners/responsive_screens/widgets/edit_banner_form.dart';
 
 class EditBannerMobileScreen extends StatelessWidget {
   const EditBannerMobileScreen({super.key});
@@ -25,7 +25,7 @@ class EditBannerMobileScreen extends StatelessWidget {
               SizedBox(height: AppSizes.spaceBtwSections),
 
               // Form
-              EditBrandForm(),
+              EditBannerForm(),
             ],
           ),
         ),

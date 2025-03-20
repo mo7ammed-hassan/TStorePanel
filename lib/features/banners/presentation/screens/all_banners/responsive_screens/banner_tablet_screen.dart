@@ -29,14 +29,14 @@ class BannerTabletScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TableHeader(
-                      buttonText: 'Create New Banners',
+                      buttonText: 'Create New Banner',
                       onPressed:
                           () => context.pushNamedPage(Routes.createBanner),
                     ),
                     const SizedBox(height: AppSizes.spaceBtwItems),
 
                     // table
-                  const BannerDataTable(),
+                    const BannerDataTable(),
                   ],
                 ),
               ),
