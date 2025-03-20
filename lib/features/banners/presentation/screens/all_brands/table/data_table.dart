@@ -17,11 +17,11 @@ class BrandDataTable extends StatelessWidget {
           label: const Text('Brand'),
           fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,
         ),
+        const DataColumn2(label: Text('Categories')),
         DataColumn2(
-          label: const Text('Categories'),
-          fixedWidth: DeviceUtility.isMobileScreen(context) ? 160 : null,
+          label: const Text('Featured'),
+          fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 100,
         ),
-        const DataColumn2(label: Text('Featured')),
         DataColumn2(
           label: const Text('Date'),
           fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,

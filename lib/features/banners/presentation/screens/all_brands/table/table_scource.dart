@@ -46,41 +46,48 @@ class BrandRows extends DataTableSource {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: AppSizes.sm),
             child: SingleChildScrollView(
-              scrollDirection:
-                  DeviceUtility.isMobileScreen(AppContext.context)
-                      ? Axis.horizontal
-                      : Axis.vertical,
-              child: const Wrap(
+              child: Wrap(
+                spacing: AppSizes.xs,
+                direction:
+                    DeviceUtility.isMobileScreen(AppContext.context)
+                        ? Axis.vertical
+                        : Axis.horizontal,
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      bottom: AppSizes.xs,
-                      right: AppSizes.xs,
+                      bottom:
+                          DeviceUtility.isMobileScreen(AppContext.context)
+                              ? 0
+                              : AppSizes.xs,
                     ),
 
-                    child: Chip(
+                    child: const Chip(
                       label: Text('Shoes'),
                       padding: EdgeInsets.all(AppSizes.xs),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      bottom: AppSizes.xs,
-                      right: AppSizes.xs,
+                      bottom:
+                          DeviceUtility.isMobileScreen(AppContext.context)
+                              ? 0
+                              : AppSizes.xs,
                     ),
 
-                    child: Chip(
+                    child: const Chip(
                       label: Text('tracksuits'),
                       padding: EdgeInsets.all(AppSizes.xs),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      bottom: AppSizes.xs,
-                      right: AppSizes.xs,
+                      bottom:
+                          DeviceUtility.isMobileScreen(AppContext.context)
+                              ? 0
+                              : AppSizes.xs,
                     ),
 
-                    child: Chip(
+                    child: const Chip(
                       label: Text('joggers'),
                       padding: EdgeInsets.all(AppSizes.xs),
                     ),
@@ -90,22 +97,14 @@ class BrandRows extends DataTableSource {
             ),
           ),
         ),
-        DataCell(
-          Padding(
-            padding:
-                DeviceUtility.isMobileScreen(AppContext.context)
-                    ? const EdgeInsets.only(left: 10)
-                    : const EdgeInsets.all(0),
-            child: const Icon(Iconsax.heart5, color: AppColors.primary),
-          ),
-        ),
+        const DataCell(Icon(Iconsax.heart5, color: AppColors.primary)),
         DataCell(Text(DateTime.now().toString())),
         DataCell(
           TTableActionButtons(
             onEditPressed:
                 () => AppContext.context.pushNamedPage(
                   Routes.editBrand,
-                  arguments: 'Brand',
+                  //arguments: 'Brand',
                 ),
             onDeletePressed: () {},
           ),
