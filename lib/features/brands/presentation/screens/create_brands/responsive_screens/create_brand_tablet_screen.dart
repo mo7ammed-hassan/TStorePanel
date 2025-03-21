@@ -20,7 +20,7 @@ class CreateBrandTabletScreen extends StatelessWidget {
               BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
                 heading: 'Create Brand',
-                breadcrumbs: [Routes.categories, 'Create Brand'],
+                breadcrumbs: [Routes.brands, 'Create Brand'],
               ),
               SizedBox(height: AppSizes.spaceBtwSections),
 

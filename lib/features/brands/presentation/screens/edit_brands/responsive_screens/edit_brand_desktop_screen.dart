@@ -20,7 +20,7 @@ class EditBrandDesktopScreen extends StatelessWidget {
               BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
                 heading: 'Update Brand',
-                breadcrumbs: [Routes.categories, 'Update Brand'],
+                breadcrumbs: [Routes.brands, 'Update Brand'],
               ),
               SizedBox(height: AppSizes.spaceBtwSections),
 

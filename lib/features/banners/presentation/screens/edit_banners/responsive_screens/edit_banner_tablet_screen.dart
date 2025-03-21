@@ -20,7 +20,7 @@ class EditBannerTabletScreen extends StatelessWidget {
               BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
                 heading: 'Update Banner',
-                breadcrumbs: [Routes.categories, 'Update Banner'],
+                breadcrumbs: [Routes.banners, 'Update Banner'],
               ),
               SizedBox(height: AppSizes.spaceBtwSections),
 

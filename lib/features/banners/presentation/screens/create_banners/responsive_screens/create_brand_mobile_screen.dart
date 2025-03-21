@@ -20,7 +20,7 @@ class CreateBannerMobileScreen extends StatelessWidget {
               BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
                 heading: 'Create Banner',
-                breadcrumbs: [Routes.categories, 'Create Banner'],
+                breadcrumbs: [Routes.banners, 'Create Banner'],
               ),
               SizedBox(height: AppSizes.spaceBtwSections),
 
