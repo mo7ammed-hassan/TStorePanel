@@ -20,7 +20,7 @@ class BrandDataTable extends StatelessWidget {
         const DataColumn2(label: Text('Categories')),
         const DataColumn2(
           label: Text('Featured'),
-          fixedWidth: 50,
+          fixedWidth: 100,
         ),
         DataColumn2(
           label: const Text('Date'),

@@ -13,11 +13,14 @@ class BannerDataTable extends StatelessWidget {
       minWidth: 700,
       tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
       dataRowHeight: 110,
-      columns: const [
-        DataColumn2(label: Text('Banner')),
-        DataColumn2(label: Text('Redirect Screen')),
-        DataColumn2(label: Text('Active'), fixedWidth: 50),
-        DataColumn2(label: Text('Action'), fixedWidth: 100),
+      columns: [
+        const DataColumn2(label: Text('Banner'), fixedWidth: 230),
+        DataColumn2(
+          label: const Text('Redirect Screen'),
+          fixedWidth: DeviceUtility.isMobileScreen(context) ? 200 : null,
+        ),
+        const DataColumn2(label: Text('Active'), fixedWidth: 100),
+        const DataColumn2(label: Text('Action'), fixedWidth: 100),
       ],
       source: BannerRows(),
     );

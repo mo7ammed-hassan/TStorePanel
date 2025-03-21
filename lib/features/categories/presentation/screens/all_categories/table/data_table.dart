@@ -15,7 +15,7 @@ class CategoryDataTable extends StatelessWidget {
       columns: const [
         DataColumn2(label: Text('Category')),
         DataColumn2(label: Text('Parent Category')),
-        DataColumn2(label: Text('Featured')),
+        DataColumn2(label: Text('Featured'), fixedWidth: 100),
         DataColumn2(label: Text('Date')),
         DataColumn2(label: Text('Action'), fixedWidth: 100),
       ],

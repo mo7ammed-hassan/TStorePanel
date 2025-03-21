@@ -18,6 +18,6 @@ class MediaScreen extends StatelessWidget {
         BlocProvider.value(value: getIt<MediaActionCubit>()),
       ],
       child: const SiteTemplate(desktop: MediaDesktopScreen()),
-    );
+    );  
   }
 }

@@ -82,7 +82,7 @@ class BreadcrumbWithHeading extends StatelessWidget {
               ),
             if (returnToPreviousScreen)
               const SizedBox(width: AppSizes.spaceBtwItems),
-            PageHeading(heading: heading),
+            Expanded(child: PageHeading(heading: heading)),
           ],
         ),
       ],

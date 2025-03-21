@@ -9,7 +9,14 @@ class PageHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(heading, style: Theme.of(context).textTheme.headlineLarge),
+        Flexible(
+          child: FittedBox(
+            child: Text(
+              heading,
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+          ),
+        ),
         rightSideWidget ?? const SizedBox(),
       ],
     );
