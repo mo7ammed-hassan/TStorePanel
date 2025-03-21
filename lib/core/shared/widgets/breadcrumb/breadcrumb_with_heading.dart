@@ -31,43 +31,48 @@ class BreadcrumbWithHeading extends StatelessWidget {
         // Breadcrumb trail
         Row(
           children: [
-            InkWell(
-              onTap:
-                  () => context.pushNamedAndRemoveUntilPage(Routes.dashboard),
-              child: Padding(
-                padding: const EdgeInsets.all(AppSizes.xs),
-                child: Text(
-                  'Dashboard',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodySmall!.apply(fontWeightDelta: -1),
+            FittedBox(
+              child: InkWell(
+                onTap:
+                    () =>
+                        context.pushNamedAndRemoveUntilPage(Routes.dashboard),
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSizes.xs),
+                  child: Text(
+                    'Dashboard',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall!.apply(fontWeightDelta: -1),
+                  ),
                 ),
               ),
             ),
             for (int i = 0; i < breadcrumbs.length; i++)
-              Row(
-                children: [
-                  const Text('/'), // Separator
-                  InkWell(
-                    onTap:
-                        i == breadcrumbs.length - 1
-                            ? null
-                            : () => context.pushNamedPage(breadcrumbs[i]),
-
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppSizes.xs),
-                      // Format the breadcrumb item capitalize and remove leading '/'
-                      child: Text(
-                        i == breadcrumbs.length - 1
-                            ? breadcrumbs[i].capitalize.toString()
-                            : capitalize(breadcrumbs[i].substring(1)),
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodySmall!.apply(fontWeightDelta: -1),
+              FittedBox(
+                child: Row(
+                  children: [
+                    const Text('/'), // Separator
+                    InkWell(
+                      onTap:
+                          i == breadcrumbs.length - 1
+                              ? null
+                              : () => context.pushNamedPage(breadcrumbs[i]),
+              
+                      child: Padding(
+                        padding: const EdgeInsets.all(AppSizes.xs),
+                        // Format the breadcrumb item capitalize and remove leading '/'
+                        child: Text(
+                          i == breadcrumbs.length - 1
+                              ? breadcrumbs[i].capitalize.toString()
+                              : capitalize(breadcrumbs[i].substring(1)),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall!.apply(fontWeightDelta: -1),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
           ],
         ),
@@ -82,7 +87,7 @@ class BreadcrumbWithHeading extends StatelessWidget {
               ),
             if (returnToPreviousScreen)
               const SizedBox(width: AppSizes.spaceBtwItems),
-            Expanded(child: PageHeading(heading: heading)),
+            PageHeading(heading: heading),
           ],
         ),
       ],
