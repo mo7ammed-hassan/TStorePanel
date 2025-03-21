@@ -32,7 +32,7 @@ class TableHeader extends StatelessWidget {
               Flexible(
                 child: FittedBox(
                   child: SizedBox(
-                    //width: 200,
+                    width: DeviceUtility.isMobileScreen(context) ? null : 200,
                     child: ElevatedButton(
                       onPressed: onPressed,
                       child: FittedBox(child: Text(buttonText)),

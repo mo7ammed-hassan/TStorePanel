@@ -67,16 +67,6 @@ class Sidebar extends StatelessWidget {
                           route: Routes.media,
                         ),
                         const MenuItem(
-                          itemName: 'Banners',
-                          icon: Iconsax.picture_frame,
-                          route: Routes.banners,
-                        ),
-                        const MenuItem(
-                          itemName: 'Products',
-                          icon: Iconsax.shopping_bag,
-                          route: Routes.products,
-                        ),
-                        const MenuItem(
                           itemName: 'Categories',
                           icon: Iconsax.category,
                           route: Routes.categories,
@@ -86,6 +76,17 @@ class Sidebar extends StatelessWidget {
                           icon: Iconsax.dcube,
                           route: Routes.brands,
                         ),
+                        const MenuItem(
+                          itemName: 'Products',
+                          icon: Iconsax.shopping_bag,
+                          route: Routes.products,
+                        ),
+                        const MenuItem(
+                          itemName: 'Banners',
+                          icon: Iconsax.picture_frame,
+                          route: Routes.banners,
+                        ),
+
                         GestureDetector(
                           onTap: () => getIt<UserCubit>().signOut(),
                           child: const MenuItem(

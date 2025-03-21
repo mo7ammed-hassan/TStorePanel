@@ -9,6 +9,8 @@ class Routes {
   static var createCategory = '/create-category';
 
   static const String products = '/products';
+  static const String createProduct = '/create-product';
+  static const String editProduct = '/edit-product';
 
   static const String banners = '/banners';
   static const String createBanner = '/create-banner';
@@ -33,4 +35,6 @@ class Routes {
   ];
   // Test Screen
   static const String testScreen = '/test-screen';
+
+  
 }

@@ -29,7 +29,7 @@ class BrandRows extends DataTableSource {
                 backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
-              Expanded(
+              Flexible(
                 child: Text(
                   'Adidas',
                   style: Theme.of(

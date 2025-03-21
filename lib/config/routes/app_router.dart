@@ -14,7 +14,7 @@ import 'package:t_store_admin_panel/features/categories/presentation/screens/cre
 import 'package:t_store_admin_panel/features/categories/presentation/screens/edit_category/edit_category_screen.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
-import 'package:t_store_admin_panel/features/products/presentation/screens/product_screen.dart';
+import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
 import 'package:t_store_admin_panel/test_screen.dart';
 
 class AppRouter {
@@ -33,13 +33,15 @@ class AppRouter {
     // --Side Bar Menu
     // Media
     Routes.media: (_) => const MediaScreen(),
-    
+
     // Categories
     Routes.categories: (_) => const CategoryScreen(),
     Routes.editCategory: (_) => const EditCategoryScreen(),
     Routes.createCategory: (_) => const CreateCategoryScreen(),
     // Products
     Routes.products: (_) => const ProductScreen(),
+    Routes.createProduct: (_) => Container(),
+    Routes.editProduct: (_) => Container(),
 
     // Banners
     Routes.banners: (_) => const BannerScreen(),
