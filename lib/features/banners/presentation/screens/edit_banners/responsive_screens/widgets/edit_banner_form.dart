@@ -6,12 +6,14 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 
 class EditBannerForm extends StatelessWidget {
   const EditBannerForm({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return RoundedContainer(
       width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
@@ -32,10 +34,14 @@ class EditBannerForm extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {},
-                  child: const TRoundedImage(
+                  child: TRoundedImage(
                     width: 400,
                     height: 200,
-                    backgroundColor: AppColors.primaryBackground,
+                    fit: BoxFit.cover,
+                    backgroundColor:
+                        isDark
+                            ? AppColors.darkerGrey
+                            : AppColors.primaryBackground,
 
                     imageType: ImageType.asset,
                     image: TImages.banner1,

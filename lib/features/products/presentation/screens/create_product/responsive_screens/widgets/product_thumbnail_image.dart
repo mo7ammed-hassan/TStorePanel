@@ -5,12 +5,14 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 
 class ProductThumbnailImage extends StatelessWidget {
   const ProductThumbnailImage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return RoundedContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,25 +25,29 @@ class ProductThumbnailImage extends StatelessWidget {
           // Image widget
           RoundedContainer(
             height: 300,
-            backgroundColor: AppColors.primaryBackground,
+            backgroundColor:
+                isDark ? AppColors.darkerGrey : AppColors.primaryBackground,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: TRoundedImage(
-                          imageType: ImageType.asset,
-                          image: TImages.defaultProductImage,
-                          width: 220,
-                          height: 220,
-                          fit: BoxFit.cover,
+                  const Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TRoundedImage(
+                            imageType: ImageType.asset,
+                            image: TImages.productImage1,
+                            width: 220,
+                            height: 220,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
                   SizedBox(
                     width: 200,
                     child: OutlinedButton(

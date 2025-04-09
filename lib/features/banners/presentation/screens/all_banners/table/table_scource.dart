@@ -9,21 +9,25 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
 
 class BannerRows extends DataTableSource {
+  final isDark = HelperFunctions.isDarkMode(AppContext.context);
   @override
   DataRow? getRow(int index) {
     return DataRow2(
       cells: [
-        const DataCell(
+        DataCell(
           TRoundedImage(
             image: TImages.banner1,
             width: 180,
             height: 100,
             imageType: ImageType.asset,
+            fit: BoxFit.cover,
             borderRadius: AppSizes.borderRadiusMd,
-            backgroundColor: AppColors.primaryBackground,
+            backgroundColor:
+                isDark ? AppColors.darkerGrey : AppColors.primaryBackground,
           ),
         ),
         const DataCell(Text('Shop')),

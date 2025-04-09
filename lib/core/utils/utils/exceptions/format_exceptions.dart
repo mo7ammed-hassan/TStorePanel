@@ -34,4 +34,7 @@ class TFormatException implements Exception {
         return const TFormatException();
     }
   }
+
+  @override
+  String toString() => message;
 }

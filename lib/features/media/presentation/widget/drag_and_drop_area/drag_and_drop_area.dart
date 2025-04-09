@@ -13,7 +13,7 @@ class DragDropArea extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(TImages.appleLogo, width: 50, height: 50),
+        Image.asset(TImages.defaultProductImage, width: 50, height: 50),
         const SizedBox(height: AppSizes.spaceBtwItems),
         const Text('Drag and Drop Images here'),
         const SizedBox(height: AppSizes.spaceBtwItems),

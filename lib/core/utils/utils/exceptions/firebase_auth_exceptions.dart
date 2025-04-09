@@ -95,4 +95,7 @@ class TFirebaseAuthException implements Exception {
         return 'An unexpected authentication error occurred. Please try again.';
     }
   }
+
+  @override
+  String toString() => message;
 }

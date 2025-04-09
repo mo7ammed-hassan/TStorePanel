@@ -5,12 +5,14 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 
 class ProductVariations extends StatelessWidget {
   const ProductVariations({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return Column(
       children: [
         Row(
@@ -36,19 +38,19 @@ class ProductVariations extends StatelessWidget {
           separatorBuilder:
               (context, index) =>
                   const SizedBox(height: AppSizes.spaceBtwItems),
-          itemBuilder: (context, index) => _buildVariationItem(context),
+          itemBuilder: (context, index) => _buildVariationItem(context, isDark),
         ),
 
         // No Variation Message
-        _buildNoVariationMessage(context),
+        //_buildNoVariationMessage(context),
       ],
     );
   }
 
-  Widget _buildVariationItem(BuildContext context) {
+  Widget _buildVariationItem(BuildContext context, isDark) {
     return ExpansionTile(
-      collapsedBackgroundColor: AppColors.lightGrey,
-      backgroundColor: AppColors.lightGrey,
+      collapsedBackgroundColor: isDark ? AppColors.dark : AppColors.lightGrey,
+      backgroundColor: isDark ? AppColors.dark : AppColors.lightGrey,
       childrenPadding: const EdgeInsets.all(AppSizes.md),
       expandedCrossAxisAlignment: CrossAxisAlignment.start,
       shape: RoundedRectangleBorder(

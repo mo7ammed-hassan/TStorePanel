@@ -31,7 +31,7 @@ class RoundedContainer extends StatelessWidget {
     this.padding = const EdgeInsets.all(AppSizes.md),
     this.borderColor = AppColors.borderPrimary,
     this.raduis = AppSizes.cardRadiusLg,
-    this.backgroundColor = AppColors.white,
+    this.backgroundColor,
     this.onTap,
   });
 
@@ -42,7 +42,7 @@ class RoundedContainer extends StatelessWidget {
   final Color borderColor;
   final bool showShadow;
   final bool showBorder;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final void Function()? onTap;
 
   @override
@@ -56,7 +56,8 @@ class RoundedContainer extends StatelessWidget {
         margin: margin,
         padding: padding,
         decoration: BoxDecoration(
-          color: isDark ? AppColors.black : backgroundColor,
+          color:
+              backgroundColor ?? (isDark ? AppColors.black : AppColors.white),
           borderRadius: BorderRadius.circular(raduis),
           border:
               showBorder

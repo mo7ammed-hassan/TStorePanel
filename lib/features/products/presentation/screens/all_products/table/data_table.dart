@@ -11,8 +11,11 @@ class ProductDataTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaginatedTable(
       tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
-      columns:  [
-        DataColumn2(label: const Text('product'),fixedWidth: !DeviceUtility.isDesktopScreen(context) ? 300 : 400),
+      columns: [
+        DataColumn2(
+          label: const Text('product'),
+          fixedWidth: !DeviceUtility.isDesktopScreen(context) ? 300 : 400,
+        ),
         const DataColumn2(label: Text('Stock')),
         const DataColumn2(label: Text('Brand')),
         const DataColumn2(label: Text('Price')),

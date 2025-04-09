@@ -6,6 +6,7 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 
 class ProductAdditionalImages extends StatelessWidget {
   const ProductAdditionalImages({
@@ -21,6 +22,7 @@ class ProductAdditionalImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return SizedBox(
       height: 300,
       child: Column(
@@ -47,7 +49,7 @@ class ProductAdditionalImages extends StatelessWidget {
               ),
             ),
           ),
-
+          const SizedBox(height: AppSizes.spaceBtwItems),
           // section to display uploaded Images
           Expanded(
             child: Row(
@@ -55,7 +57,10 @@ class ProductAdditionalImages extends StatelessWidget {
                 // images List
                 Expanded(
                   flex: 2,
-                  child: SizedBox(height: 80, child: _buildImagesOrEmptyList()),
+                  child: SizedBox(
+                    height: 80,
+                    child: _buildImagesOrEmptyList(isDark),
+                  ),
                 ),
                 const SizedBox(width: AppSizes.spaceBtwItems / 2),
 
@@ -76,23 +81,24 @@ class ProductAdditionalImages extends StatelessWidget {
     );
   }
 
-  Widget _buildImagesOrEmptyList() {
+  Widget _buildImagesOrEmptyList(isDark) {
     return additionalProductImagesUrls.isEmpty
-        ? _buildEmptyList()
+        ? _buildEmptyList(isDark)
         : _buildUploadedImages();
   }
 
-  Widget _buildEmptyList() {
+  Widget _buildEmptyList(isDark) {
     return ListView.separated(
       itemCount: 6,
       scrollDirection: Axis.horizontal,
       separatorBuilder:
           (context, index) => const SizedBox(width: AppSizes.defaultSpace / 2),
       itemBuilder: (context, index) {
-        return const RoundedContainer(
+        return RoundedContainer(
           height: 80,
           width: 80,
-          backgroundColor: AppColors.primaryBackground,
+          backgroundColor:
+              isDark ? AppColors.darkerGrey : AppColors.primaryBackground,
         );
       },
     );

@@ -97,4 +97,7 @@ class TFirebaseException implements Exception {
         return 'An unexpected Firebase error occurred. Please try again.';
     }
   }
+
+  @override
+  String toString() => message;
 }

@@ -14,6 +14,7 @@ import 'package:t_store_admin_panel/features/products/presentation/screens/creat
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_type_widget.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_variations.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_visibility_widget.dart';
+import 'package:t_store_admin_panel/features/products/presentation/widgets/product_bottom_navigation_buttons.dart';
 
 class CreateProductDesktopScreen extends StatelessWidget {
   const CreateProductDesktopScreen({super.key});
@@ -21,6 +22,7 @@ class CreateProductDesktopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const ProductBottomNavigationButtons(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.defaultSpace),

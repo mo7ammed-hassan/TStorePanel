@@ -6,6 +6,7 @@ import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_conta
 import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/drag_and_drop_area/drag_and_drop_area.dart';
 
@@ -14,13 +15,14 @@ class BuildDragAndDropArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RoundedContainer(
+    final isDark = HelperFunctions.isDarkMode(context);
+    return RoundedContainer(
       height: 250,
       width: double.infinity,
       showBorder: true,
-      backgroundColor: AppColors.primaryBackground,
-      padding: EdgeInsets.all(AppSizes.defaultSpace),
-      child: Column(
+      backgroundColor: isDark ? AppColors.dark : AppColors.primaryBackground,
+      padding: const EdgeInsets.all(AppSizes.defaultSpace),
+      child: const Column(
         children: [
           Expanded(
             child: Stack(
@@ -104,7 +106,7 @@ class MobileDropTarget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(TImages.appleLogo, width: 50, height: 50),
+        Image.asset(TImages.defaultProductImage, width: 50, height: 50),
         const SizedBox(height: AppSizes.spaceBtwItems),
         const Text('Drop Images here'),
         const SizedBox(height: AppSizes.spaceBtwItems),

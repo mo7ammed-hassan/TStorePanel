@@ -6,6 +6,7 @@ import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
 
 class ProductAttributes extends StatelessWidget {
@@ -13,10 +14,13 @@ class ProductAttributes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = HelperFunctions.isDarkMode(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(color: AppColors.primaryBackground),
+        Divider(
+          color: isDark ? AppColors.darkerGrey : AppColors.primaryBackground,
+        ),
         const SizedBox(height: AppSizes.spaceBtwSections),
 
         Text(
@@ -36,7 +40,7 @@ class ProductAttributes extends StatelessWidget {
                       const SizedBox(width: AppSizes.spaceBtwItems),
                       Expanded(flex: 2, child: _buildAttributeValue()),
                       const SizedBox(width: AppSizes.spaceBtwItems),
-                      _buildAtrributeButton(),
+                      _buildAtrributeButton(context),
                     ],
                   )
                   : Column(
@@ -45,7 +49,7 @@ class ProductAttributes extends StatelessWidget {
                       const SizedBox(height: AppSizes.spaceBtwItems),
                       _buildAttributeValue(),
                       const SizedBox(height: AppSizes.spaceBtwItems),
-                      _buildAtrributeButton(),
+                      _buildAtrributeButton(context),
                     ],
                   ),
         ),
@@ -60,9 +64,14 @@ class ProductAttributes extends StatelessWidget {
 
         // Display added attributes
         RoundedContainer(
-          backgroundColor: AppColors.primaryBackground,
+          backgroundColor:
+              isDark ? AppColors.darkerGrey : AppColors.primaryBackground,
           child: Column(
-            children: [_buildAttrivutesList(), _buildEmptyAttributesList()],
+            children: [
+              _buildAttrivutesList(isDark),
+              const SizedBox(height: AppSizes.md),
+              _buildEmptyAttributesList(),
+            ],
           ),
         ),
         const SizedBox(height: AppSizes.spaceBtwSections),
@@ -115,9 +124,9 @@ class ProductAttributes extends StatelessWidget {
     );
   }
 
-  Widget _buildAtrributeButton() {
+  Widget _buildAtrributeButton(context) {
     return SizedBox(
-      width: 100,
+      width: DeviceUtility.isMobileScreen(context) ? 150 : 100,
       child: ElevatedButton.icon(
         onPressed: () {},
         label: const Text('Add'),
@@ -131,7 +140,7 @@ class ProductAttributes extends StatelessWidget {
     );
   }
 
-  Widget _buildAttrivutesList() {
+  Widget _buildAttrivutesList(isDark) {
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -141,7 +150,7 @@ class ProductAttributes extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: isDark ? AppColors.dark : AppColors.white,
             borderRadius: BorderRadius.circular(AppSizes.borderRadiusLg),
           ),
 
@@ -162,7 +171,12 @@ class ProductAttributes extends StatelessWidget {
   Widget _buildEmptyAttributesList() {
     return const Column(
       children: [
-        RoundedImage(imageUrl: TImages.acerlogo, width: 150, height: 80),
+        RoundedImage(
+          imageUrl: TImages.acerlogo,
+          width: 150,
+          height: 80,
+          showShadow: false,
+        ),
         SizedBox(height: AppSizes.spaceBtwItems),
         Text('There are no attributes added yet.'),
       ],
