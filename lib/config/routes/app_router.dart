@@ -16,6 +16,7 @@ import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dash
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/create_product_screen.dart';
+import 'package:t_store_admin_panel/features/products/presentation/screens/edit_product/edit_product_screen.dart';
 import 'package:t_store_admin_panel/test_screen.dart';
 
 class AppRouter {
@@ -42,7 +43,7 @@ class AppRouter {
     // Products
     Routes.products: (_) => const ProductScreen(),
     Routes.createProduct: (_) => const CreateProductScreen(),
-    Routes.editProduct: (_) => Container(),
+    Routes.editProduct: (_) => const EditProductScreen(),
 
     // Banners
     Routes.banners: (_) => const BannerScreen(),
