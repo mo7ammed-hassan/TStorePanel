@@ -33,7 +33,7 @@ class CustomerRows extends DataTableSource {
               const SizedBox(width: AppSizes.spaceBtwItems),
               Expanded(
                 child: Text(
-                  'Mohamed.H',
+                  'Mohamed H.',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(
@@ -44,7 +44,7 @@ class CustomerRows extends DataTableSource {
             ],
           ),
         ),
-        const DataCell(Text('Mohamed.H@gmail.com')),
+        const DataCell(Text('mohamedh7h@gmail.com')),
         const DataCell(Text('+201096493188')),
         DataCell(Text(DateTime.now().toString())),
         DataCell(

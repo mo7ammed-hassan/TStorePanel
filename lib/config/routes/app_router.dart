@@ -13,6 +13,7 @@ import 'package:t_store_admin_panel/features/categories/presentation/screens/all
 import 'package:t_store_admin_panel/features/categories/presentation/screens/create_category/create_category_screen.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/edit_category/edit_category_screen.dart';
 import 'package:t_store_admin_panel/features/customers/presentation/screens/all_customers/customers_screen.dart';
+import 'package:t_store_admin_panel/features/customers/presentation/screens/customer_detail/customer_details_screen.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
@@ -58,6 +59,7 @@ class AppRouter {
 
     // Customers
     Routes.customers: (_) => const CustomersScreen(),
+    Routes.customerDetails: (_) => const CustomerDetailScreen(),
 
     Routes.testScreen: (_) => const TestScreen(),
   };
