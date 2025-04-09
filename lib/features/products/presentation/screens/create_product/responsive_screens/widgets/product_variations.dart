@@ -129,23 +129,23 @@ class ProductVariations extends StatelessWidget {
     );
   }
 
-  Widget _buildNoVariationMessage(BuildContext context) {
-    return const Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TRoundedImage(
-              imageType: ImageType.asset,
-              width: 200,
-              height: 200,
-              image: TImages.acerlogo,
-            ),
-          ],
-        ),
-        SizedBox(height: AppSizes.spaceBtwItems),
-        Text('There are no variations added yet.'),
-      ],
-    );
-  }
+  // Widget _buildNoVariationMessage(BuildContext context) {
+  //   return const Column(
+  //     children: [
+  //       Row(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           TRoundedImage(
+  //             imageType: ImageType.asset,
+  //             width: 200,
+  //             height: 200,
+  //             image: TImages.acerlogo,
+  //           ),
+  //         ],
+  //       ),
+  //       SizedBox(height: AppSizes.spaceBtwItems),
+  //       Text('There are no variations added yet.'),
+  //     ],
+  //   );
+  // }
 }

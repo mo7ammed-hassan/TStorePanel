@@ -12,6 +12,7 @@ import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_br
 import 'package:t_store_admin_panel/features/categories/presentation/screens/all_categories/category_screen.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/create_category/create_category_screen.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/edit_category/edit_category_screen.dart';
+import 'package:t_store_admin_panel/features/customers/presentation/screens/all_customers/customers_screen.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
@@ -54,6 +55,9 @@ class AppRouter {
     Routes.brands: (_) => const BrandScreen(),
     Routes.editBrand: (_) => const EditBrandScreen(),
     Routes.createBrand: (_) => const CreateBrandScreen(),
+
+    // Customers
+    Routes.customers: (_) => const CustomersScreen(),
 
     Routes.testScreen: (_) => const TestScreen(),
   };

@@ -24,6 +24,8 @@ class Routes {
 
   static const String dashboard = '/dashboard';
 
+  static const String customers = '/customers';
+
   // sidebarMenuRoutes
   static List<String> get sidebarMenuRoutes => [
     dashboard,
@@ -36,5 +38,5 @@ class Routes {
   // Test Screen
   static const String testScreen = '/test-screen';
 
-  
+  static const String customerDetails = '/customer-details';
 }

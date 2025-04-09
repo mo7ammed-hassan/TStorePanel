@@ -7,17 +7,19 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 
 class TableHeader extends StatelessWidget {
   final Function()? onPressed;
-  final String buttonText;
+  final String? buttonText;
 
   final TextEditingController? searchController;
   final Function(String)? searchOnChanged;
+  final bool showLeftWidget;
 
   const TableHeader({
     super.key,
     this.onPressed,
-    required this.buttonText,
+    this.buttonText = 'Add',
     this.searchController,
     this.searchOnChanged,
+    this.showLeftWidget = true,
   });
 
   @override
@@ -27,7 +29,7 @@ class TableHeader extends StatelessWidget {
       children: [
         Flexible(
           flex: DeviceUtility.isDesktopScreen(context) ? 3 : 1,
-          child: Row(
+          child: showLeftWidget ? Row(
             children: [
               Flexible(
                 child: FittedBox(
@@ -35,13 +37,13 @@ class TableHeader extends StatelessWidget {
                     width: DeviceUtility.isMobileScreen(context) ? null : 200,
                     child: ElevatedButton(
                       onPressed: onPressed,
-                      child: FittedBox(child: Text(buttonText)),
+                      child: FittedBox(child: Text(buttonText!)),
                     ),
                   ),
                 ),
               ),
             ],
-          ),
+          ) : const SizedBox.shrink(),
         ),
         const SizedBox(width: AppSizes.md),
         Expanded(
