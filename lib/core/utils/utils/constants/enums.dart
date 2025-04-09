@@ -23,3 +23,8 @@ enum MediaCategory { folders, banners, brands, categories, products, users }
 enum ImageType { network, memory, file, asset }
 
 enum AppRole { admin, user }
+
+enum ProductVisibility {
+  pubblished,
+  hidden,
+}

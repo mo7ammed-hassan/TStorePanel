@@ -30,6 +30,8 @@ class TImages {
       "assets/icons/categories/icons8-sparkling-diamond-64.png";
   static const String electronicsIcon =
       "assets/icons/categories/icons8-smartphone-64.png";
+  static const String defaultProductImage =
+      "assets/images/products/default_product_image.png";
 
   // -- Brand Icons
   static const String nikeLogo = "assets/icons/brands/nike.png";

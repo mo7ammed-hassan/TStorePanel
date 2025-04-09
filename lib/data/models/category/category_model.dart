@@ -5,14 +5,14 @@ class CategoryModel {
   String name;
   String? image;
   String parentId;
-  bool isFeatured;
+  bool? isFeatured;
 
   CategoryModel({
     required this.id,
     required this.name,
     required this.image,
     this.parentId = '',
-    required this.isFeatured,
+     this.isFeatured,
   });
 
   // Empty Helper function
