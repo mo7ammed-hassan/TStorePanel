@@ -26,10 +26,7 @@ class OrderItemsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Order Information',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
+          Text('Items', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: AppSizes.spaceBtwSections),
 
           // Items
