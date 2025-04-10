@@ -11,7 +11,7 @@ import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.da
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
 
-class CustomOrdersRows extends DataTableSource {
+class OrdersRows extends DataTableSource {
   final isDark = HelperFunctions.isDarkMode(AppContext.context);
   @override
   DataRow? getRow(int index) {
@@ -60,6 +60,7 @@ class CustomOrdersRows extends DataTableSource {
         ),
 
         const DataCell(Text('\$$totalAmout')),
+        
       ],
     );
   }

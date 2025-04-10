@@ -91,6 +91,11 @@ class Sidebar extends StatelessWidget {
                           icon: Iconsax.profile_2user,
                           route: Routes.customers,
                         ),
+                        const MenuItem(
+                          itemName: 'Orders',
+                          icon: Iconsax.box,
+                          route: Routes.orders,
+                        ),
 
                         GestureDetector(
                           onTap: () => getIt<UserCubit>().signOut(),

@@ -13,6 +13,7 @@ import 'package:t_store_admin_panel/domain/repositories/media/media_repository.d
 import 'package:t_store_admin_panel/domain/repositories/user/user_repo.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/sign_in/sign_in_cubit.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
+import 'package:t_store_admin_panel/features/dashboard/presentation/cubits/cubit/dashboard_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 
@@ -71,6 +72,8 @@ void setupServiceLocator() {
     () => MediaCubit(getIt<MediaRepository>()),
   );
   getIt.registerLazySingleton<MediaActionCubit>(() => MediaActionCubit());
+
+  getIt.registerFactory<DashboardCubit>(() => DashboardCubit());
 }
 
 /// 🔄 Reset the user manager after logout

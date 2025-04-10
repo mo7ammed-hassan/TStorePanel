@@ -16,6 +16,8 @@ import 'package:t_store_admin_panel/features/customers/presentation/screens/all_
 import 'package:t_store_admin_panel/features/customers/presentation/screens/customer_detail/customer_details_screen.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
+import 'package:t_store_admin_panel/features/order/screens/all_orders/orders_screen.dart';
+import 'package:t_store_admin_panel/features/order/screens/order_detail/order_details_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/create_product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/edit_product/edit_product_screen.dart';
@@ -60,6 +62,10 @@ class AppRouter {
     // Customers
     Routes.customers: (_) => const CustomersScreen(),
     Routes.customerDetails: (_) => const CustomerDetailScreen(),
+
+    // Orders
+    Routes.orders: (_) => const OrdersScreen(),
+    Routes.orderDetail: (_) => const OrderDetailsScreen(),
 
     Routes.testScreen: (_) => const TestScreen(),
   };
