@@ -30,6 +30,9 @@ class Routes {
   static const String orders = '/orders';
   static const String orderDetail = '/order-detail';
 
+  static const String settings = '/settings';
+  static const String profile = '/profile';
+
   // sidebarMenuRoutes
   static List<String> get sidebarMenuRoutes => [
     dashboard,

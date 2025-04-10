@@ -97,6 +97,25 @@ class Sidebar extends StatelessWidget {
                           route: Routes.orders,
                         ),
 
+                        // Other Menu Items
+                        Text(
+                          'OTHER',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2),
+                        ),
+
+                        const MenuItem(
+                          itemName: 'Profile',
+                          icon: Iconsax.user,
+                          route: Routes.profile,
+                        ),
+                        const MenuItem(
+                          itemName: 'Settings',
+                          icon: Iconsax.setting_2,
+                          route: Routes.settings,
+                        ),
+
                         GestureDetector(
                           onTap: () => getIt<UserCubit>().signOut(),
                           child: const MenuItem(

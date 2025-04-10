@@ -18,6 +18,8 @@ import 'package:t_store_admin_panel/features/dashboard/presentation/screens/dash
 import 'package:t_store_admin_panel/features/media/presentation/screens/media_screen.dart';
 import 'package:t_store_admin_panel/features/order/screens/all_orders/orders_screen.dart';
 import 'package:t_store_admin_panel/features/order/screens/order_detail/order_details_screen.dart';
+import 'package:t_store_admin_panel/features/personalization/presentation/screens/profile/profile_screen.dart';
+import 'package:t_store_admin_panel/features/personalization/presentation/screens/settings/settings_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/create_product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/edit_product/edit_product_screen.dart';
@@ -66,6 +68,11 @@ class AppRouter {
     // Orders
     Routes.orders: (_) => const OrdersScreen(),
     Routes.orderDetail: (_) => const OrderDetailsScreen(),
+
+    // Profile & Settings
+     Routes.profile: (_) => const ProfileScreen(),
+     Routes.settings: (_) => const SettingsScreen(),
+
 
     Routes.testScreen: (_) => const TestScreen(),
   };
