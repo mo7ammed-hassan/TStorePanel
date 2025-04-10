@@ -20,7 +20,7 @@ class ProfileForm extends StatelessWidget {
         children: [
           Text(
             'Profile Details',
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: AppSizes.spaceBtwSections),
 
@@ -69,9 +69,7 @@ class ProfileForm extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        validator:
-                            (value) =>
-                                TValidator.validateEmptyText('Email', value),
+                        validator: (value) => TValidator.validateEmail(value),
                         decoration: const InputDecoration(
                           hintText: 'Email',
                           label: Text('Email'),

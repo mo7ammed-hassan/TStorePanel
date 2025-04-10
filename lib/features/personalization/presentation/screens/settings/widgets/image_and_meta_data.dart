@@ -6,8 +6,8 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 
-class ProfileImageSection extends StatelessWidget {
-  const ProfileImageSection({super.key});
+class ImageAndMetaData extends StatelessWidget {
+  const ImageAndMetaData({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,9 @@ class ProfileImageSection extends StatelessWidget {
                 const SizedBox(height: AppSizes.spaceBtwItems),
 
                 Text(
-                  'Mohamed H.',
+                  'T Store',
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                const Text('mohamedh7h@gmail.com'),
-                const SizedBox(height: AppSizes.spaceBtwItems),
               ],
             ),
           ),
