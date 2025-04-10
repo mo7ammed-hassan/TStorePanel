@@ -36,6 +36,7 @@ class TransactionSection extends StatelessWidget {
                       imageType: ImageType.asset,
                       image: TImages.paypal,
                     ),
+                    const SizedBox(width: AppSizes.md),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,6 +55,7 @@ class TransactionSection extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(width: AppSizes.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +71,7 @@ class TransactionSection extends StatelessWidget {
                   ],
                 ),
               ),
-
+              const SizedBox(width: AppSizes.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

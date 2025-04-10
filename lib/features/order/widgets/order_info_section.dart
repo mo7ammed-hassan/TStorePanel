@@ -65,33 +65,36 @@ class OrderInfoSection extends StatelessWidget {
                       backgroundColor: HelperFunctions.getOrderStatusColor(
                         order.status!,
                       ).withValues(alpha: 0.1),
-                      child: DropdownButton<OrderStatus>(
-                        items:
-                            OrderStatus.values
-                                .map(
-                                  (e) => DropdownMenuItem<OrderStatus>(
-                                    value: e,
-                                    child: Text(
-                                      e.name.capitalize.toString(),
-                                      style: TextStyle(
-                                        color:
-                                            HelperFunctions.getOrderStatusColor(
-                                              e,
-                                            ),
+                      child: FittedBox(
+                        child: DropdownButton<OrderStatus>(
+                          items:
+                              OrderStatus.values
+                                  .map(
+                                    (e) => DropdownMenuItem<OrderStatus>(
+                                      value: e,
+                                      child: Text(
+                                        e.name.capitalize.toString(),
+                                        style: TextStyle(
+                                          color:
+                                              HelperFunctions.getOrderStatusColor(
+                                                e,
+                                              ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
-                        value: order.status,
-                        onChanged: (value) {
-                          if (value != null) {}
-                        },
+                                  )
+                                  .toList(),
+                          value: order.status,
+                          onChanged: (value) {
+                            if (value != null) {}
+                          },
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(width: AppSizes.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
