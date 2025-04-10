@@ -5,6 +5,7 @@ import 'package:t_store_admin_panel/core/shared/widgets/images/circular_image.da
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 
 class UploaderImage extends StatelessWidget {
   const UploaderImage({
@@ -21,6 +22,7 @@ class UploaderImage extends StatelessWidget {
     this.right,
     this.bottom = 0,
     this.onIconButtonPressed,
+    this.fit = BoxFit.cover,
   });
 
   final bool circular;
@@ -44,6 +46,7 @@ class UploaderImage extends StatelessWidget {
   final double? right;
 
   final double? bottom;
+  final BoxFit fit;
 
   final void Function()? onIconButtonPressed;
 
@@ -53,12 +56,15 @@ class UploaderImage extends StatelessWidget {
       children: [
         circular
             ? TCircularImage(
+              fit: fit,
               image: image!,
               width: width,
               height: height,
               isNetworkImage: imageType == ImageType.network,
+              backgroundColor: AppColors.primaryBackground,
             )
             : TRoundedImage(
+              fit: fit,
               width: width,
               height: height,
               imageType: imageType,
@@ -73,15 +79,17 @@ class UploaderImage extends StatelessWidget {
           right: right,
           bottom: bottom,
           child: Container(
-            decoration: const BoxDecoration(
-              color: AppColors.buttonPrimary,
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.9),
               shape: BoxShape.circle,
             ),
-            child: IconButton(
-              icon: Icon(icon),
-              onPressed: onIconButtonPressed,
-              color: AppColors.white,
-              iconSize: 18,
+            child: Center(
+              child: IconButton(
+                icon: Icon(icon),
+                onPressed: onIconButtonPressed,
+                color: AppColors.white,
+                iconSize: AppSizes.md,
+              ),
             ),
           ),
         ),
