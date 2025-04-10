@@ -5,7 +5,6 @@ import '../../../utils/utils/constants/colors.dart';
 import '../../../utils/utils/constants/sizes.dart';
 import '../../../utils/utils/helpers/helper_functions.dart';
 
-
 class TCircularImage extends StatelessWidget {
   const TCircularImage({
     super.key,
@@ -41,24 +40,30 @@ class TCircularImage extends StatelessWidget {
       child: Center(
         child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
-          child: isNetworkImage
-              ? CachedNetworkImage(
-                  imageUrl: image,
-                  fit: fit,
-                  color: (isDark ? AppColors.light : AppColors.dark),
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      const ShimmerWidget(
-                    height: 75,
-                    width: 75,
-                    shapeBorder: CircleBorder(),
+          child:
+              isNetworkImage
+                  ? CachedNetworkImage(
+                    width: width,
+                    height: height,
+                    imageUrl: image,
+                    fit: fit,
+                    color: (isDark ? AppColors.light : AppColors.dark),
+                    progressIndicatorBuilder:
+                        (context, url, progress) => const ShimmerWidget(
+                          height: 75,
+                          width: 75,
+                          shapeBorder: CircleBorder(),
+                        ),
+                    errorWidget:
+                        (context, url, error) => const Icon(Icons.error),
+                  )
+                  : Image(
+                    fit: fit,
+                    width: width,
+                    height: height,
+                    image: AssetImage(image),
+                    color: imageColor,
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                )
-              : Image(
-                  fit: fit,
-                  image: AssetImage(image),
-                  color: imageColor,
-                ),
         ),
       ),
     );

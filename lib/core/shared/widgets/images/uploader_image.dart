@@ -85,7 +85,7 @@ class UploaderImage extends StatelessWidget {
             ),
             child: Center(
               child: IconButton(
-                icon: Icon(icon),
+                icon: Icon(icon, color: Colors.white),
                 onPressed: onIconButtonPressed,
                 color: AppColors.white,
                 iconSize: AppSizes.md,

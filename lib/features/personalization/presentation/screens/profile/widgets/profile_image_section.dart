@@ -22,7 +22,7 @@ class ProfileImageSection extends StatelessWidget {
           Flexible(
             child: Column(
               children: [
-                const UploaderImage(
+                 UploaderImage(
                   imageType: ImageType.asset,
                   image: TImages.user,
                   right: 10,
@@ -32,6 +32,7 @@ class ProfileImageSection extends StatelessWidget {
                   circular: true,
                   left: null,
                   icon: Iconsax.camera,
+                  onIconButtonPressed: (){},
                 ),
                 const SizedBox(height: AppSizes.spaceBtwItems),
 
