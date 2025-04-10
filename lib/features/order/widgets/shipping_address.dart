@@ -21,10 +21,9 @@ class ShippingAddress extends StatelessWidget {
           Text('Mohamed Hassan', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: AppSizes.spaceBtwItems / 2),
           Text(
-            'Cairo, Egypt, Al Zohour, 12454',
+            'Cairo, Egypt, Al Zohour, 4656',
             style: Theme.of(context).textTheme.titleSmall,
           ),
-          
         ],
       ),
     );

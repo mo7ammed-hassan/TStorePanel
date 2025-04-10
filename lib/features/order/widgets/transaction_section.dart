@@ -41,11 +41,11 @@ class TransactionSection extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Payment Via ${order.paymentMethod!.capitalize}',
+                            'Payment Via ${order.paymentMethod?.capitalize}',
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           Text(
-                            '${order.paymentMethod!.capitalize} free \$25',
+                            '${order.paymentMethod?.capitalize} free \$25',
                             style: Theme.of(context).textTheme.labelMedium,
                           ),
                         ],

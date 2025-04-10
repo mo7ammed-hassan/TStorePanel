@@ -16,7 +16,7 @@ class OrderItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subTotal = order.cartItems!.fold(
+    final subTotal = order.cartItems?.fold(
       0.0,
       (previousValue, element) =>
           previousValue + (element.price * element.quantity),
@@ -32,7 +32,7 @@ class OrderItemsSection extends StatelessWidget {
           // Items
           ListView.separated(
             shrinkWrap: true,
-            itemCount: order.cartItems!.length,
+            itemCount: order.cartItems?.length ?? 0,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final orderItem = order.cartItems![index];
@@ -126,7 +126,7 @@ class OrderItemsSection extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
-                      '\$${subTotal.toStringAsFixed(2)}',
+                      '\$${subTotal?.toStringAsFixed(2)}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -154,7 +154,7 @@ class OrderItemsSection extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
-                      '\$${TPricingCalculator.calculateShippingCost(subTotal, '')}',
+                      '\$${TPricingCalculator.calculateShippingCost(subTotal ?? 0, '')}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -165,7 +165,7 @@ class OrderItemsSection extends StatelessWidget {
                   children: [
                     Text('Tax', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${TPricingCalculator.calculateTax(subTotal, '')}',
+                      '\$${TPricingCalculator.calculateTax(subTotal ?? 0, '')}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -181,7 +181,7 @@ class OrderItemsSection extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
-                      '\$${TPricingCalculator.calculateTotalPrice(subTotal, '')}',
+                      '\$${TPricingCalculator.calculateTotalPrice(subTotal ?? 0, '')}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
