@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
-import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
+import 'package:t_store_admin_panel/features/order/widgets/billing_address.dart';
+import 'package:t_store_admin_panel/features/order/widgets/contact_section.dart';
+import 'package:t_store_admin_panel/features/order/widgets/order_customer.dart';
+import 'package:t_store_admin_panel/features/order/widgets/order_info_section.dart';
+import 'package:t_store_admin_panel/features/order/widgets/order_items_section.dart';
+import 'package:t_store_admin_panel/features/order/widgets/shipping_address.dart';
+import 'package:t_store_admin_panel/features/order/widgets/transaction_section.dart';
 
 class OrderDetailsDesktopScreen extends StatelessWidget {
   const OrderDetailsDesktopScreen({super.key, required this.order});
@@ -26,7 +32,7 @@ class OrderDetailsDesktopScreen extends StatelessWidget {
 
               const SizedBox(height: AppSizes.spaceBtwSections),
 
-              const Row(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
@@ -34,37 +40,37 @@ class OrderDetailsDesktopScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         // Order Info
-                        RoundedContainer(),
-                        SizedBox(height: AppSizes.spaceBtwSections),
+                        OrderInfoSection(order: order),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // Order Items
-                        RoundedContainer(),
-                        SizedBox(height: AppSizes.spaceBtwSections),
+                        OrderItemsSection(order: order),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // transactions
-                        RoundedContainer(),
+                        TransactionSection(order: order),
                       ],
                     ),
                   ),
-                  SizedBox(width: AppSizes.spaceBtwSections),
+                  const SizedBox(width: AppSizes.spaceBtwSections),
                   Expanded(
                     child: Column(
                       children: [
                         // customer info
-                        RoundedContainer(),
-                        SizedBox(height: AppSizes.spaceBtwSections),
+                        OrderCustomer(order: order),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // contact person info
-                        RoundedContainer(),
-                        SizedBox(height: AppSizes.spaceBtwSections),
+                        const ContactSection(),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // shipping address
-                        RoundedContainer(),
-                        SizedBox(height: AppSizes.spaceBtwSections),
+                        const ShippingAddress(),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
 
                         // billing address
-                        RoundedContainer(),
-                        SizedBox(height: AppSizes.spaceBtwSections),
+                        const BillingAddress(),
+                        const SizedBox(height: AppSizes.spaceBtwSections),
                       ],
                     ),
                   ),

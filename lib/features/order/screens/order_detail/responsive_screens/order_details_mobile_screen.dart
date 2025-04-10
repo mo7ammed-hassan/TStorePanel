@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
-import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
+import 'package:t_store_admin_panel/features/order/widgets/billing_address.dart';
+import 'package:t_store_admin_panel/features/order/widgets/contact_section.dart';
+import 'package:t_store_admin_panel/features/order/widgets/order_customer.dart';
+import 'package:t_store_admin_panel/features/order/widgets/order_info_section.dart';
+import 'package:t_store_admin_panel/features/order/widgets/order_items_section.dart';
+import 'package:t_store_admin_panel/features/order/widgets/shipping_address.dart';
+import 'package:t_store_admin_panel/features/order/widgets/transaction_section.dart';
 
 class OrderDetailsMobileScreen extends StatelessWidget {
   const OrderDetailsMobileScreen({super.key, required this.order});
@@ -18,7 +24,7 @@ class OrderDetailsMobileScreen extends StatelessWidget {
           child: Column(
             children: [
               // Breadcrumbs
-             BreadcrumbWithHeading(
+              BreadcrumbWithHeading(
                 heading: '#[${order.id}]',
                 breadcrumbs: const [Routes.orders, 'Details'],
                 returnToPreviousScreen: true,
@@ -26,31 +32,31 @@ class OrderDetailsMobileScreen extends StatelessWidget {
 
               const SizedBox(height: AppSizes.spaceBtwSections),
 
-              const RoundedContainer(),
+              // Order Info
+              OrderInfoSection(order: order),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
               // Order Items
-              const RoundedContainer(),
+              OrderItemsSection(order: order),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
               // transactions
-              const RoundedContainer(),
+              TransactionSection(order: order),
               const SizedBox(height: AppSizes.spaceBtwSections),
-              const SizedBox(width: AppSizes.spaceBtwSections),
 
-              const RoundedContainer(),
+              OrderCustomer(order: order),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
               // contact person info
-              const RoundedContainer(),
+              const ContactSection(),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
               // shipping address
-              const RoundedContainer(),
+              const ShippingAddress(),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
               // billing address
-              const RoundedContainer(),
+              const BillingAddress(),
               const SizedBox(height: AppSizes.spaceBtwSections),
             ],
           ),

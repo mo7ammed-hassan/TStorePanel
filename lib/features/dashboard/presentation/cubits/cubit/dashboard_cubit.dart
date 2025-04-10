@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
+import 'package:t_store_admin_panel/data/models/user/cart_item_model.dart';
 
 part 'dashboard_state.dart';
 
@@ -23,43 +24,79 @@ class DashboardCubit extends Cubit<DashboardState> {
       id: 'MWT001',
       status: OrderStatus.processing,
       totalAmount: 260,
-      orderDate: DateTime.now().subtract(const Duration(days: 6)), // قبل 6 أيام
-      deliveryDate: DateTime.now().add(const Duration(days: 10)), // بعد 10 أيام
+      orderDate: DateTime.now().subtract(const Duration(days: 6)),
+      deliveryDate: DateTime.now().add(const Duration(days: 10)),
+      paymentMethod: PaymentMethods.paypal.name.toString(),
+      cartItems: [
+        CartItemModel(productId: '1', price: 100, quantity: 2),
+        CartItemModel(productId: '202', price: 50, quantity: 1),
+        CartItemModel(productId: '31', price: 75, quantity: 3),
+      ],
     ),
     OrderModel(
       id: 'MWT0051',
       status: OrderStatus.processing,
       totalAmount: 200,
-      orderDate: DateTime.now().subtract(const Duration(days: 5)), // قبل 5 أيام
+      orderDate: DateTime.now().subtract(const Duration(days: 5)),
       deliveryDate: DateTime.now().add(const Duration(days: 15)),
+      paymentMethod: PaymentMethods.paypal.name.toString(),
+      cartItems: [
+        CartItemModel(productId: '1', price: 100, quantity: 2),
+        CartItemModel(productId: '202', price: 50, quantity: 1),
+        CartItemModel(productId: '31', price: 75, quantity: 3),
+      ],
     ),
     OrderModel(
       id: 'MWT0012',
       status: OrderStatus.delivered,
       totalAmount: 240,
-      orderDate: DateTime.now().subtract(const Duration(days: 4)), // قبل 4 أيام
+      orderDate: DateTime.now().subtract(const Duration(days: 4)),
       deliveryDate: DateTime.now().add(const Duration(days: 20)),
+      paymentMethod: PaymentMethods.paypal.name.toString(),
+      cartItems: [
+        CartItemModel(productId: '1', price: 100, quantity: 2),
+        CartItemModel(productId: '202', price: 50, quantity: 1),
+        CartItemModel(productId: '31', price: 75, quantity: 3),
+      ],
     ),
     OrderModel(
       id: 'MWT0013',
       status: OrderStatus.delivered,
       totalAmount: 645,
-      orderDate: DateTime.now().subtract(const Duration(days: 3)), // قبل 3 أيام
+      orderDate: DateTime.now().subtract(const Duration(days: 3)),
       deliveryDate: DateTime.now().add(const Duration(days: 25)),
+      paymentMethod: PaymentMethods.paypal.name.toString(),
+      cartItems: [
+        CartItemModel(productId: '1', price: 100, quantity: 2),
+        CartItemModel(productId: '202', price: 50, quantity: 1),
+        CartItemModel(productId: '31', price: 75, quantity: 3),
+      ],
     ),
     OrderModel(
       id: 'MWT05015',
       status: OrderStatus.delivered,
       totalAmount: 150,
-      orderDate: DateTime.now().subtract(const Duration(days: 2)), // قبل يومين
+      orderDate: DateTime.now().subtract(const Duration(days: 2)),
       deliveryDate: DateTime.now().add(const Duration(days: 5)),
+      paymentMethod: PaymentMethods.paypal.name.toString(),
+      cartItems: [
+        CartItemModel(productId: '1', price: 100, quantity: 2),
+        CartItemModel(productId: '202', price: 50, quantity: 1),
+        CartItemModel(productId: '31', price: 75, quantity: 3),
+      ],
     ),
     OrderModel(
       id: 'MWT00515',
       status: OrderStatus.shipped,
       totalAmount: 150,
-      orderDate: DateTime.now().subtract(const Duration(days: 1)), // أمس
+      orderDate: DateTime.now().subtract(const Duration(days: 1)),
       deliveryDate: DateTime.now().add(const Duration(days: 7)),
+      paymentMethod: PaymentMethods.paypal.name.toString(),
+      cartItems: [
+        CartItemModel(productId: '1', price: 100, quantity: 2),
+        CartItemModel(productId: '202', price: 50, quantity: 1),
+        CartItemModel(productId: '31', price: 75, quantity: 3),
+      ],
     ),
   ];
   // Calculate weekly sales
