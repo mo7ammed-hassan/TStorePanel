@@ -16,6 +16,9 @@ abstract class AuthFirebaseServices {
   Future<void> signOut();
 
   // RESET PASSWORD
+
+  // Already Logged In
+  bool alreadyLoggedIn();
 }
 
 class AuthFirebaseServicesImpl implements AuthFirebaseServices {
@@ -78,5 +81,10 @@ class AuthFirebaseServicesImpl implements AuthFirebaseServices {
       debugPrint("❌ Unexpected Error: $e\n$stackTrace");
       throw Exception('Something went wrong. Please try again.');
     }
+  }
+
+  @override
+  bool alreadyLoggedIn() {
+    return _userManager.auth.currentUser != null ? true : false;
   }
 }

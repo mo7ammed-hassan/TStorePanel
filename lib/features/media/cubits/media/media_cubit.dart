@@ -179,7 +179,7 @@ class MediaCubit extends Cubit<MediaState> {
         allowMultiple: true,
         allowedExtensions: ['jpeg', 'png', 'jpg', 'webp'],
         withData:
-            true, // هذا يجعل file.bytes دائمًا يحتوي على البيانات بدون الحاجة إلى file.path.
+            true, // pass true if you want to get the file bytes when a user picks a file
       );
 
       if (result != null && result.files.isNotEmpty) {
@@ -192,7 +192,7 @@ class MediaCubit extends Cubit<MediaState> {
           } else if (file.path != null) {
             imageBytes = await File(file.path!).readAsBytes();
           } else {
-            debugPrint('No bytes or path found for file: ${file.name}');
+            //debugPrint('No bytes or path found for file: ${file.name}');
             continue;
           }
 
@@ -298,7 +298,7 @@ class MediaCubit extends Cubit<MediaState> {
 
           // Add uploaded image to the successful uploads list
           successfulUploads.add(uploadedImage);
-          debugPrint('Image uploaded successfully: ${uploadedImage.createdAt}');
+          //debugPrint('Image uploaded successfully: ${uploadedImage.createdAt}');
 
           // Add uploaded image to the target list
           targetList.add(uploadedImage);
@@ -423,7 +423,7 @@ class MediaCubit extends Cubit<MediaState> {
 
   /// --Fetch Images From Database--
   Future<void> fetchImagesFromDatabase(int? limit) async {
-    debugPrint('🔍 fetchImagesFromDatabase triggered!');
+    //debugPrint('🔍 fetchImagesFromDatabase triggered!');
     emit(FetchImagesLoadingState());
 
     // Get Folder Images
@@ -432,11 +432,11 @@ class MediaCubit extends Cubit<MediaState> {
 
     if (targetList.isNotEmpty) {
       emit(FetchImagesSuccessState(targetList));
-      debugPrint('Images Already fetched from database: ${targetList.length}');
+      //debugPrint('Images Already fetched from database: ${targetList.length}');
       return;
     }
 
-    debugPrint('Images fetched from database: ${targetList.length}');
+    //debugPrint('Images fetched from database: ${targetList.length}');
 
     // Fetch Images From Database
     var result = await mediaRepository.fetchImagesFromDatabase(
@@ -447,7 +447,7 @@ class MediaCubit extends Cubit<MediaState> {
 
     result.fold(
       (error) {
-        debugPrint('Error fetching images from database: $error');
+        //debugPrint('Error fetching images from database: $error');
         emit(FetchImagesFailureState(error));
       },
       (images) {
@@ -464,7 +464,7 @@ class MediaCubit extends Cubit<MediaState> {
 
   /// --Fetch More Images From Database--
   Future<void> fetchMoreImages(int limit) async {
-    debugPrint('🔍 fetchMoreImages triggered!');
+    ////debugPrint('🔍 fetchMoreImages triggered!');
 
     // Get Folder Images
     List<ImageModel> targetList = <ImageModel>[];
@@ -474,11 +474,11 @@ class MediaCubit extends Cubit<MediaState> {
     lastFetchTime = lastFetchTime ?? DateTime.now();
 
     // Check if targetList is empty
-    if (targetList.isEmpty) {
-      debugPrint('⚠️ Warning: No previous images found, using DateTime.now().');
-    } else {
-      debugPrint('✅ Using last createdAt: $lastFetchTime');
-    }
+    // if (targetList.isEmpty) {
+    //   //debugPrint('⚠️ Warning: No previous images found, using DateTime.now().');
+    // } else {
+    //   //debugPrint('✅ Using last createdAt: $lastFetchTime');
+    // }
 
     // Fetch Images From Database
     var result = await mediaRepository.fetchMoreImages(
@@ -519,7 +519,7 @@ class MediaCubit extends Cubit<MediaState> {
 
   // 2-- Delete Image--
   Future<void> deleteImageFromStorage(ImageModel image) async {
-    debugPrint('🔍 deleteImageFromStorage triggered!');
+    //debugPrint('🔍 deleteImageFromStorage triggered!');
     // Remove Confirmation Dialog
     AppContext.context.popPage(AppContext.overlayContext);
 
@@ -534,7 +534,7 @@ class MediaCubit extends Cubit<MediaState> {
 
     result.fold(
       (error) {
-        debugPrint('Error deleting image: $error');
+        //debugPrint('Error deleting image: $error');
         // Remove Loader
         if (AppContext.overlayContext.mounted) {
           AppContext.overlayContext.popPage(AppContext.overlayContext);
@@ -547,7 +547,7 @@ class MediaCubit extends Cubit<MediaState> {
         emit(DeleteImageFailureState(error));
       },
       (success) {
-        debugPrint('Image deleted successfully');
+        //debugPrint('Image deleted successfully');
         // Remove Loader
         if (AppContext.overlayContext.mounted) {
           AppContext.overlayContext.popPage(AppContext.overlayContext);

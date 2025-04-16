@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 part 'media_action_state.dart';
@@ -23,14 +22,6 @@ class MediaActionCubit extends Cubit<MediaActionState> {
     bool? selected,
     bool allowMultibleSelection,
   ) {
-    // debugPrint('Multi Selection Images Length: ${multiSelectionImages.length}');
-    // if (allowMultibleSelection && multiSelectionImages.isNotEmpty) {
-    //   for (var image in multiSelectionImages) {
-    //     image.isSelected = true;
-    //     emit(ToggleImageCheckBox(image));
-    //   }
-    // }
-
     if (selected != null) {
       image.isSelected = selected;
 
@@ -73,7 +64,7 @@ class MediaActionCubit extends Cubit<MediaActionState> {
   // Use it when swapping path'Folders' if needed 'IN MEDIA CUBIT 'changeCategory''
   void resetSelectedImages() {
     selectedImages.clear();
-    debugPrint('Selected Images Length: ${selectedImages.length}');
+    //debugPrint('Selected Images Length: ${selectedImages.length}');
   }
 
   /// Use it when add multiple images
