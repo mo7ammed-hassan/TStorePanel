@@ -25,7 +25,7 @@ class CategoryRepoImpl implements CategoryRepo {
   }
 
   @override
-  Future<Either<String, CategoryModel>> updateCategory(
+  Future<Either<String, void>> updateCategory(
     CategoryModel category,
   ) async {
     return await _categoryFirebaseServices.updateCategory(category);

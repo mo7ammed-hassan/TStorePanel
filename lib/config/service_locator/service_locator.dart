@@ -18,6 +18,7 @@ import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/create_category/create_category_cubit.dart';
+import 'package:t_store_admin_panel/features/categories/cubits/edit_category/edit_category_cubit.dart';
 import 'package:t_store_admin_panel/features/dashboard/presentation/cubits/cubit/dashboard_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
@@ -90,9 +91,12 @@ void setupServiceLocator() {
   getIt.registerFactory<CategoryCubit>(
     () => CategoryCubit(getIt<CategoryRepo>()),
   );
-  // create Category 
+  // create Category
   getIt.registerFactory<CreateCategoryCubit>(
     () => CreateCategoryCubit(getIt<CategoryRepo>()),
+  );
+  getIt.registerFactory<EditCategoryCubit>(
+    () => EditCategoryCubit(getIt<CategoryRepo>()),
   );
 }
 

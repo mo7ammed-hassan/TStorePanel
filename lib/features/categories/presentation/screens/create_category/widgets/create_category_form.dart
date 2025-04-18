@@ -8,6 +8,7 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/create_category/create_category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/create_category/create_category_state.dart';
@@ -56,7 +57,7 @@ class CreateCategoryForm extends StatelessWidget {
               ),
               const SizedBox(height: AppSizes.spaceBtwInputFields),
 
-              DropdownButtonFormField(
+              DropdownButtonFormField<CategoryModel>(
                 decoration: const InputDecoration(
                   labelText: 'Parent Category',
                   hintText: 'Parent Category',

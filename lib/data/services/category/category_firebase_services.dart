@@ -14,7 +14,7 @@ abstract class CategoryFirebaseServices {
   Future<Either<String, String>> createCategory(CategoryModel category);
 
   // update category
-  Future<Either<String, CategoryModel>> updateCategory(CategoryModel category);
+  Future<Either<String, void>> updateCategory(CategoryModel category);
 
   // delete category
   Future<Either<String, void>> deleteCategory(CategoryModel category);
@@ -79,10 +79,22 @@ class CategoryFirebaseServicesImpl implements CategoryFirebaseServices {
   }
 
   @override
-  Future<Either<String, CategoryModel>> updateCategory(
-    CategoryModel category,
-  ) async {
-    // TODO: implement updateCategory
-    throw UnimplementedError();
+  Future<Either<String, void>> updateCategory(CategoryModel category) async {
+    try {
+      await firestore
+          .collection(collectionName)
+          .doc(category.id)
+          .update(category.toJson());
+
+      return const Right(null);
+    } on FirebaseException catch (e) {
+      return Left(e.message ?? 'Unknown error');
+    } on SocketException catch (e) {
+      return Left(e.message);
+    } on PlatformException catch (e) {
+      return Left(e.message ?? 'Unknown error');
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(Exception('Unexpected Error: $e'), stackTrace);
+    }
   }
 }

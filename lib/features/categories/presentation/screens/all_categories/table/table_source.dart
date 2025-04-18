@@ -78,7 +78,10 @@ class CategoryRows extends DataTableSource {
             onEditPressed:
                 () => AppContext.context.pushNamedPage(
                   Routes.editCategory,
-                  arguments: category,
+                  arguments: {
+                    'categoryModel': category,
+                    'categoryCubit': categoryCubit,
+                  },
                 ),
             onDeletePressed:
                 () => categoryCubit.showDeleteConfirmationDialog(category),
