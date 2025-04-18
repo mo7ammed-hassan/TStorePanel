@@ -23,10 +23,10 @@ class CreateCategoryForm extends StatelessWidget {
     return BlocListener<CreateCategoryCubit, CreateCategoryState>(
       listener: (context, state) {
         if (state is CreateCategorySuccessState) {
-          categoryCubit.categories.add(state.category);
-          categoryCubit.filteredCategories.add(state.category);
-          categoryCubit.selectedCategories.add(false);
-          categoryCubit.updateCategoriesState();
+          categoryCubit.allItems.add(state.category);
+          categoryCubit.filteredItems.add(state.category);
+          categoryCubit.selectedItems.add(false);
+          categoryCubit.updateState();
         }
       },
       child: RoundedContainer(
@@ -66,9 +66,9 @@ class CreateCategoryForm extends StatelessWidget {
                 onChanged:
                     (value) => createCategoryCubit.selectedParent = value!,
                 items:
-                    categoryCubit.categories
+                    categoryCubit.allItems
                         .map(
-                          (item) => DropdownMenuItem(
+                          (item) => DropdownMenuItem<CategoryModel>(
                             value: item,
                             child: Row(children: [Text(item.name)]),
                           ),

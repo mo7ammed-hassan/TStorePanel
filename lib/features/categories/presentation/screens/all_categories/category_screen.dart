@@ -13,7 +13,7 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<CategoryCubit>()..fetchCategories(),
+      create: (context) => getIt<CategoryCubit>(),
       child: const SiteTemplate(
         desktop: CategoryDesktopScreen(),
         mobile: CategoryMobileScreen(),

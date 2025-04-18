@@ -27,7 +27,7 @@ class CategoryRows extends DataTableSource {
     );
 
     return DataRow2(
-      selected: categoryCubit.selectedCategories[index],
+      selected: categoryCubit.selectedItems[index],
       onSelectChanged: (value) {
         categoryCubit.toggleSelection(index, value);
       },
@@ -83,8 +83,7 @@ class CategoryRows extends DataTableSource {
                     'categoryCubit': categoryCubit,
                   },
                 ),
-            onDeletePressed:
-                () => categoryCubit.showDeleteConfirmationDialog(category),
+            onDeletePressed: () => categoryCubit.deleteOnConfirmation(category),
           ),
         ),
       ],
@@ -98,5 +97,6 @@ class CategoryRows extends DataTableSource {
   int get rowCount => categories.length;
 
   @override
-  int get selectedRowCount => categoryCubit.selectedCategories.length;
+  int get selectedRowCount =>
+      categoryCubit.selectedItems.where((e) => e == true).length;
 }

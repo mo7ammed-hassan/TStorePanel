@@ -28,15 +28,15 @@ class EditCategoryForm extends StatelessWidget {
     return BlocListener<EditCategoryCubit, EditCategoryState>(
       listener: (context, state) {
         if (state is EditCategorySuccessState) {
-          final index = categoryCubit.categories.indexWhere(
+          final index = categoryCubit.allItems.indexWhere(
             (element) => element.id == category!.id,
           );
 
           // index != -1
-          categoryCubit.categories[index] = state.category;
-          categoryCubit.filteredCategories[index] = state.category;
-          categoryCubit.selectedCategories[index] = false;
-          categoryCubit.updateCategoriesState();
+          categoryCubit.allItems[index] = state.category;
+          categoryCubit.filteredItems[index] = state.category;
+          categoryCubit.selectedItems[index] = false;
+          categoryCubit.updateState();
         }
       },
       child: RoundedContainer(
@@ -75,9 +75,9 @@ class EditCategoryForm extends StatelessWidget {
                 ),
                 onChanged: (value) => cubit.selectedParent = value!,
                 items:
-                    categoryCubit.categories
+                    categoryCubit.allItems
                         .map(
-                          (item) => DropdownMenuItem(
+                          (item) => DropdownMenuItem<CategoryModel>(
                             value: item,
                             child: Row(children: [Text(item.name)]),
                           ),

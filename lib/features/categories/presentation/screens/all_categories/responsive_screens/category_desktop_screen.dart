@@ -41,9 +41,8 @@ class CategoryDesktopScreen extends StatelessWidget {
                             arguments: context.read<CategoryCubit>(),
                           ),
                       searchOnChanged:
-                          (quary) => context
-                              .read<CategoryCubit>()
-                              .searchCategories(quary),
+                          (quary) =>
+                              context.read<CategoryCubit>().filterData(quary),
                     ),
                     const SizedBox(height: AppSizes.spaceBtwItems),
 
