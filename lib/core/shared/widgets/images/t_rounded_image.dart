@@ -83,7 +83,7 @@ class TRoundedImage extends StatelessWidget {
   }
 
   Widget _buildNetworkImage() {
-    if (image != null) {
+    if (image != null && image!.isNotEmpty) {
       // Use cached network image for efficient loading and cache image // Not working for web but just for loading
       return CachedNetworkImage(
         imageUrl: image!,
@@ -125,7 +125,7 @@ class TRoundedImage extends StatelessWidget {
   }
 
   Widget _buildAssetImage() {
-    if (image != null) {
+    if (image != null && image!.isNotEmpty) {
       // Display image from asset
       return Image(fit: fit, image: AssetImage(image!), color: overlayColor);
     } else {

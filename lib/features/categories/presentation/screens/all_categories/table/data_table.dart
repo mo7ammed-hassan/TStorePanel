@@ -1,6 +1,10 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
+import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
+import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/all_categories/table/table_source.dart';
 import 'package:t_store_admin_panel/features/dashboard/widgets/tables/custom_paginated_table.dart';
 
@@ -9,17 +13,57 @@ class CategoryDataTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaginatedTable(
-      minWidth: 700,
-      tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
-      columns: const [
-        DataColumn2(label: Text('Category')),
-        DataColumn2(label: Text('Parent Category')),
-        DataColumn2(label: Text('Featured'), fixedWidth: 100),
-        DataColumn2(label: Text('Date')),
-        DataColumn2(label: Text('Action'), fixedWidth: 100),
-      ],
-      source: CategoryRows(),
+    return BlocBuilder<CategoryCubit, CategoryState>(
+      builder: (context, state) {
+        if (state is CategoryLoadingState) {
+          return _buildEmptyWidget();
+        }
+        if (state is CategoryLoadedState && state.categories.isEmpty) {
+          return _buildEmptyWidget();
+        }
+        return CustomPaginatedTable(
+          minWidth: 700,
+          tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+          sortAscending: context.read<CategoryCubit>().sortAscending,
+          sortColumnIndex: context.read<CategoryCubit>().sortColumnIndex,
+
+          columns: [
+            DataColumn2(
+              label: const Text('Category'),
+              onSort:
+                  (columnIndex, ascending) => context
+                      .read<CategoryCubit>()
+                      .sortByColumn(columnIndex, ascending),
+            ),
+            DataColumn2(
+              label: const Text('Parent Category'),
+              onSort:
+                  (columnIndex, ascending) => context
+                      .read<CategoryCubit>()
+                      .sortByColumn(columnIndex, ascending),
+            ),
+            const DataColumn2(label: Text('Featured'), fixedWidth: 100),
+            const DataColumn2(label: Text('Date')),
+            const DataColumn2(label: Text('Action'), fixedWidth: 100),
+          ],
+          source: CategoryRows(
+            state is CategoryLoadedState ? state.categories : [],
+            context.read<CategoryCubit>(),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildEmptyWidget() {
+    return const SizedBox(
+      height: 700,
+      child: TAnimationLoaderWidget(
+        width: 300,
+        height: 300,
+        text: '',
+        animation: TImages.packaging,
+      ),
     );
   }
 }

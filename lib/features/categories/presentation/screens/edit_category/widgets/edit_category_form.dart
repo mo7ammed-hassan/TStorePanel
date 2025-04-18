@@ -9,7 +9,7 @@ import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart'
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 class EditCategoryForm extends StatelessWidget {
-  const EditCategoryForm({super.key,  this.category});
+  const EditCategoryForm({super.key, this.category});
 
   final CategoryModel? category;
 
@@ -37,6 +37,7 @@ class EditCategoryForm extends StatelessWidget {
                 labelText: 'Category Name',
                 prefixIcon: Icon(Iconsax.category),
               ),
+              controller: TextEditingController(text: category?.name),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
 
@@ -60,8 +61,8 @@ class EditCategoryForm extends StatelessWidget {
             UploaderImage(
               width: 80,
               height: 80,
-              image: TImages.darkAppLogo,
-              imageType: ImageType.asset,
+              image: category?.image ?? TImages.defaultProductImage,
+              imageType: ImageType.network,
               onIconButtonPressed: () {},
             ),
 

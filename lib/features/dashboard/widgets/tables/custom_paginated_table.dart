@@ -11,7 +11,7 @@ class CustomPaginatedTable extends StatelessWidget {
     super.key,
     required this.columns,
     required this.source,
-    this.sortAscending,
+    this.sortAscending = false,
     this.sortColumnIndex,
     this.rowsPerPage = 10,
     this.tableheight = 760,
@@ -20,7 +20,7 @@ class CustomPaginatedTable extends StatelessWidget {
     this.onPageChanged,
   });
 
-  final bool? sortAscending;
+  final bool sortAscending;
   final int? sortColumnIndex;
   final List<DataColumn> columns;
   final DataTableSource source;
@@ -57,7 +57,7 @@ class CustomPaginatedTable extends StatelessWidget {
           dataRowHeight: dataRowHeight,
 
           /// Checkbox
-          showCheckboxColumn: false,
+          showCheckboxColumn: true,
 
           /// Pagination
           showFirstLastButtons: true,
@@ -66,7 +66,7 @@ class CustomPaginatedTable extends StatelessWidget {
           onRowsPerPageChanged: (value) => {},
 
           // Sorting
-          sortAscending: sortAscending ?? true,
+          sortAscending: sortAscending,
           sortArrowAlwaysVisible: true,
           sortArrowIcon: Icons.line_axis,
           sortColumnIndex: sortColumnIndex,

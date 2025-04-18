@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,27 +12,44 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
+import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 
 class CategoryRows extends DataTableSource {
+  final List<CategoryModel> categories;
+  final CategoryCubit categoryCubit;
+
+  CategoryRows(this.categories, this.categoryCubit);
   @override
   DataRow? getRow(int index) {
+    final category = categories[index];
+    final parentCategory = categories.firstWhereOrNull(
+      (element) => element.id == category.parentId,
+    );
+
     return DataRow2(
+      selected: categoryCubit.selectedCategories[index],
+      onSelectChanged: (value) {
+        categoryCubit.toggleSelection(index, value);
+      },
       cells: [
         DataCell(
           Row(
             children: [
-              const TRoundedImage(
-                image: TImages.acerlogo,
+              TRoundedImage(
+                image: category.image ?? TImages.defaultProductImage,
                 width: 50,
                 height: 50,
-                imageType: ImageType.asset,
+                imageType:
+                    category.image != null
+                        ? ImageType.network
+                        : ImageType.asset,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Flexible(
                 child: Text(
-                  'Name',
+                  category.name,
                   style: Theme.of(
                     AppContext.context,
                   ).textTheme.bodyLarge!.apply(color: AppColors.primary),
@@ -42,17 +60,28 @@ class CategoryRows extends DataTableSource {
             ],
           ),
         ),
-        const DataCell(Text('Parent')),
-        const DataCell(Icon(Iconsax.heart5, color: AppColors.primary)),
-        DataCell(Text(DateTime.now().toString())),
+        DataCell(Text(parentCategory != null ? parentCategory.name : '')),
+        DataCell(
+          category.isFeatured!
+              ? const Icon(Iconsax.heart5, color: AppColors.primary)
+              : const Icon(Iconsax.heart, color: Colors.grey),
+        ),
+        DataCell(
+          Text(
+            category.formattedCreatedAt!.isEmpty
+                ? DateTime.now().toString()
+                : category.formattedCreatedAt!,
+          ),
+        ),
         DataCell(
           TTableActionButtons(
             onEditPressed:
                 () => AppContext.context.pushNamedPage(
                   Routes.editCategory,
-                  arguments: CategoryModel.empty(),
+                  arguments: category,
                 ),
-            onDeletePressed: () {},
+            onDeletePressed:
+                () => categoryCubit.showDeleteConfirmationDialog(category),
           ),
         ),
       ],
@@ -63,8 +92,8 @@ class CategoryRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 5;
+  int get rowCount => categories.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount => categoryCubit.selectedCategories.length;
 }

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/shimmer/shimmer_widget.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import '../../../utils/utils/constants/colors.dart';
 import '../../../utils/utils/constants/sizes.dart';
 import '../../../utils/utils/helpers/helper_functions.dart';
@@ -18,7 +19,7 @@ class TCircularImage extends StatelessWidget {
     this.imageColor,
   });
 
-  final String image;
+  final String? image;
   final double width, height, padding;
 
   final Color? backgroundColor;
@@ -45,7 +46,7 @@ class TCircularImage extends StatelessWidget {
                   ? CachedNetworkImage(
                     width: width,
                     height: height,
-                    imageUrl: image,
+                    imageUrl: image ?? TImages.defaultProductImage,
                     fit: fit,
                     color: (isDark ? AppColors.light : AppColors.dark),
                     progressIndicatorBuilder:
@@ -61,7 +62,7 @@ class TCircularImage extends StatelessWidget {
                     fit: fit,
                     width: width,
                     height: height,
-                    image: AssetImage(image),
+                    image: AssetImage(image ?? TImages.defaultProductImage),
                     color: imageColor,
                   ),
         ),
