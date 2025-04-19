@@ -22,7 +22,7 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
   final CacheStorageManagement<T> cacheStorageManagement;
 
   // init
-  void init() async {
+  Future<void> init() async {
     // initialize the cache storage management
     await cacheStorageManagement.init();
     await fetchData();
@@ -45,6 +45,7 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
     if (cachedData.isNotEmpty) {
       _updateLists(cachedData);
       emit(DataTableLoadedState(filteredItems));
+      return;
     }
 
     // Fetch from Database
@@ -86,6 +87,9 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
         allItems.where((item) => containSearchQuery(item, query)),
       );
     }
+
+    // Ensure sorting is maintained after filtering
+    sortByProperty(sortColumnIndex, sortAscending, (item) => item);
 
     emit(DataTableLoadedState(filteredItems));
   }
@@ -144,14 +148,14 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
     });
   }
 
-  void removeItemFromList(T item) {
+  void removeItemFromList(T item) async {
     allItems.remove(item);
     filteredItems.remove(item);
     selectedItems
       ..clear()
       ..addAll(List.generate(allItems.length, (index) => false));
 
-    cacheStorageManagement.deleteItem(allItems.indexOf(item));
+    await cacheStorageManagement.deleteItem(allItems.indexOf(item));
   }
 
   /// Method for toggling selection
