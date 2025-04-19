@@ -20,7 +20,10 @@ class EditCategoryScreen extends StatelessWidget {
     final categoryCubit = arguments['categoryCubit'] as CategoryCubit;
 
     return BlocProvider(
-      create: (context) => getIt<EditCategoryCubit>()..initData(category),
+      create:
+          (context) =>
+              getIt<EditCategoryCubit>()
+                ..initData(category, categoryCubit.allItems),
       child: SiteTemplate(
         desktop: EditCategoryDesktopScreen(
           category: category,

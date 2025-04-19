@@ -21,13 +21,22 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
   String? imageUrl = '';
   bool isFeatured = false;
 
-  // init Data
-  void initData(CategoryModel? category) {
+  bool _isInitialized = false; //  To prevent double init
+
+  void initData(CategoryModel? category, List<CategoryModel> allCategories) {
+    if (_isInitialized) return;
+    _isInitialized = true;
+
     nameController.text = category?.name ?? '';
     imageUrl = category?.image ?? '';
     isFeatured = category?.isFeatured ?? false;
-    selectedParent =
-        (category?.parentId != null ? category : CategoryModel.empty())!;
+
+    if (category?.parentId != null && category!.parentId.isNotEmpty) {
+      selectedParent = allCategories.firstWhere(
+        (item) => item.id == category.parentId,
+        orElse: () => CategoryModel.empty(),
+      );
+    }
   }
 
   // update Category
