@@ -1,10 +1,9 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
+import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
-import 'package:t_store_admin_panel/data/abstract/base_data_table_states.dart';
-
-import '../../core/utils/utils/dialogs/show_confirmation_dialog.dart';
+import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 
 abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
   BaseDataTableCubit(super.initialState, this.cacheStorageManagement) {
@@ -54,7 +53,9 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
 
     result.fold(
       (error) {
-        if (allItems.isEmpty) emit(DataTableFailureState(error));
+        // if (allItems.isEmpty) emit(DataTableFailureState(error));
+        Loaders.errorSnackBar(title: 'Error', message: error);
+        emit(DataTableFailureState(error));
       },
       (items) async {
         _updateLists(items);
@@ -132,17 +133,23 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
     final result = await deleteItem(item);
     if (isClosed) return;
 
-    result.fold((error) => emit(DataTableFailureState(error)), (_) {
-      removeItemFromList(item);
+    result.fold(
+      (error) {
+        CustomDialogs.hideLoader();
+        emit(DataTableFailureState(error));
+      },
+      (_) {
+        removeItemFromList(item);
 
-      CustomDialogs.hideLoader();
-      Loaders.successSnackBar(
-        title: 'Item Deleted',
-        message: 'Your item has been deleted successfully.',
-      );
+        CustomDialogs.hideLoader();
+        Loaders.successSnackBar(
+          title: 'Item Deleted',
+          message: 'Your item has been deleted successfully.',
+        );
 
-      emit(DataTableLoadedState(List<T>.from(allItems)));
-    });
+        emit(DataTableLoadedState(List<T>.from(allItems)));
+      },
+    );
   }
 
   void removeItemFromList(T item) async {

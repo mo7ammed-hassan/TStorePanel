@@ -90,10 +90,10 @@ class TRoundedImage extends StatelessWidget {
         fit: fit,
         color: overlayColor,
         progressIndicatorBuilder:
-            (context, url, progress) => const ShimmerWidget(
-              height: 75,
-              width: 75,
-              shapeBorder: CircleBorder(),
+            (context, url, progress) => ShimmerWidget(
+              height: height,
+              width: width,
+              padding: EdgeInsets.all(padding),
             ),
         errorWidget: (context, url, error) => const Icon(Iconsax.image),
       );

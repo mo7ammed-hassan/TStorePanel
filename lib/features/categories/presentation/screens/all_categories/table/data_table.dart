@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
-import 'package:t_store_admin_panel/data/abstract/base_data_table_states.dart';
+import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/presentation/screens/all_categories/table/table_source.dart';
