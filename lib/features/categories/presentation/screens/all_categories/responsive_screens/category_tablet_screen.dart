@@ -39,6 +39,9 @@ class CategoryTabletScreen extends StatelessWidget {
                             Routes.createCategory,
                             arguments: context.read<CategoryCubit>(),
                           ),
+                      searchOnChanged:
+                          (quary) =>
+                              context.read<CategoryCubit>().filterData(quary),
                     ),
                     const SizedBox(height: AppSizes.spaceBtwItems),
 
