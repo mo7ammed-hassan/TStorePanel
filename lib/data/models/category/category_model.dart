@@ -1,12 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
 
+part 'category_model.g.dart';
+
+@HiveType(typeId: 1)
 class CategoryModel {
+  @HiveField(0)
   String id;
+
+  @HiveField(1)
   String name;
+
+  @HiveField(2)
   String? image;
+
+  @HiveField(3)
   String parentId;
+
+  @HiveField(4)
   bool? isFeatured;
+
+  @HiveField(5)
   DateTime? createdAt;
+
+  @HiveField(6)
   DateTime? updatedAt;
 
   CategoryModel({

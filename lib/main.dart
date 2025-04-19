@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:t_store_admin_panel/app.dart';
 import 'package:t_store_admin_panel/bloc_observier.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
@@ -42,6 +43,9 @@ void main() async {
 
   // Bloc Observers
   Bloc.observer = MyBlocObserver();
+
+  // Initialize Hive
+  await Hive.initFlutter();
 
   // Main App Start
   runApp(const MyApp());
