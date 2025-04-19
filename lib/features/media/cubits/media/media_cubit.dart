@@ -582,9 +582,7 @@ class MediaCubit extends Cubit<MediaState> {
 
   // Reset Cubit
   void reset() {
-    selectedPath = MediaCategory.folders;
     selectedImagesToUpload.clear();
-
     emit(MediaInitial());
   }
 }
