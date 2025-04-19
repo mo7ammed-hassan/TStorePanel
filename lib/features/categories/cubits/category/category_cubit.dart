@@ -1,12 +1,22 @@
 import 'package:either_dart/either.dart';
+import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/data/abstract/base_data_table_cubit.dart';
 import 'package:t_store_admin_panel/data/abstract/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/domain/repositories/category/category_repo.dart';
 
-
 class CategoryCubit extends BaseDataTableCubit<CategoryModel> {
-  CategoryCubit(this.categoryRepo) : super(DataTableInitial());
+  CategoryCubit(this.categoryRepo)
+    : super(
+        DataTableInitial(),
+        CacheStorageManagementImpl<CategoryModel>(
+          'categories',
+          1,
+          adapter: CategoryModelAdapter(),
+        ),
+      ) {
+    init();
+  }
   final CategoryRepo categoryRepo;
 
   @override

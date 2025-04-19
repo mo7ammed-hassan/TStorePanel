@@ -1,12 +1,13 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/abstract/base_data_table_states.dart';
 
 import '../../core/utils/utils/dialogs/show_confirmation_dialog.dart';
 
 abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
-  BaseDataTableCubit(super.initialState) {
+  BaseDataTableCubit(super.initialState, this.cacheStorageManagement) {
     init();
   }
 
@@ -18,9 +19,13 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
 
   final List<bool> selectedItems = <bool>[];
 
+  final CacheStorageManagement<T> cacheStorageManagement;
+
   // init
-  void init() {
-    fetchData();
+  void init() async {
+    // initialize the cache storage management
+    await cacheStorageManagement.init();
+    await fetchData();
   }
 
   /// Method for fetching data
@@ -33,33 +38,41 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
   bool containSearchQuery(T item, String query);
 
   Future<void> fetchData() async {
-    // Start Loading
     emit(DataTableLoadingState());
 
-    if (allItems.isEmpty) {
-      final result = await fetchItems();
-      if (isClosed) return;
-
-      result.fold(
-        (error) {
-          emit(DataTableFailureState(error));
-        },
-        (items) {
-          this.allItems
-            ..clear()
-            ..addAll(items);
-          filteredItems
-            ..clear()
-            ..addAll(items);
-
-          selectedItems
-            ..clear()
-            ..addAll(List.generate(items.length, (index) => false));
-
-          emit(DataTableLoadedState(items));
-        },
-      );
+    // Try cache first
+    final cachedData = await cacheStorageManagement.fetchData();
+    if (cachedData.isNotEmpty) {
+      _updateLists(cachedData);
+      emit(DataTableLoadedState(filteredItems));
     }
+
+    // Fetch from Database
+    final result = await fetchItems();
+    if (isClosed) return;
+
+    result.fold(
+      (error) {
+        if (allItems.isEmpty) emit(DataTableFailureState(error));
+      },
+      (items) async {
+        _updateLists(items);
+        await cacheStorageManagement.storeData(items);
+        emit(DataTableLoadedState(filteredItems));
+      },
+    );
+  }
+
+  void _updateLists(List<T> items) {
+    allItems
+      ..clear()
+      ..addAll(items);
+    filteredItems
+      ..clear()
+      ..addAll(items);
+    selectedItems
+      ..clear()
+      ..addAll(List.generate(items.length, (index) => false));
   }
 
   /// Method for filtering data
@@ -137,6 +150,8 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
     selectedItems
       ..clear()
       ..addAll(List.generate(allItems.length, (index) => false));
+
+    cacheStorageManagement.deleteItem(allItems.indexOf(item));
   }
 
   /// Method for toggling selection
