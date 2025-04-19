@@ -50,7 +50,7 @@ class CategoryCubit extends BaseDataTableCubit<CategoryModel> {
         return sortByProperty(
           columnIndex,
           ascending,
-          (dynamic category) => (category as CategoryModel).isFeatured,
+          (dynamic category) => (category as CategoryModel).isFeatured == true ? 1 : 0,
         );
       default:
         return;

@@ -88,9 +88,6 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
       );
     }
 
-    // Ensure sorting is maintained after filtering
-    sortByProperty(sortColumnIndex, sortAscending, (item) => item);
-
     emit(DataTableLoadedState(filteredItems));
   }
 
