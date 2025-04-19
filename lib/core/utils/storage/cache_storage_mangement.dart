@@ -14,6 +14,9 @@ abstract class CacheStorageManagement<T> {
   // Method for storage data
   Future<void> storeData(List<T> items);
 
+  // Store item
+  Future<void> storeItem(T item);
+
   /// Clear Cache Storage
   Future<void> clearCacheStorage();
 }
@@ -51,43 +54,6 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
     _box = await Hive.openBox<dynamic>(_boxName);
   }
 
-  // @override
-  // Future<List<T>> fetchData() async {
-  //   final data = _box.get('data');
-  //   final timestamp = _box.get('timestamp');
-
-  //   // Check if cache is expired
-  //   if (timestamp as DateTime == null ||
-  //       DateTime.now().isAfter(timestamp.add(_cacheDuration))) {
-  //     await clearCacheStorage(); // Clear expired cache
-  //     return [];
-  //   }
-
-  //   if (data == null) return [];
-  //   return data.cast<T>();
-  // }
-
-  // @override
-  // Future<void> storeData(List<T> items) async {
-  //   await _box.put('data', items);
-  //   await _box.put('timestamp', DateTime.now()); // Store current timestamp
-  // }
-
-  // @override
-  // Future<void> deleteItem(int index) async {
-  //   final currentData = await fetchData();
-  //   if (index >= 0 && index < currentData.length) {
-  //     currentData.removeAt(index);
-  //     await storeData(currentData);
-  //   }
-  // }
-
-  // @override
-  // Future<void> clearCacheStorage() async {
-  //   await _box.clear();
-  //   await _box.delete('timestamp');
-  // }
-
   @override
   Future<List<T>> fetchData() async {
     try {
@@ -118,7 +84,6 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
   @override
   Future<void> deleteItem(int index) async {
     final currentData = await fetchData();
-    _box.delete(_dataKey);
     if (index >= 0 && index < currentData.length) {
       currentData.removeAt(index);
       await storeData(currentData);
@@ -135,5 +100,12 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
     final timestamp = _box.get(_timestampKey, defaultValue: null) as DateTime?;
     return timestamp != null &&
         !DateTime.now().isAfter(timestamp.add(_cacheDuration));
+  }
+
+  @override
+  Future<void> storeItem(T item) async {
+    final currentData = await fetchData();
+    currentData.add(item);
+    await storeData(currentData);
   }
 }

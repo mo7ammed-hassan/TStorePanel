@@ -149,13 +149,17 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
   }
 
   void removeItemFromList(T item) async {
+    // Remove from local storage
+    await cacheStorageManagement.deleteItem(allItems.indexOf(item));
+
+    // Remove from lists
     allItems.remove(item);
     filteredItems.remove(item);
     selectedItems
       ..clear()
       ..addAll(List.generate(allItems.length, (index) => false));
 
-    await cacheStorageManagement.deleteItem(allItems.indexOf(item));
+    emit(DataTableLoadedState(filteredItems));
   }
 
   /// Method for toggling selection
