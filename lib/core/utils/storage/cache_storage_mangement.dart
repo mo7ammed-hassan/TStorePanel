@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
+// import 'package:path_provider/path_provider.dart' as path_provider;
 
 abstract class CacheStorageManagement<T> {
   // init
@@ -46,9 +46,9 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
       Hive.registerAdapter(_adapter);
     }
 
-    final appDocumentDir =
-        await path_provider.getApplicationDocumentsDirectory();
-    Hive.init(appDocumentDir.path);
+    // final appDocumentDir =
+    //     await path_provider.getApplicationDocumentsDirectory();
+    // Hive.init(appDocumentDir.path);
 
     // Open the box for this type
     _box = await Hive.openBox<dynamic>(_boxName);
