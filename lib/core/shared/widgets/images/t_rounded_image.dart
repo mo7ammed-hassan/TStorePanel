@@ -93,7 +93,7 @@ class TRoundedImage extends StatelessWidget {
             (context, url, progress) => ShimmerWidget(
               height: height,
               width: width,
-              padding: EdgeInsets.all(padding),
+              //padding: EdgeInsets.all(padding),
             ),
         errorWidget: (context, url, error) => const Icon(Iconsax.image),
       );
