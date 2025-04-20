@@ -35,7 +35,7 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
-    
+
             // Password
             BlocSelector<SignInCubit, SignInState, bool>(
               selector:
@@ -62,7 +62,7 @@ class LoginForm extends StatelessWidget {
               },
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields / 2),
-    
+
             // Remember Me & Forgot Password
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,15 +81,14 @@ class LoginForm extends StatelessWidget {
                         return Checkbox(
                           value: state,
                           onChanged:
-                              (value) =>
-                                  signInCubit.toggleCheckBoxVisibility(),
+                              (value) => signInCubit.toggleCheckBoxVisibility(),
                         );
                       },
                     ),
                     const Text(TTexts.rememberMe),
                   ],
                 ),
-    
+
                 // Forgot Password
                 TextButton(
                   onPressed: () {
@@ -100,7 +99,7 @@ class LoginForm extends StatelessWidget {
               ],
             ),
             const SizedBox(height: AppSizes.spaceBtwSections),
-    
+
             /// Sign In Button
             BlocListener<SignInCubit, SignInState>(
               listener: (context, state) {

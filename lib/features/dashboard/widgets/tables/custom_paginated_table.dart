@@ -57,7 +57,7 @@ class CustomPaginatedTable extends StatelessWidget {
           dataRowHeight: dataRowHeight,
 
           /// Checkbox
-          showCheckboxColumn: true,
+          //showCheckboxColumn: true,
 
           /// Pagination
           showFirstLastButtons: true,
