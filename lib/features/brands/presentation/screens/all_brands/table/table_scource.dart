@@ -11,27 +11,37 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.da
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 
 class BrandRows extends DataTableSource {
+  final List<BrandModel> brands;
+  final BrandCubit brandCubit;
+  BrandRows(this.brands, this.brandCubit);
   @override
   DataRow? getRow(int index) {
+    if (index >= brands.length) return null;
+    final BrandModel brand = brands[index];
     return DataRow2(
+      selected: brandCubit.selectedItems[index],
+      onSelectChanged: (value) => brandCubit.toggleSelection(index, value!),
       cells: [
         DataCell(
           Row(
             children: [
-              const TRoundedImage(
-                image: TImages.adidasLogo,
+              TRoundedImage(
+                image: brand.image ?? TImages.defaultProductImage,
                 width: 50,
                 height: 50,
                 imageType: ImageType.asset,
+                //brand.image != null ? ImageType.network : ImageType.asset,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
               ),
               const SizedBox(width: AppSizes.spaceBtwItems),
               Flexible(
                 child: Text(
-                  'Adidas',
+                  brand.name,
                   style: Theme.of(
                     AppContext.context,
                   ).textTheme.bodyLarge!.apply(color: AppColors.primary),
@@ -97,14 +107,18 @@ class BrandRows extends DataTableSource {
             ),
           ),
         ),
-        const DataCell(Icon(Iconsax.heart5, color: AppColors.primary)),
-        DataCell(Text(DateTime.now().toString())),
+        DataCell(
+          brand.isFeatured ?? false
+              ? const Icon(Iconsax.heart5, color: AppColors.primary)
+              : const Icon(Iconsax.heart, color: Colors.grey),
+        ),
+        DataCell(Text(brand.formattedCreatedAt ?? '')),
         DataCell(
           TTableActionButtons(
             onEditPressed:
                 () => AppContext.context.pushNamedPage(
                   Routes.editBrand,
-                  //arguments: 'Brand',
+                  arguments: brand,
                 ),
             onDeletePressed: () {},
           ),
@@ -117,8 +131,9 @@ class BrandRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => 20;
+  int get rowCount => brands.length;
 
   @override
-  int get selectedRowCount => 0;
+  int get selectedRowCount =>
+      brandCubit.selectedItems.where((e) => e == true).length;
 }

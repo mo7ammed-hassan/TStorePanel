@@ -33,7 +33,10 @@ class BannerDesktopScreen extends StatelessWidget {
                     TableHeader(
                       buttonText: 'Create New Banner',
                       onPressed:
-                          () => context.pushNamedPage(Routes.createBanner),
+                          () => context.pushNamedPage(
+                            Routes.createBanner,
+                            arguments: context.read<BannerCubit>(),
+                          ),
                       searchOnChanged:
                           (query) =>
                               context.read<BannerCubit>().filterData(query),

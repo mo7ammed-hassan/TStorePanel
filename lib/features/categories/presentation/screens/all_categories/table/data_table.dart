@@ -23,7 +23,7 @@ class CategoryDataTable extends StatelessWidget {
         }
 
         if (state is DataTableFailureState) {
-          return _failureWidget();
+          return _failureWidget(state.message);
         }
 
         return CustomPaginatedTable(
@@ -77,7 +77,7 @@ class CategoryDataTable extends StatelessWidget {
     );
   }
 
-  Widget _failureWidget() {
-    return const Center(child: Text('Something went wrong!, Try again.'));
+  Widget _failureWidget(String? error) {
+    return  Center(child: Text( error ?? 'Something went wrong!, Try again.'));
   }
 }

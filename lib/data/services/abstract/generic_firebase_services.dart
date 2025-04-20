@@ -1,7 +1,7 @@
 import 'package:either_dart/either.dart';
 
 abstract class GenericFirebaseServices<T> {
-  /// fetrch all items
+  /// fetch all items
   Future<Either<String, List<T>>> fetchItems();
 
   /// create new item

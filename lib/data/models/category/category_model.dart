@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
 
 part 'category_model.g.dart';
 
@@ -36,15 +37,11 @@ class CategoryModel {
     this.updatedAt,
   });
 
-  // Formatted Dates
+  // formate date
   String? get formattedCreatedAt =>
-      createdAt != null
-          ? '${createdAt!.day}/${createdAt!.month}/${createdAt!.year}'
-          : '';
+      HelperFunctions.getFormattedDate(createdAt ?? DateTime.now());
   String? get formattedUpdatedAt =>
-      updatedAt != null
-          ? '${updatedAt!.day}/${updatedAt!.month}/${updatedAt!.year}'
-          : '';
+      HelperFunctions.getFormattedDate(updatedAt ?? DateTime.now());
 
   // Empty Helper function
   static CategoryModel empty() => CategoryModel(id: '', name: '', image: '');
