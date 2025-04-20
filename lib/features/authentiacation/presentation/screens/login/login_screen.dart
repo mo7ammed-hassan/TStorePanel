@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     final isDark = HelperFunctions.isDarkMode(context);
     final signInCubit = getIt<SignInCubit>();
     return BlocProvider(
-      create: (context) => signInCubit,
+      create: (context) => signInCubit..getStorageEmailAndPassword(),
       child: SiteTemplate(
         backgroundColor: isDark ? Colors.black : Colors.white,
         useLayout: false,

@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
+import 'package:t_store_admin_panel/core/utils/storage/flutter_secure_storage.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/data/models/user/user_model.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentaication_local_data_source.dart';
@@ -32,9 +33,18 @@ class SignInCubit extends Cubit<SignInState> {
   final password = TextEditingController();
   final loginKey = GlobalKey<FormState>();
 
+  // Storage
+  final _storage = FlutterSecureStorageUtils.instance;
+
   /// Check form validation
   bool validateForm() {
     return loginKey.currentState?.validate() ?? false;
+  }
+
+  // show email and password that is storage in get storage
+  Future<void> getStorageEmailAndPassword() async {
+    email.text = await _storage.read('REMEMBER_ME_EMAIL') ?? '';
+    password.text = await _storage.read('REMEMBER_ME_PASSWORD') ?? '';
   }
 
   /// SIGN IN WITH EMAIL & PASSWORD
@@ -45,11 +55,13 @@ class SignInCubit extends Cubit<SignInState> {
     // Check form validation
     if (!validateForm()) return;
 
-    // Save Data if Remember Me is checked
-    // if (isCheckBoxVisible) {
-    //   await _authRepo.saveData('REMEMBER_ME_EMAIL', email.text.trim());
-    //   await _authRepo.saveData('REMEMBER_ME_PASSWORD', password.text.trim());
-    // }
+    if (isCheckBoxVisible) {
+      _storage.write('REMEMBER_ME_EMAIL', email.text.trim());
+      _storage.write('REMEMBER_ME_PASSWORD', password.text.trim());
+    } else {
+      _storage.delete('REMEMBER_ME_EMAIL');
+      _storage.delete('REMEMBER_ME_PASSWORD');
+    }
 
     // Start loading
     emit(SignInLoadingState('Logging You In...'));
