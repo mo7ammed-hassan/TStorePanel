@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:t_store_admin_panel/app.dart';
 import 'package:t_store_admin_panel/bloc_observier.dart';
@@ -14,6 +15,9 @@ void main() async {
   // Ensure that widgets are initialized before running the app
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Load Environment Variables
+  await dotenv.load();
+
   // Remove # from Web Url
   setPathUrlStrategy();
 
@@ -23,12 +27,12 @@ void main() async {
   // initialize Firebase For Firebase Storage
   await Firebase.initializeApp(
     name: 'StorageBucket',
-    options: const FirebaseOptions(
-      apiKey: 'AIzaSyC0OcUuVYia8pBe3jYfwAnWgJ2wqQvdzVE',
-      appId: '1:263376026617:android:faafe508435e3ac8fa1b28',
-      messagingSenderId: 'spotify-010',
-      projectId: 'spotify-010',
-      storageBucket: 'spotify-010.appspot.com',
+    options: FirebaseOptions(
+      apiKey: dotenv.get('STORAGE_kEY'),
+      appId: dotenv.get('STORAGE_APP_ID'),
+      messagingSenderId: dotenv.get('STORAGE_MESSAGING_SENDER_ID'),
+      projectId: dotenv.get('STORAGE_PROJECT_ID'),
+      storageBucket: dotenv.get('STORAGE_BUCKET'),
     ),
   );
 
