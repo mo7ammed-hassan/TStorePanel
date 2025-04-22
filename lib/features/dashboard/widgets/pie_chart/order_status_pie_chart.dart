@@ -14,6 +14,7 @@ class OrderStatusPieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedContainer(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -23,28 +24,36 @@ class OrderStatusPieChart extends StatelessWidget {
           const SizedBox(height: AppSizes.spaceBtwSections),
 
           // Graph
-          SizedBox(
-            height: 400,
-            child: PieChart(
-              PieChartData(
-                sections:
-                    context.read<DashboardCubit>().ordersStatsData.entries.map((
-                      entry,
-                    ) {
-                      final status = entry.key;
-                      final count = entry.value;
-                      return PieChartSectionData(
-                        value: count.toDouble(),
-                        radius: 100,
-                        color: HelperFunctions.getOrderStatusColor(status),
-                        title: count.toString(),
-                        titleStyle: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      );
-                    }).toList(),
+          Center(
+            child: SizedBox(
+              height: 380,
+              child: PieChart(
+                PieChartData(
+                  centerSpaceRadius: 80,
+                  sections:
+                      context
+                          .read<DashboardCubit>()
+                          .ordersStatsData
+                          .entries
+                          .map((entry) {
+                            final status = entry.key;
+                            final count = entry.value;
+                            return PieChartSectionData(
+                              value: count.toDouble(),
+                              radius: 70,
+                              color: HelperFunctions.getOrderStatusColor(
+                                status,
+                              ),
+                              title: count.toString(),
+                              titleStyle: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            );
+                          })
+                          .toList(),
+                ),
               ),
             ),
           ),

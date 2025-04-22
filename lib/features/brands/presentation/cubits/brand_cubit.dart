@@ -10,7 +10,7 @@ import 'package:t_store_admin_panel/data/repositories/brands/brand_repo.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 
 class BrandCubit extends BaseDataTableCubit<BrandModel> {
-  BrandCubit(this.repository, this.categoryCubit)
+  BrandCubit(this.brandRepository, this.categoryCubit)
     : super(
         DataTableInitial(),
         CacheStorageManagementImpl<BrandModel>(
@@ -20,7 +20,7 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
         ),
       );
 
-  final BrandRepo repository;
+  final BrandRepo brandRepository;
   final CategoryCubit categoryCubit;
 
   @override
@@ -30,20 +30,21 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
 
   @override
   Future<Either<String, void>> deleteItem(BrandModel item) async {
-    return await repository.deleteItem(item);
+    return await brandRepository.deleteItem(item);
   }
 
   @override
   Future<Either<String, List<BrandModel>>> fetchItems() async {
     // Fetch All Brands
-    final result = await repository.fetchItems();
+    final result = await brandRepository.fetchItems();
     final fetchedBrands = result.fold(
       (failure) => <BrandModel>[],
       (brands) => brands,
     );
 
     // Fetch All BrandCategories
-    final fetchedBrandCategoriesResult = await repository.fetcCategoriesBrand();
+    final fetchedBrandCategoriesResult =
+        await brandRepository.fetcCategoriesBrand();
     final fetchedBrandCategories = fetchedBrandCategoriesResult.fold(
       (failure) => <BrandCategoryModel>[],
       (list) => list,
