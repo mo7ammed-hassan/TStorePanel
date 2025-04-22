@@ -62,47 +62,27 @@ class BrandRows extends DataTableSource {
                     DeviceUtility.isMobileScreen(AppContext.context)
                         ? Axis.vertical
                         : Axis.horizontal,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom:
-                          DeviceUtility.isMobileScreen(AppContext.context)
-                              ? 0
-                              : AppSizes.xs,
-                    ),
-
-                    child: const Chip(
-                      label: Text('Shoes'),
-                      padding: EdgeInsets.all(AppSizes.xs),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom:
-                          DeviceUtility.isMobileScreen(AppContext.context)
-                              ? 0
-                              : AppSizes.xs,
-                    ),
-
-                    child: const Chip(
-                      label: Text('tracksuits'),
-                      padding: EdgeInsets.all(AppSizes.xs),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom:
-                          DeviceUtility.isMobileScreen(AppContext.context)
-                              ? 0
-                              : AppSizes.xs,
-                    ),
-
-                    child: const Chip(
-                      label: Text('joggers'),
-                      padding: EdgeInsets.all(AppSizes.xs),
-                    ),
-                  ),
-                ],
+                children:
+                    brand.brandCategories != null
+                        ? brand.brandCategories!
+                            .map(
+                              (e) => Padding(
+                                padding: EdgeInsets.only(
+                                  bottom:
+                                      DeviceUtility.isMobileScreen(
+                                            AppContext.context,
+                                          )
+                                          ? 0
+                                          : AppSizes.xs,
+                                ),
+                                child: Chip(
+                                  label: Text(e.name),
+                                  padding: const EdgeInsets.all(AppSizes.xs),
+                                ),
+                              ),
+                            )
+                            .toList()
+                        : [const SizedBox.shrink()],
               ),
             ),
           ),

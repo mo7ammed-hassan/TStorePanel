@@ -3,11 +3,14 @@ import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.d
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_cubit.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
+import 'package:t_store_admin_panel/data/models/brands/brand_category_model.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
+import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/data/repositories/brands/brand_repo.dart';
+import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 
 class BrandCubit extends BaseDataTableCubit<BrandModel> {
-  BrandCubit(this.repository)
+  BrandCubit(this.repository, this.categoryCubit)
     : super(
         DataTableInitial(),
         CacheStorageManagementImpl<BrandModel>(
@@ -15,11 +18,10 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
           3,
           adapter: BrandModelAdapter(),
         ),
-      ) {
-    init();
-  }
+      );
 
   final BrandRepo repository;
+  final CategoryCubit categoryCubit;
 
   @override
   bool containSearchQuery(BrandModel item, String query) {
@@ -33,9 +35,44 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
 
   @override
   Future<Either<String, List<BrandModel>>> fetchItems() async {
-    // await repository.fetcCategoriesBrand();
-    // final Either<String, List<BrandModel>> result = await repository.fetchItems();
-    return await repository.fetchItems();
+    // Fetch All Brands
+    final result = await repository.fetchItems();
+    final fetchedBrands = result.fold(
+      (failure) => <BrandModel>[],
+      (brands) => brands,
+    );
+
+    // Fetch All BrandCategories
+    final fetchedBrandCategoriesResult = await repository.fetcCategoriesBrand();
+    final fetchedBrandCategories = fetchedBrandCategoriesResult.fold(
+      (failure) => <BrandCategoryModel>[],
+      (list) => list,
+    );
+
+    // Fetch All Categories
+    final categoriesResult = await categoryCubit.fetchItems();
+    final fetchedCategories = categoriesResult.fold(
+      (failure) => <CategoryModel>[],
+      (list) => list,
+    );
+
+    // Set brand categories for each brand
+    for (var brand in fetchedBrands) {
+      final categoryIds =
+          fetchedBrandCategories
+              .where((e) => e.brandId == brand.id)
+              .map((e) => e.categoryId)
+              .toList();
+
+      brand.brandCategories =
+          fetchedCategories
+              .where((category) => categoryIds.contains(category.id))
+              .toList();
+    }
+
+    return fetchedBrands.isNotEmpty
+        ? Right(fetchedBrands)
+        : const Left('No brands found!');
   }
 
   void sortByColumn(int columnIndex, bool ascending) {

@@ -151,7 +151,7 @@ void setupServiceLocator() {
 
   // Register Brand Cubit
   getIt.registerFactory<BrandCubit>(
-    () => BrandCubit(getIt<BrandRepo>()),
+    () => BrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
   );
 }
 

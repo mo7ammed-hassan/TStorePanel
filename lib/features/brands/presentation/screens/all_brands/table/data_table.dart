@@ -26,9 +26,22 @@ class BrandDataTable extends StatelessWidget {
           return _failureWidget(state.message);
         }
 
+        final lgTable = context.read<BrandCubit>().filteredItems.any(
+          (element) =>
+              element.brandCategories != null &&
+              element.brandCategories!.length > 2,
+        );
+
         return CustomPaginatedTable(
           minWidth: 700,
-          tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+          dataRowHeight: lgTable ? 96 : 64,
+
+          tableheight:
+              lgTable
+                  ? 96 * 11.5
+                  : DeviceUtility.isDesktopScreen(context)
+                  ? 760
+                  : 600,
           sortAscending: context.select(
             (BrandCubit brand) => brand.sortAscending,
           ),

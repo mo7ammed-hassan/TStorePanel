@@ -15,9 +15,7 @@ class BannerCubit extends BaseDataTableCubit<BannerModel> {
           2,
           adapter: BannerModelAdapter(),
         ),
-      ) {
-    init();
-  }
+      );
 
   final GenericRepository<BannerModel> repository;
 

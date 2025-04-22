@@ -37,7 +37,9 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
     TypeAdapter<T>? adapter,
     Duration cacheDuration = const Duration(minutes: 7),
   }) : _adapter = adapter,
-       _cacheDuration = cacheDuration;
+       _cacheDuration = cacheDuration {
+    init();
+  }
 
   @override
   Future<void> init() async {

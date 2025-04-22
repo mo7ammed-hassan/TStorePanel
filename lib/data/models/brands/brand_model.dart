@@ -26,7 +26,7 @@ class BrandModel extends HasId {
 
   // not mapped
   @HiveField(7)
-  final List<CategoryModel>? brandCategories;
+  List<CategoryModel>? brandCategories;
 
   BrandModel({
     required this.id,
@@ -39,10 +39,11 @@ class BrandModel extends HasId {
     this.updatedAt,
   });
 
-  // formate date 
-  String? get formattedCreatedAt => HelperFunctions.getFormattedDate(createdAt ?? DateTime.now());
-  String? get formattedUpdatedAt => HelperFunctions.getFormattedDate(updatedAt ?? DateTime.now());
-      
+  // formate date
+  String? get formattedCreatedAt =>
+      HelperFunctions.getFormattedDate(createdAt ?? DateTime.now());
+  String? get formattedUpdatedAt =>
+      HelperFunctions.getFormattedDate(updatedAt ?? DateTime.now());
 
   // empty
   static BrandModel empty() {
