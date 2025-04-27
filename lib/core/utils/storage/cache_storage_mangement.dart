@@ -19,6 +19,9 @@ abstract class CacheStorageManagement<T> {
 
   /// Clear Cache Storage
   Future<void> clearCacheStorage();
+
+  /// Restart Duration of Cache Storage
+  Future<void> restartCacheDuration();
 }
 
 class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
@@ -109,5 +112,17 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
     final currentData = await fetchData();
     currentData.add(item);
     await storeData(currentData);
+  }
+
+  // restart cache storage
+  Future<void> restartCacheStorage() async {
+    await clearCacheStorage();
+    await storeData([]);
+  }
+
+  // restart duration of cache storage
+  @override
+  Future<void> restartCacheDuration() async {
+    await _box.put(_timestampKey, DateTime.now());
   }
 }

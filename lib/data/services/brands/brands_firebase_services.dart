@@ -39,9 +39,29 @@ class BrandsFirebaseServices implements GenericFirebaseServices<BrandModel> {
     });
   }
 
+  Future<Either<String, String>> createBrandCategory(
+    BrandCategoryModel brandCategory,
+  ) async {
+    return await _errorHandler.handleErrorEitherAsync(() async {
+      final queryData = await _firestore
+          .collection(collectionPath)
+          .add(brandCategory.toJson());
+
+      return queryData.id;
+    });
+  }
+
   @override
   Future<Either<String, List<BrandModel>>> fetchItems() async {
-    return await _firebaseServices.fetchItems();
+    return await _errorHandler.handleErrorEitherAsync(() async {
+      final queryData =
+          await _firestore.collection(CollectionConstants.brands).get();
+
+      final List<BrandModel> brands =
+          queryData.docs.map((e) => BrandModel.fromSnapshot(e)).toList();
+
+      return brands;
+    });
   }
 
   @override

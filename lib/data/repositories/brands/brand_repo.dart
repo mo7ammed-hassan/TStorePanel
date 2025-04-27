@@ -33,4 +33,11 @@ class BrandRepo extends GenericRepository<BrandModel> with BrandMixin {
   Future<Either<String, List<BrandCategoryModel>>> fetcCategoriesBrand() async {
     return await _firebaseServices.fetcCategoriesBrand();
   }
+
+  @override
+  Future<Either<String, String>> createBrandCategory(
+    BrandCategoryModel brandCategory,
+  ) async {
+    return await _firebaseServices.createBrandCategory(brandCategory);
+  }
 }

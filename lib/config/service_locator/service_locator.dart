@@ -27,6 +27,7 @@ import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/screens/create_brands/cubits/create_brand_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/create_category/create_category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/edit_category/edit_category_cubit.dart';
@@ -152,6 +153,10 @@ void setupServiceLocator() {
   // Register Brand Cubit
   getIt.registerFactory<BrandCubit>(
     () => BrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
+  );
+  // Register Create Brand Cubit
+  getIt.registerFactory<CreateBrandCubit>(
+    () => CreateBrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
   );
 }
 

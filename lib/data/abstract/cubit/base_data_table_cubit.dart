@@ -24,6 +24,7 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
   Future<void> init() async {
     // initialize the cache storage management
     await cacheStorageManagement.init();
+    //await cacheStorageManagement.clearCacheStorage();
     await fetchData();
   }
 
@@ -43,7 +44,7 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
     final cachedData = await cacheStorageManagement.fetchData();
     if (cachedData.isNotEmpty) {
       _updateLists(cachedData);
-      emit(DataTableLoadedState(filteredItems));
+      emit(DataTableLoadedState(cachedData));
       return;
     }
 

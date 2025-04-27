@@ -71,9 +71,7 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
               .toList();
     }
 
-    return fetchedBrands.isNotEmpty
-        ? Right(fetchedBrands)
-        : const Left('No brands found!');
+    return result;
   }
 
   void sortByColumn(int columnIndex, bool ascending) {

@@ -33,7 +33,10 @@ class BrandMobileScreen extends StatelessWidget {
                     TableHeader(
                       buttonText: 'Create New Brand',
                       onPressed:
-                          () => context.pushNamedPage(Routes.createBrand),
+                          () => context.pushNamedPage(
+                            Routes.createBrand,
+                            arguments: context.read<BrandCubit>(),
+                          ),
                       searchOnChanged:
                           (query) =>
                               context.read<BrandCubit>().filterData(query),

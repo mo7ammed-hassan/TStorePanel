@@ -56,21 +56,27 @@ class CreateCategoryCubit extends Cubit<CreateCategoryState> {
     var result = await categoryRepo.createCategory(category);
     if (isClosed) return;
 
-    result.fold((error) => emit(CreateCategoryFailureState(error)), (id) async {
-      category.id = id;
+    result.fold(
+      (error) {
+        CustomDialogs.hideLoader();
+        emit(CreateCategoryFailureState(error));
+      },
+      (id) async {
+        category.id = id;
 
-      CustomDialogs.hideLoader();
-      Loaders.successSnackBar(
-        title: 'Congratulations',
-        message: 'Category created successfully.',
-      );
+        CustomDialogs.hideLoader();
+        Loaders.successSnackBar(
+          title: 'Congratulations',
+          message: 'Category created successfully.',
+        );
 
-      // Add to local Storage
-      await cacheStorageManagement.storeItem(category);
-      getIt<MediaCubit>().reset();
+        // Add to local Storage
+        await cacheStorageManagement.storeItem(category);
+        getIt<MediaCubit>().reset();
 
-      emit(CreateCategorySuccessState(category));
-    });
+        emit(CreateCategorySuccessState(category));
+      },
+    );
   }
 
   // pick thumbnail image from media

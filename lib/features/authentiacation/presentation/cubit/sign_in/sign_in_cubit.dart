@@ -22,6 +22,7 @@ class SignInCubit extends Cubit<SignInState> {
 
   /// Check internet connection
   final Connectivity _connectivity = Connectivity();
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
   /// toggle password visibility & check box visibility
   bool isPasswordVisible = false;
@@ -177,7 +178,9 @@ class SignInCubit extends Cubit<SignInState> {
 
   /// Monitor Connection
   void _monitorConnection() {
-    _connectivity.onConnectivityChanged.listen((result) {
+    _connectivitySubscription ??= _connectivity.onConnectivityChanged.listen((
+      result,
+    ) {
       if (result.contains(ConnectivityResult.none)) {
         emit(SignInErrorState('No Internet Connection'));
       }
@@ -189,6 +192,7 @@ class SignInCubit extends Cubit<SignInState> {
   Future<void> close() {
     email.dispose();
     password.dispose();
+    _connectivitySubscription?.cancel();
     return super.close();
   }
 }

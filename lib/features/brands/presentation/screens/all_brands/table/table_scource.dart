@@ -33,8 +33,8 @@ class BrandRows extends DataTableSource {
                 image: brand.image ?? TImages.defaultProductImage,
                 width: 50,
                 height: 50,
-                imageType: ImageType.asset,
-                //brand.image != null ? ImageType.network : ImageType.asset,
+                imageType:
+                    brand.image != null ? ImageType.network : ImageType.asset,
                 borderRadius: AppSizes.borderRadiusMd,
                 backgroundColor: AppColors.primaryBackground,
               ),
