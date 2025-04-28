@@ -38,7 +38,7 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
     emit(CreateBrandLoadingState());
     CustomDialogs.showCircularLoader();
 
-    final brand = BrandModel(
+    final newBrand = BrandModel(
       id: '',
       name: brandNameController.text.trim(),
       image: imageUrl ?? '',
@@ -48,7 +48,7 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
       createdAt: DateTime.now(),
     );
 
-    final result = await _brandRepo.createItem(brand);
+    final result = await _brandRepo.createItem(newBrand);
 
     result.fold(
       (error) {
@@ -56,8 +56,8 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
         if (!isClosed) emit(CreateBrandErrorState(error));
       },
       (brandId) async {
-        brand.id = brandId;
-        await cacheStorageManagement.storeItem(brand);
+        newBrand.id = brandId;
+        await cacheStorageManagement.storeItem(newBrand);
 
         CustomDialogs.hideLoader();
         Loaders.successSnackBar(
@@ -66,12 +66,14 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
         );
 
         if (!isClosed) {
-          emit(CreateBrandSuccessState('Brand created successfully.', brand));
+          emit(
+            CreateBrandSuccessState('Brand created successfully.', newBrand),
+          );
         }
-
-        reset();
       },
     );
+    // Reset the form after creating the brand
+    // reset();
   }
 
   Future<void> fetchCategories() async {
@@ -115,12 +117,8 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
     return super.close();
   }
 
-  // reset all fields
-  void reset() {
+  void resetForm() {
     brandNameController.clear();
-    imageUrl = null;
-    selectedBrandCategories.clear();
     isFeatured = false;
-    emit(CreateBrandInitialState());
   }
 }

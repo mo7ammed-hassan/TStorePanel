@@ -30,7 +30,7 @@ class CreateBrandForm extends StatelessWidget {
             brandCubit.filteredItems.add(state.brand);
             brandCubit.selectedItems.add(false);
             brandCubit.updateState();
-          }
+            cubit.resetForm();          }
         },
         child: Form(
           key: cubit.formKey,

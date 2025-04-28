@@ -26,7 +26,7 @@ abstract class BaseDataTableCubit<T extends HasId>
   Future<void> init() async {
     // initialize the cache storage management
     await cacheStorageManagement.init();
-    await cacheStorageManagement.clearCacheStorage();
+    //await cacheStorageManagement.clearCacheStorage();
     await fetchData();
   }
 
