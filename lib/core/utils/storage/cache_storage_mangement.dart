@@ -21,6 +21,8 @@ abstract class CacheStorageManagement<T extends HasId> {
   Future<void> clearCacheStorage();
 
   Future<void> updateItem(T item);
+
+  bool isCacheValid();
 }
 
 class CacheStorageManagementImpl<T extends HasId>
@@ -101,7 +103,8 @@ class CacheStorageManagementImpl<T extends HasId>
     await _box.delete(_timestampKey);
   }
 
-  Future<bool> isCacheValid() async {
+  @override
+  bool isCacheValid() {
     final timestamp = _box.get(_timestampKey, defaultValue: null) as DateTime?;
     return timestamp != null &&
         !DateTime.now().isAfter(timestamp.add(_cacheDuration));

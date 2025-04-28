@@ -72,6 +72,9 @@ class CreateCategoryCubit extends Cubit<CreateCategoryState> {
 
         // Add to local Storage
         await cacheStorageManagement.storeItem(category);
+        if (!cacheStorageManagement.isCacheValid()) {
+          await cacheStorageManagement.clearCacheStorage();
+        }
         getIt<MediaCubit>().reset();
 
         emit(CreateCategorySuccessState(category));

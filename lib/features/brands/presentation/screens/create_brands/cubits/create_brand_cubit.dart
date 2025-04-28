@@ -58,6 +58,9 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
       (brandId) async {
         newBrand.id = brandId;
         await cacheStorageManagement.storeItem(newBrand);
+        if (!cacheStorageManagement.isCacheValid()) {
+          await cacheStorageManagement.clearCacheStorage();
+        }
 
         CustomDialogs.hideLoader();
         Loaders.successSnackBar(
