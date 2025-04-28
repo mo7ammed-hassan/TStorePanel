@@ -5,7 +5,8 @@ import 'package:t_store_admin_panel/core/errors/firebase_error.dart';
 import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 import 'package:t_store_admin_panel/data/services/abstract/generic_firebase_services.dart';
 
-class GenericFirebaseServicesImpl<T extends HasId> extends GenericFirebaseServices<T> {
+class GenericFirebaseServicesImpl<T extends HasId>
+    extends GenericFirebaseServices<T> {
   final String collectionPath;
   final FirebaseStorage storage = FirebaseStorage.instance;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -16,7 +17,7 @@ class GenericFirebaseServicesImpl<T extends HasId> extends GenericFirebaseServic
   final Map<String, dynamic> Function(T item) toJson;
 
   GenericFirebaseServicesImpl(this.collectionPath, this.fromJson, this.toJson);
- 
+
   /// Creates a new item in the Firestore collection.
   @override
   Future<Either<String, String>> createItem(T item) async {
@@ -25,7 +26,7 @@ class GenericFirebaseServicesImpl<T extends HasId> extends GenericFirebaseServic
       return data.id;
     });
   }
-  
+
   /// Deletes an item from the Firestore collection.
   @override
   Future<Either<String, void>> deleteItem(T item) async {
@@ -35,7 +36,7 @@ class GenericFirebaseServicesImpl<T extends HasId> extends GenericFirebaseServic
       await firestore.collection(collectionPath).doc(item.id).delete();
     });
   }
-  
+
   /// Fetches all items from the Firestore collection.
   @override
   Future<Either<String, List<T>>> fetchItems() async {
@@ -44,8 +45,7 @@ class GenericFirebaseServicesImpl<T extends HasId> extends GenericFirebaseServic
       return queryData.docs.map((e) => fromJson(e.data(), e.id)).toList();
     });
   }
-  
-  /// Fetches a single item by its ID from the Firestore collection.
+
   @override
   Future<Either<String, void>> updateItem(T item) async {
     if (item.id == null) return const Left("Item has no ID");

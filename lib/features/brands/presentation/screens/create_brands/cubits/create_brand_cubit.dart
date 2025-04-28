@@ -5,7 +5,6 @@ import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.d
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
-import 'package:t_store_admin_panel/data/models/brands/brand_category_model.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
@@ -24,14 +23,13 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController brandNameController = TextEditingController();
   String? imageUrl = '';
-  final List<CategoryModel> brandCategories = <CategoryModel>[];
-  bool? isFeatured = false;
+  final List<CategoryModel> selectedBrandCategories = <CategoryModel>[];
+  bool isFeatured = false;
   final List<CategoryModel> categories = <CategoryModel>[];
 
   final CacheStorageManagement<BrandModel> cacheStorageManagement =
       CacheStorageManagementImpl(CollectionConstants.brands, 3)..init();
 
-  // validatetion
   bool validateForm() => formKey.currentState?.validate() ?? false;
 
   Future<void> createBrand() async {
@@ -42,75 +40,50 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
 
     final brand = BrandModel(
       id: '',
-      name: brandNameController.text,
+      name: brandNameController.text.trim(),
       image: imageUrl ?? '',
-      isFeatured: isFeatured ?? false,
+      isFeatured: isFeatured,
       productCount: 0,
-      brandCategories: brandCategories,
+      brandCategories: selectedBrandCategories,
       createdAt: DateTime.now(),
     );
 
     final result = await _brandRepo.createItem(brand);
 
-    if (result.isLeft) {
-      CustomDialogs.hideLoader();
-      if (isClosed) return;
-      emit(CreateBrandErrorState(result.fold((e) => e, (_) => '')));
-      return;
-    }
-
-    brand.id = result.isRight ? result.right : '';
-
-    bool hasError = false;
-
-    for (var category in brandCategories) {
-      final brandCategory = BrandCategoryModel(
-        brandId: brand.id!,
-        categoryId: category.id,
-      );
-
-      final brandCategoryResult = await _brandRepo.createBrandCategory(
-        brandCategory,
-      );
-
-      if (brandCategoryResult.isLeft) {
-        hasError = true;
+    result.fold(
+      (error) {
         CustomDialogs.hideLoader();
-        if (isClosed) return;
-        emit(
-          CreateBrandErrorState(brandCategoryResult.fold((e) => e, (_) => '')),
+        if (!isClosed) emit(CreateBrandErrorState(error));
+      },
+      (brandId) async {
+        brand.id = brandId;
+        await cacheStorageManagement.storeItem(brand);
+
+        CustomDialogs.hideLoader();
+        Loaders.successSnackBar(
+          title: 'Congratulations',
+          message: 'Brand created successfully.',
         );
-        break;
-      }
-    }
 
-    if (!hasError) {
-      await cacheStorageManagement.storeItem(brand);
-      CustomDialogs.hideLoader();
+        if (!isClosed) {
+          emit(CreateBrandSuccessState('Brand created successfully.', brand));
+        }
 
-      if (isClosed) return;
-
-      Loaders.successSnackBar(
-        title: 'Congratulations',
-        message: 'Brand created successfully.',
-      );
-      await cacheStorageManagement.restartCacheDuration();
-      emit(CreateBrandSuccessState('Brand created successfully.', brand));
-    }
+        reset();
+      },
+    );
   }
 
-  // get all categories
   Future<void> fetchCategories() async {
     final result = await _categoryCubit.fetchItems();
     if (isClosed) return;
-    return result.fold((error) => [], (success) {
+    result.fold((error) => null, (success) {
       categories.clear();
       categories.addAll(success);
       emit(FetchCategoriesState(categories));
     });
   }
 
-  // pick thumbnail image from media
   void pickImage() async {
     final mediaCubit = getIt<MediaCubit>();
     List<ImageModel>? selectedImages =
@@ -122,18 +95,32 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
     }
   }
 
-  // toggle isFeatured
   void toggleIsFeatured(bool? value) {
     isFeatured = value ?? false;
     emit(ToggleFeatured(isFeatured));
   }
 
   void toggleCategorySelection(CategoryModel category) {
-    if (brandCategories.contains(category)) {
-      brandCategories.remove(category);
+    if (selectedBrandCategories.contains(category)) {
+      selectedBrandCategories.remove(category);
     } else {
-      brandCategories.add(category);
+      selectedBrandCategories.add(category);
     }
-    emit(ToggleCategorySelectionState(brandCategories));
+    emit(ToggleCategorySelectionState(selectedBrandCategories));
+  }
+
+  @override
+  Future<void> close() {
+    brandNameController.dispose();
+    return super.close();
+  }
+
+  // reset all fields
+  void reset() {
+    brandNameController.clear();
+    imageUrl = null;
+    selectedBrandCategories.clear();
+    isFeatured = false;
+    emit(CreateBrandInitialState());
   }
 }

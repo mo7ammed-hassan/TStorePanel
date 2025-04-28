@@ -1,8 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive/hive.dart';
 
+part 'brand_category_model.g.dart';
+
+@HiveType(typeId: 4)
 class BrandCategoryModel {
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   final String brandId;
+  @HiveField(2)
   final String categoryId;
 
   BrandCategoryModel({

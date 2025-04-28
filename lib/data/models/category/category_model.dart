@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive/hive.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 
 part 'category_model.g.dart';
 
 @HiveType(typeId: 1)
-class CategoryModel {
+class CategoryModel implements HasId {
+  @override
   @HiveField(0)
-  String id;
+  String? id;
 
   @HiveField(1)
   String name;

@@ -4,8 +4,10 @@ import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.d
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
+import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 
-abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
+abstract class BaseDataTableCubit<T extends HasId>
+    extends Cubit<BaseDataTableStates> {
   BaseDataTableCubit(super.initialState, this.cacheStorageManagement) {
     init();
   }
@@ -24,7 +26,7 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
   Future<void> init() async {
     // initialize the cache storage management
     await cacheStorageManagement.init();
-    //await cacheStorageManagement.clearCacheStorage();
+    await cacheStorageManagement.clearCacheStorage();
     await fetchData();
   }
 
@@ -54,7 +56,6 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
 
     result.fold(
       (error) {
-        // if (allItems.isEmpty) emit(DataTableFailureState(error));
         Loaders.errorSnackBar(title: 'Error', message: error);
         emit(DataTableFailureState(error));
       },
@@ -137,6 +138,10 @@ abstract class BaseDataTableCubit<T> extends Cubit<BaseDataTableStates> {
     result.fold(
       (error) {
         CustomDialogs.hideLoader();
+        Loaders.errorSnackBar(
+          title: 'Error',
+          message: 'Failed to delete item.\n$error',
+        );
         emit(DataTableFailureState(error));
       },
       (_) {

@@ -49,7 +49,7 @@ class CreateCategoryCubit extends Cubit<CreateCategoryState> {
       name: nameController.text.trim(),
       image: imageUrl,
       isFeatured: isFeatured,
-      parentId: selectedParent.id,
+      parentId: selectedParent.id!,
       createdAt: DateTime.now(),
     );
 

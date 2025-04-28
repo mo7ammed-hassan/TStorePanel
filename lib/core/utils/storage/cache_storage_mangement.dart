@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
-// import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 
-abstract class CacheStorageManagement<T> {
+abstract class CacheStorageManagement<T extends HasId> {
   // init
   Future<void> init();
 
@@ -20,11 +20,11 @@ abstract class CacheStorageManagement<T> {
   /// Clear Cache Storage
   Future<void> clearCacheStorage();
 
-  /// Restart Duration of Cache Storage
-  Future<void> restartCacheDuration();
+  Future<void> updateItem(T item);
 }
 
-class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
+class CacheStorageManagementImpl<T extends HasId>
+    implements CacheStorageManagement<T> {
   late Box _box;
   final String _boxName;
   final int _adapterTypeId;
@@ -110,19 +110,27 @@ class CacheStorageManagementImpl<T> implements CacheStorageManagement<T> {
   @override
   Future<void> storeItem(T item) async {
     final currentData = await fetchData();
-    currentData.add(item);
+    // Check if the item already exists in the cache
+    int index = currentData.indexWhere((e) => e.id == item.id);
+    if (index == -1) {
+      // If it doesn't exist, add it to the list
+      currentData.add(item);
+    } else {
+      // If it exists, update the existing item
+      currentData[index] = item;
+    }
     await storeData(currentData);
   }
 
-  // restart cache storage
-  Future<void> restartCacheStorage() async {
-    await clearCacheStorage();
-    await storeData([]);
-  }
-
-  // restart duration of cache storage
+  // update item in cache storage
   @override
-  Future<void> restartCacheDuration() async {
-    await _box.put(_timestampKey, DateTime.now());
+  Future<void> updateItem(T item) async {
+    final currentData = await fetchData();
+
+    int index = currentData.indexWhere((e) => e.id == item.id);
+    if (index != -1) {
+      currentData[index] = item;
+      await storeData(currentData);
+    }
   }
 }

@@ -1,50 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category_model.dart';
+part of 'brand_category_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
+class BrandCategoryModelAdapter extends TypeAdapter<BrandCategoryModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 4;
 
   @override
-  CategoryModel read(BinaryReader reader) {
+  BrandCategoryModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CategoryModel(
+    return BrandCategoryModel(
       id: fields[0] as String?,
-      name: fields[1] as String,
-      image: fields[2] as String?,
-      parentId: fields[3] as String,
-      isFeatured: fields[4] as bool?,
-      createdAt: fields[5] as DateTime?,
-      updatedAt: fields[6] as DateTime?,
+      brandId: fields[1] as String,
+      categoryId: fields[2] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, CategoryModel obj) {
+  void write(BinaryWriter writer, BrandCategoryModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.brandId)
       ..writeByte(2)
-      ..write(obj.image)
-      ..writeByte(3)
-      ..write(obj.parentId)
-      ..writeByte(4)
-      ..write(obj.isFeatured)
-      ..writeByte(5)
-      ..write(obj.createdAt)
-      ..writeByte(6)
-      ..write(obj.updatedAt);
+      ..write(obj.categoryId);
   }
 
   @override
@@ -53,7 +41,7 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CategoryModelAdapter &&
+      other is BrandCategoryModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

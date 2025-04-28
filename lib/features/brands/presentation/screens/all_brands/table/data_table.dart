@@ -22,10 +22,6 @@ class BrandDataTable extends StatelessWidget {
           return _buildLoaderOrEmptyWidget();
         }
 
-        if (state is DataTableFailureState) {
-          return _failureWidget(state.message);
-        }
-
         final lgTable = context.read<BrandCubit>().filteredItems.any(
           (element) =>
               element.brandCategories != null &&
@@ -72,7 +68,7 @@ class BrandDataTable extends StatelessWidget {
           source: BrandRows(
             state is DataTableLoadedState
                 ? (state.data as List<BrandModel>)
-                : [],
+                : context.read<BrandCubit>().allItems,
             context.read<BrandCubit>(),
           ),
         );
@@ -86,13 +82,9 @@ class BrandDataTable extends StatelessWidget {
       child: TAnimationLoaderWidget(
         width: 300,
         height: 300,
-        text: 'Try adding some categories.',
+        text: 'Try adding some brands.',
         animation: TImages.packaging,
       ),
     );
-  }
-
-  Widget _failureWidget(String? error) {
-    return Center(child: Text(error ?? 'Something went wrong!, Try again.'));
   }
 }

@@ -19,12 +19,12 @@ class BrandModelAdapter extends TypeAdapter<BrandModel> {
     return BrandModel(
       id: fields[0] as String?,
       name: fields[1] as String,
-      image: fields[2] as String,
+      image: fields[2] as String?,
       isFeatured: fields[3] as bool?,
       productCount: fields[4] as int?,
-      brandCategories: (fields[7] as List?)?.cast<CategoryModel>(),
       createdAt: fields[5] as DateTime?,
       updatedAt: fields[6] as DateTime?,
+      brandCategories: (fields[7] as List?)?.cast<CategoryModel>(),
     );
   }
 

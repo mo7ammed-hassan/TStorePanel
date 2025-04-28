@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/chip/choice_chip.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/uploader_image.dart';
@@ -8,102 +8,154 @@ import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
 import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
-import 'package:t_store_admin_panel/data/models/category/category_model.dart';
+import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/cubit/edit_brand_cubit.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/cubit/edit_brand_states.dart';
 
 class EditBrandForm extends StatelessWidget {
-  const EditBrandForm({super.key});
-
+  const EditBrandForm({
+    super.key,
+    required this.brandModel,
+    required this.brandCubit,
+  });
+  final BrandModel brandModel;
+  final BrandCubit brandCubit;
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditBrandCubit>();
     return RoundedContainer(
       width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
-      child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Heading
-            const SizedBox(height: AppSizes.sm),
+      child: BlocListener<EditBrandCubit, EditBrandStates>(
+        listener: (context, state) {
+          if (state is EditBrandCompletedState) {
+            final index = brandCubit.allItems.indexWhere(
+              (element) => element.id == state.brand.id,
+            );
 
-            Text(
-              'Update Brand',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: AppSizes.spaceBtwSections),
+            // index != -1
+            brandCubit.allItems[index] = state.brand;
+            brandCubit.filteredItems[index] = state.brand;
+            brandCubit.selectedItems[index] = false;
+            brandCubit.updateState();
+          }
+        },
+        child: Form(
+          key: cubit.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Heading
+              const SizedBox(height: AppSizes.sm),
 
-            TextFormField(
-              validator: (value) => TValidator.validateEmptyText('Name', value),
-              decoration: const InputDecoration(
-                labelText: 'Brand Name',
-                prefixIcon: Icon(Iconsax.box),
+              Text(
+                'Update Brand',
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
-            ),
-            const SizedBox(height: AppSizes.spaceBtwInputFields),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
-            Text(
-              'Select Categories',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-
-            const SizedBox(height: AppSizes.spaceBtwSections),
-
-            Wrap(
-              spacing: AppSizes.sm,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: TChoiceChip(
-                    text: 'Shoes',
-                    isSelected: true,
-                    onSelected: (select) {},
-                  ),
+              TextFormField(
+                validator:
+                    (value) => TValidator.validateEmptyText('Name', value),
+                controller: cubit.brandNameController,
+                decoration: const InputDecoration(
+                  labelText: 'Brand Name',
+                  prefixIcon: Icon(Iconsax.box),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                  child: TChoiceChip(
-                    text: 'Track suits',
-                    isSelected: true,
-                    onSelected: (select) {},
-                  ),
-                ),
-              ],
-            ),
-
-            const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
-
-            UploaderImage(
-              width: 80,
-              height: 80,
-              image: TImages.darkAppLogo,
-              imageType: ImageType.asset,
-              onIconButtonPressed:
-                  () => context.pushNamedPage(
-                    Routes.editCategory,
-                    arguments: CategoryModel.empty(),
-                  ),
-            ),
-
-            const SizedBox(height: AppSizes.spaceBtwInputFields),
-
-            CheckboxMenuButton(
-              value: true,
-              onChanged: (value) {},
-              child: const Text('Featured'),
-            ),
-
-            const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Update'),
               ),
-            ),
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
 
-            const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
-          ],
+              Text(
+                'Select Categories',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: AppSizes.spaceBtwSections),
+
+              BlocBuilder<EditBrandCubit, EditBrandStates>(
+                buildWhen:
+                    (previous, current) => current is FetchCategoriesState,
+                builder: (context, state) {
+                  return Wrap(
+                    spacing: AppSizes.sm,
+                    children:
+                        cubit.categories.map((category) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: AppSizes.sm),
+                            child: BlocSelector<
+                              EditBrandCubit,
+                              EditBrandStates,
+                              bool
+                            >(
+                              selector: (state) {
+                                return state is ToggleBrandSelectionState
+                                    ? cubit.selectedCategories.contains(
+                                      category,
+                                    )
+                                    : cubit.selectedCategories.contains(
+                                      category,
+                                    );
+                              },
+                              builder: (context, state) {
+                                return TChoiceChip(
+                                  text: category.name,
+                                  isSelected: state,
+                                  onSelected:
+                                      (select) => cubit.toggleSelectedCategory(
+                                        category,
+                                      ),
+                                );
+                              },
+                            ),
+                          );
+                        }).toList(),
+                  );
+                },
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
+
+              UploaderImage(
+                width: 80,
+                height: 80,
+                image: cubit.imageUrl ?? TImages.defaultProductImage,
+                imageType:
+                    cubit.imageUrl != null
+                        ? ImageType.network
+                        : ImageType.asset,
+                onIconButtonPressed: () => cubit.pickImage(),
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
+
+              BlocSelector<EditBrandCubit, EditBrandStates, bool>(
+                selector: (state) {
+                  return state is ToggleFeatured
+                      ? state.isFeatured
+                      : cubit.isFeatured;
+                },
+                builder: (context, state) {
+                  return CheckboxMenuButton(
+                    value: cubit.isFeatured,
+                    onChanged: (value) => cubit.toggleIsFeatured(value),
+                    child: const Text('Featured'),
+                  );
+                },
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => cubit.updateBrand(brandModel),
+                  child: const Text('Update'),
+                ),
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
+            ],
+          ),
         ),
       ),
     );

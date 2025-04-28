@@ -84,7 +84,7 @@ class EditCategoryForm extends StatelessWidget {
                         )
                         .toList(),
                 value:
-                    cubit.selectedParent.id.isNotEmpty
+                    cubit.selectedParent.id!.isNotEmpty
                         ? cubit.selectedParent
                         : null,
               ),

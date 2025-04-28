@@ -50,22 +50,28 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
     // map data
     category.image = imageUrl;
     category.isFeatured = isFeatured;
-    category.parentId = selectedParent.id;
+    category.parentId = selectedParent.id!;
     category.name = nameController.text.trim();
     category.updatedAt = DateTime.now();
 
     var result = await categoryRepo.updateCategory(category);
 
-    result.fold((error) => emit(EditCategoryFailureState(error)), (_) {
-      CustomDialogs.hideLoader();
+    result.fold(
+      (error) {
+        CustomDialogs.hideLoader();
+        emit(EditCategoryFailureState(error));
+      },
+      (_) {
+        CustomDialogs.hideLoader();
 
-      Loaders.successSnackBar(
-        message: 'Category updated successfully',
-        title: 'Success',
-      );
+        Loaders.successSnackBar(
+          message: 'Category updated successfully',
+          title: 'Success',
+        );
 
-      emit(EditCategorySuccessState(category));
-    });
+        emit(EditCategorySuccessState(category));
+      },
+    );
   }
 
   // pick thumbnail image from media

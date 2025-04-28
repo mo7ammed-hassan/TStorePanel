@@ -98,9 +98,10 @@ class BrandRows extends DataTableSource {
             onEditPressed:
                 () => AppContext.context.pushNamedPage(
                   Routes.editBrand,
-                  arguments: brand,
+                  arguments: {'brandModel': brand, 'brandCubit': brandCubit},
                 ),
-            onDeletePressed: () {},
+            onDeletePressed:
+                () async => await brandCubit.deleteOnConfirmation(brand),
           ),
         ),
       ],

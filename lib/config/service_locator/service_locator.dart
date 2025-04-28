@@ -4,7 +4,6 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/collection_consta
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository_impl.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
-import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/repositories/authentication/authentication_repo_impl.dart';
 import 'package:t_store_admin_panel/data/repositories/brands/brand_repo.dart';
 import 'package:t_store_admin_panel/data/repositories/category/category_repo_impl.dart';
@@ -14,7 +13,7 @@ import 'package:t_store_admin_panel/data/services/abstract/generic_fire_base_ser
 import 'package:t_store_admin_panel/data/services/abstract/generic_firebase_services.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentication_firebase_services.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentication_firestore_service.dart';
-import 'package:t_store_admin_panel/data/services/brands/brands_firebase_services.dart';
+import 'package:t_store_admin_panel/data/services/brands/brand_firebase_services.dart';
 import 'package:t_store_admin_panel/data/services/category/category_firebase_services.dart';
 import 'package:t_store_admin_panel/data/services/media/media_firebase_services.dart';
 import 'package:t_store_admin_panel/data/services/user/user_firebase_services.dart';
@@ -28,6 +27,7 @@ import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/create_brands/cubits/create_brand_cubit.dart';
+import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/cubit/edit_brand_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/create_category/create_category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/edit_category/edit_category_cubit.dart';
@@ -135,19 +135,24 @@ void setupServiceLocator() {
 
   /// ----Brands----
   // Register BaseFirebaseServices for Brands
-  getIt.registerLazySingleton<BrandsFirebaseServices>(
-    () => BrandsFirebaseServices(
-      GenericFirebaseServicesImpl<BrandModel>(
-        CollectionConstants.brands,
-        (json, [id]) => BrandModel.fromMap(json, id),
-        (brand) => brand.toJson(),
-      ),
-    ),
+  // getIt.registerLazySingleton<BrandsFirebaseServices>(
+  //   () => BrandsFirebaseServices(
+  //     GenericFirebaseServicesImpl<BrandModel>(
+  //       CollectionConstants.brands,
+  //       (json, [id]) => BrandModel.fromMap(json, id),
+  //       (brand) => brand.toJson(),
+  //     ),
+  //   ),
+  // );
+
+  // Register BrandFirebaseServices
+  getIt.registerLazySingleton<BrandFirebaseServices>(
+    () => BrandFirebaseServicesImpl(),
   );
 
   // Register Brand Repository
   getIt.registerLazySingleton<BrandRepo>(
-    () => BrandRepo(getIt<BrandsFirebaseServices>()),
+    () => BrandRepo(getIt<BrandFirebaseServices>()),
   );
 
   // Register Brand Cubit
@@ -157,6 +162,10 @@ void setupServiceLocator() {
   // Register Create Brand Cubit
   getIt.registerFactory<CreateBrandCubit>(
     () => CreateBrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
+  );
+  // Register Edit Brand Cubit
+  getIt.registerFactory<EditBrandCubit>(
+    () => EditBrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
   );
 }
 

@@ -84,17 +84,15 @@ class CreateBrandForm extends StatelessWidget {
                                 >(
                                   selector: (state) {
                                     return state is ToggleCategorySelectionState
-                                        ? cubit.brandCategories.contains(
-                                          category,
-                                        )
-                                        : cubit.brandCategories.contains(
-                                          category,
-                                        );
+                                        ? cubit.selectedBrandCategories
+                                            .contains(category)
+                                        : cubit.selectedBrandCategories
+                                            .contains(category);
                                   },
                                   builder: (context, state) {
                                     return TChoiceChip(
                                       text: category.name,
-                                      isSelected: cubit.brandCategories
+                                      isSelected: cubit.selectedBrandCategories
                                           .contains(category),
                                       onSelected:
                                           (select) =>
@@ -117,11 +115,11 @@ class CreateBrandForm extends StatelessWidget {
                 width: 80,
                 height: 80,
                 image:
-                    cubit.imageUrl!.isNotEmpty
+                    cubit.imageUrl != null && cubit.imageUrl!.isNotEmpty
                         ? cubit.imageUrl
                         : TImages.defaultProductImage,
                 imageType:
-                    cubit.imageUrl!.isNotEmpty
+                    cubit.imageUrl != null && cubit.imageUrl!.isNotEmpty
                         ? ImageType.network
                         : ImageType.asset,
                 onIconButtonPressed: () => cubit.pickImage(),
@@ -132,8 +130,8 @@ class CreateBrandForm extends StatelessWidget {
               BlocSelector<CreateBrandCubit, CreateBrandStates, bool>(
                 selector: (state) {
                   return state is ToggleFeatured
-                      ? state.isFeatured ?? false
-                      : cubit.isFeatured ?? false;
+                      ? state.isFeatured
+                      : cubit.isFeatured;
                 },
                 builder: (context, state) {
                   return CheckboxMenuButton(
