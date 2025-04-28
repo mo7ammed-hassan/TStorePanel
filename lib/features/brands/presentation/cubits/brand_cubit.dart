@@ -1,14 +1,16 @@
 import 'package:either_dart/either.dart';
+import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_cubit.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
+import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/data/repositories/brands/brand_repo.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 
 class BrandCubit extends BaseDataTableCubit<BrandModel> {
-  BrandCubit(this.brandRepository, this.categoryCubit)
+  BrandCubit(this.brandRepository)
     : super(
         DataTableInitial(),
         CacheStorageManagementImpl<BrandModel>(
@@ -19,7 +21,7 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
       );
 
   final BrandRepo brandRepository;
-  final CategoryCubit categoryCubit;
+  final List<CategoryModel> categories = [];
 
   @override
   bool containSearchQuery(BrandModel item, String query) {
@@ -37,42 +39,6 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
 
   @override
   Future<Either<String, List<BrandModel>>> fetchItems() async {
-    // // Fetch All Brands
-    // final result = await brandRepository.fetchItems();
-    // final fetchedBrands = result.fold(
-    //   (failure) => <BrandModel>[],
-    //   (brands) => brands,
-    // );
-
-    // // Fetch All BrandCategories
-    // final fetchedBrandCategoriesResult =
-    //     await brandRepository.fetcCategoriesBrand();
-    // final fetchedBrandCategories = fetchedBrandCategoriesResult.fold(
-    //   (failure) => <BrandCategoryModel>[],
-    //   (list) => list,
-    // );
-
-    // // Fetch All Categories
-    // final categoriesResult = await categoryCubit.fetchItems();
-    // final fetchedCategories = categoriesResult.fold(
-    //   (failure) => <CategoryModel>[],
-    //   (list) => list,
-    // );
-
-    // // Set brand categories for each brand
-    // for (var brand in fetchedBrands) {
-    //   final categoryIds =
-    //       fetchedBrandCategories
-    //           .where((e) => e.brandId == brand.id)
-    //           .map((e) => e.categoryId)
-    //           .toList();
-
-    //   brand.brandCategories =
-    //       fetchedCategories
-    //           .where((category) => categoryIds.contains(category.id))
-    //           .toList();
-    // }
-
     return await brandRepository.fetchItems();
   }
 
@@ -81,7 +47,7 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
     sortAscending = ascending;
 
     switch (columnIndex) {
-      case 0: // name
+      case 0:
         return sortByProperty(
           columnIndex,
           ascending,
@@ -90,5 +56,14 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
       default:
         return;
     }
+  }
+
+  fetcCategories() async {
+    getIt<CategoryCubit>().fetchItems().then((value) {
+      if (value.isRight) {
+        categories.clear();
+        categories.addAll(value.right);
+      }
+    });
   }
 }

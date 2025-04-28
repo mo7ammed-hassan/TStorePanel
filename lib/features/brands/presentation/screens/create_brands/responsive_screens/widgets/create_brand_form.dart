@@ -30,7 +30,8 @@ class CreateBrandForm extends StatelessWidget {
             brandCubit.filteredItems.add(state.brand);
             brandCubit.selectedItems.add(false);
             brandCubit.updateState();
-            cubit.resetForm();          }
+            cubit.resetForm();
+          }
         },
         child: Form(
           key: cubit.formKey,
@@ -64,49 +65,42 @@ class CreateBrandForm extends StatelessWidget {
 
               const SizedBox(height: AppSizes.spaceBtwInputFields / 2),
 
-              BlocBuilder<CreateBrandCubit, CreateBrandStates>(
-                buildWhen:
-                    (previous, current) => current is FetchCategoriesState,
-                builder: (context, state) {
-                  return Wrap(
-                    spacing: AppSizes.sm,
-                    children:
-                        cubit.categories
-                            .map(
-                              (category) => Padding(
-                                padding: const EdgeInsets.only(
-                                  bottom: AppSizes.sm,
-                                ),
-                                child: BlocSelector<
-                                  CreateBrandCubit,
-                                  CreateBrandStates,
-                                  bool
-                                >(
-                                  selector: (state) {
-                                    return state is ToggleCategorySelectionState
-                                        ? cubit.selectedBrandCategories
-                                            .contains(category)
-                                        : cubit.selectedBrandCategories
-                                            .contains(category);
-                                  },
-                                  builder: (context, state) {
-                                    return TChoiceChip(
-                                      text: category.name,
-                                      isSelected: cubit.selectedBrandCategories
-                                          .contains(category),
-                                      onSelected:
-                                          (select) =>
-                                              cubit.toggleCategorySelection(
-                                                category,
-                                              ),
+              Wrap(
+                spacing: AppSizes.sm,
+                children:
+                    brandCubit.categories
+                        .map(
+                          (category) => Padding(
+                            padding: const EdgeInsets.only(bottom: AppSizes.sm),
+                            child: BlocSelector<
+                              CreateBrandCubit,
+                              CreateBrandStates,
+                              bool
+                            >(
+                              selector: (state) {
+                                return state is ToggleCategorySelectionState
+                                    ? cubit.selectedBrandCategories.contains(
+                                      category,
+                                    )
+                                    : cubit.selectedBrandCategories.contains(
+                                      category,
                                     );
-                                  },
-                                ),
-                              ),
-                            )
-                            .toList(),
-                  );
-                },
+                              },
+                              builder: (context, state) {
+                                return TChoiceChip(
+                                  text: category.name,
+                                  isSelected: cubit.selectedBrandCategories
+                                      .contains(category),
+                                  onSelected:
+                                      (select) => cubit.toggleCategorySelection(
+                                        category,
+                                      ),
+                                );
+                              },
+                            ),
+                          ),
+                        )
+                        .toList(),
               ),
 
               const SizedBox(height: AppSizes.spaceBtwInputFields * 2),

@@ -22,6 +22,7 @@ class EditBrandForm extends StatelessWidget {
   });
   final BrandModel brandModel;
   final BrandCubit brandCubit;
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<EditBrandCubit>();
@@ -73,45 +74,34 @@ class EditBrandForm extends StatelessWidget {
               ),
               const SizedBox(height: AppSizes.spaceBtwSections),
 
-              BlocBuilder<EditBrandCubit, EditBrandStates>(
-                buildWhen:
-                    (previous, current) => current is FetchCategoriesState,
-                builder: (context, state) {
-                  return Wrap(
-                    spacing: AppSizes.sm,
-                    children:
-                        cubit.categories.map((category) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: AppSizes.sm),
-                            child: BlocSelector<
-                              EditBrandCubit,
-                              EditBrandStates,
-                              bool
-                            >(
-                              selector: (state) {
-                                return state is ToggleBrandSelectionState
-                                    ? cubit.selectedCategories.contains(
-                                      category,
-                                    )
-                                    : cubit.selectedCategories.contains(
-                                      category,
-                                    );
-                              },
-                              builder: (context, state) {
-                                return TChoiceChip(
-                                  text: category.name,
-                                  isSelected: state,
-                                  onSelected:
-                                      (select) => cubit.toggleSelectedCategory(
-                                        category,
-                                      ),
-                                );
-                              },
-                            ),
-                          );
-                        }).toList(),
-                  );
-                },
+              Wrap(
+                spacing: AppSizes.sm,
+                children:
+                    brandCubit.categories.map((category) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: AppSizes.sm),
+                        child: BlocSelector<
+                          EditBrandCubit,
+                          EditBrandStates,
+                          bool
+                        >(
+                          selector: (state) {
+                            return state is ToggleBrandSelectionState
+                                ? cubit.selectedCategories.contains(category)
+                                : cubit.selectedCategories.contains(category);
+                          },
+                          builder: (context, state) {
+                            return TChoiceChip(
+                              text: category.name,
+                              isSelected: state,
+                              onSelected:
+                                  (select) =>
+                                      cubit.toggleSelectedCategory(category),
+                            );
+                          },
+                        ),
+                      );
+                    }).toList(),
               ),
 
               const SizedBox(height: AppSizes.spaceBtwInputFields * 2),

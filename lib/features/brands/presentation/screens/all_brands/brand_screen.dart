@@ -13,7 +13,7 @@ class BrandScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<BrandCubit>(),
+      create: (context) => getIt<BrandCubit>()..fetcCategories(),
       child: const SiteTemplate(
         desktop: BrandDesktopScreen(),
         tablet: BrandTabletScreen(),
