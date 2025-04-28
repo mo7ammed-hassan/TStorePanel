@@ -7,12 +7,12 @@ import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
-import 'package:t_store_admin_panel/features/banners/cubits/create_banner/create_banner_states.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/edit_banner/edit_banner_states.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 
-class CreateBannerCubit extends Cubit<CreateBannerStates> {
-  CreateBannerCubit(this._repository, this._cacheStorageManagement)
-    : super(CreateBannerInitialState());
+class EditBannerCubit extends Cubit<EditBannerStates> {
+  EditBannerCubit(this._repository, this._cacheStorageManagement)
+    : super(EditBannerInitialState());
 
   final GenericRepository<BannerModel> _repository;
   final CacheStorageManagement _cacheStorageManagement;
@@ -20,9 +20,17 @@ class CreateBannerCubit extends Cubit<CreateBannerStates> {
   String? imageUrl = '';
   bool active = false;
   String targetScreen = AppScreens.allAppScreens[0];
+  BannerModel oldBanner = BannerModel.empty();
 
-  Future<void> createBanner() async {
-    emit(CreateBannerLoadingState());
+  void init(BannerModel banner) {
+    oldBanner = banner;
+    imageUrl = banner.image;
+    active = banner.active;
+    targetScreen = banner.targetScreen;
+  }
+
+  Future<void> editBanner() async {
+    emit(EditBannerLoadingState());
     if (imageUrl == null || imageUrl!.isEmpty) {
       Loaders.warningSnackBar(
         title: 'Error',
@@ -33,14 +41,23 @@ class CreateBannerCubit extends Cubit<CreateBannerStates> {
 
     CustomDialogs.showCircularLoader();
 
-    final newBanner = BannerModel(
-      id: '',
+    // Mapping the old banner to the new one
+    final updatedBanner = oldBanner.copyWith(
       image: imageUrl,
       active: active,
       targetScreen: targetScreen,
     );
 
-    final result = await _repository.createItem(newBanner);
+    if (BannerModel.isSameModel(updatedBanner, oldBanner)) {
+      CustomDialogs.hideLoader();
+      Loaders.warningSnackBar(
+        message: 'No changes detected!',
+        title: 'Warning',
+      );
+      return;
+    }
+
+    final result = await _repository.updateItem(updatedBanner);
 
     result.fold(
       (error) {
@@ -49,11 +66,10 @@ class CreateBannerCubit extends Cubit<CreateBannerStates> {
           title: 'Error',
           message: 'Failed to create banner: ${error.toString()}',
         );
-        emit(CreateBannerFailureState(errorMessage: error.toString()));
+        emit(EditBannerErrorState(error.toString()));
       },
-      (bannerId) async {
-        newBanner.id = bannerId;
-        await _cacheStorageManagement.storeItem(newBanner);
+      (_) async {
+        await _cacheStorageManagement.updateItem(updatedBanner);
         if (!_cacheStorageManagement.isCacheValid()) {
           await _cacheStorageManagement.clearCacheStorage();
         }
@@ -63,14 +79,14 @@ class CreateBannerCubit extends Cubit<CreateBannerStates> {
           title: 'Congratulations',
           message: 'Banner created successfully',
         );
-        emit(CreateBannerSuccessState(banner: newBanner));
+        emit(EditBannerSuccessState(updatedBanner));
       },
     );
   }
 
   void toggleActive(bool value) {
     active = value;
-    emit(ToggleActiveState(active: active));
+    emit(ToggleActiveState(active));
   }
 
   void pickImage() async {
@@ -81,19 +97,19 @@ class CreateBannerCubit extends Cubit<CreateBannerStates> {
     if (selectedImages != null && selectedImages.isNotEmpty) {
       ImageModel selectedImage = selectedImages.first;
       imageUrl = selectedImage.url;
-      emit(SelectedImageState(imageUrl: imageUrl!));
+      emit(SelectedImageState(imageUrl));
     }
   }
 
   void setTargetScreen(String screen) {
     targetScreen = screen;
-    emit(TargetScreenState(targetScreen: targetScreen));
+    emit(TargetScreenState(targetScreen));
   }
 
   void resetForm() {
     imageUrl = null;
     active = false;
     targetScreen = AppScreens.allAppScreens[0];
-    emit(CreateBannerInitialState());
+    emit(EditBannerInitialState());
   }
 }

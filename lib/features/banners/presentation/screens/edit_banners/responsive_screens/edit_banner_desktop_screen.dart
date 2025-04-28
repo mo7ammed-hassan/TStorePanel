@@ -13,23 +13,23 @@ class EditBannerDesktopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(AppSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumb
-              BreadcrumbWithHeading(
+              const BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
                 heading: 'Update Banner',
                 breadcrumbs: [Routes.banners, 'Update Banner'],
               ),
-              SizedBox(height: AppSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
               // Form
-              EditBannerForm(),
+              EditBannerForm(bannerCubit: bannerCubit),
             ],
           ),
         ),

@@ -28,6 +28,7 @@ import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/create_banner/create_banner_cubit.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/edit_banner/edit_banner_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/create_brands/cubits/create_brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/cubit/edit_brand_cubit.dart';
@@ -138,6 +139,19 @@ void setupServiceLocator() {
   // Register CreateBannersCubit
   getIt.registerFactory<CreateBannerCubit>(
     () => CreateBannerCubit(
+      GenericRepositoryImpl(
+        GenericFirebaseServicesImpl(
+          CollectionConstants.banners,
+          (json, [id]) => BannerModel.fromMap(json, id),
+          (banner) => banner.toJson(),
+        ),
+      ),
+      CacheStorageManagementImpl(CollectionConstants.banners, 2),
+    ),
+  );
+  // Register EditBannersCubit
+  getIt.registerFactory<EditBannerCubit>(
+    () => EditBannerCubit(
       GenericRepositoryImpl(
         GenericFirebaseServicesImpl(
           CollectionConstants.banners,

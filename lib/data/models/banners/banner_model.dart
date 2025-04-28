@@ -52,4 +52,27 @@ class BannerModel implements HasId {
       active: json['Active'] ?? false,
     );
   }
+
+  // Helper to check if there was an update in model or not
+  static bool isSameModel(BannerModel model1, BannerModel model2) {
+    return model1.id == model2.id &&
+        model1.image == model2.image &&
+        model1.targetScreen == model2.targetScreen &&
+        model1.active == model2.active;
+  }
+
+  // copyWith method to create a new instance with updated values
+  BannerModel copyWith({
+    String? id,
+    String? image,
+    String? targetScreen,
+    bool? active,
+  }) {
+    return BannerModel(
+      id: id ?? this.id,
+      image: image ?? this.image,
+      targetScreen: targetScreen ?? this.targetScreen,
+      active: active ?? this.active,
+    );
+  }
 }

@@ -22,8 +22,10 @@ class GenericFirebaseServicesImpl<T extends HasId>
   @override
   Future<Either<String, String>> createItem(T item) async {
     return _errorHandler.handleErrorEitherAsync(() async {
-      final data = await firestore.collection(collectionPath).add(toJson(item));
-      return data.id;
+      final docRef = firestore.collection(collectionPath).doc();
+      item.id = docRef.id; // Assign the generated ID to the item
+      await docRef.set(toJson(item));
+      return docRef.id;
     });
   }
 

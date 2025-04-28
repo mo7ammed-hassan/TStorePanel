@@ -1,92 +1,150 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
+import 'package:t_store_admin_panel/core/utils/utils/constants/app_screens.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/edit_banner/edit_banner_cubit.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/edit_banner/edit_banner_states.dart';
 
 class EditBannerForm extends StatelessWidget {
-  const EditBannerForm({super.key});
-
+  const EditBannerForm({super.key, required this.bannerCubit});
+  final BannerCubit bannerCubit;
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditBannerCubit>();
     final isDark = HelperFunctions.isDarkMode(context);
-    return RoundedContainer(
-      width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
-      padding: const EdgeInsets.all(AppSizes.defaultSpace),
-      child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Heading
-            const SizedBox(height: AppSizes.sm),
+    return BlocListener<EditBannerCubit, EditBannerStates>(
+      listener: (context, state) {
+        if (state is EditBannerSuccessState) {
+          final index = bannerCubit.allItems.indexWhere(
+            (element) => element.id == state.banner.id,
+          );
 
-            Text(
-              'Update Banner',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(height: AppSizes.spaceBtwSections),
+          // index != -1
+          bannerCubit.allItems[index] = state.banner;
+          bannerCubit.filteredItems[index] = state.banner;
+          bannerCubit.selectedItems[index] = false;
 
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: TRoundedImage(
-                    width: 400,
-                    height: 200,
-                    fit: BoxFit.cover,
-                    backgroundColor:
-                        isDark
-                            ? AppColors.darkerGrey
-                            : AppColors.primaryBackground,
+          /// Method for updating state
+          bannerCubit.updateState();
+        }
+      },
+      child: RoundedContainer(
+        width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
+        padding: const EdgeInsets.all(AppSizes.defaultSpace),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Heading
+              const SizedBox(height: AppSizes.sm),
 
-                    imageType: ImageType.asset,
-                    image: TImages.banner1,
-                  ),
-                ),
-                const SizedBox(height: AppSizes.spaceBtwItems),
-                const Text('Select Image'),
-              ],
-            ),
-            const SizedBox(height: AppSizes.spaceBtwInputFields),
-
-            Text(
-              'Make your Banner Active or Inactive',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-
-            CheckboxMenuButton(
-              value: true,
-              onChanged: (value) {},
-              child: const Text('Active'),
-            ),
-
-            const SizedBox(height: AppSizes.spaceBtwInputFields),
-
-            DropdownButton(
-              value: 'search',
-              items: const [
-                DropdownMenuItem(value: 'home', child: Text('Home')),
-                DropdownMenuItem(value: 'search', child: Text('Search')),
-              ],
-              onChanged: (value) {},
-            ),
-
-            const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Create'),
+              Text(
+                'Update Banner',
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
-            ),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
-            const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
-          ],
+              Column(
+                children: [
+                  BlocBuilder<EditBannerCubit, EditBannerStates>(
+                    buildWhen:
+                        (previous, current) => current is SelectedImageState,
+                    builder: (context, state) {
+                      return TRoundedImage(
+                        width: 350,
+                        height: 200,
+
+                        backgroundColor:
+                            isDark
+                                ? AppColors.darkerGrey
+                                : AppColors.primaryBackground,
+                        fit: BoxFit.cover,
+                        imageType:
+                            cubit.imageUrl != null && cubit.imageUrl!.isNotEmpty
+                                ? ImageType.network
+                                : ImageType.asset,
+                        image:
+                            cubit.imageUrl != null && cubit.imageUrl!.isNotEmpty
+                                ? cubit.imageUrl
+                                : TImages.defaultProductImage,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: AppSizes.spaceBtwItems),
+                  TextButton(
+                    onPressed: () => cubit.pickImage(),
+                    child: const Text('Select Image'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
+
+              Text(
+                'Make your Banner Active or Inactive',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+
+              BlocSelector<EditBannerCubit, EditBannerStates, bool>(
+                selector: (state) {
+                  return state is ToggleActiveState
+                      ? state.isActive
+                      : cubit.active;
+                },
+                builder: (context, state) {
+                  return CheckboxMenuButton(
+                    value: cubit.active,
+                    onChanged: (value) => cubit.toggleActive(value!),
+                    child: const Text('Active'),
+                  );
+                },
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields),
+
+              BlocSelector<EditBannerCubit, EditBannerStates, String>(
+                selector: (state) {
+                  return state is TargetScreenState
+                      ? state.targetScreen
+                      : cubit.targetScreen;
+                },
+                builder: (context, state) {
+                  return DropdownButton(
+                    value: cubit.targetScreen,
+                    items:
+                        AppScreens.allAppScreens
+                            .map(
+                              (screen) => DropdownMenuItem(
+                                value: screen,
+                                child: Text(screen),
+                              ),
+                            )
+                            .toList(),
+                    onChanged: (value) => cubit.setTargetScreen(value!),
+                  );
+                },
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
+
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () async => await cubit.editBanner(),
+                  child: const Text('Update'),
+                ),
+              ),
+
+              const SizedBox(height: AppSizes.spaceBtwInputFields * 2),
+            ],
+          ),
         ),
       ),
     );
