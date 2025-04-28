@@ -39,8 +39,8 @@ class BannerRows extends DataTableSource {
             image: banner.image ?? TImages.defaultProductImage,
             width: 180,
             height: 100,
-            imageType: ImageType.asset,
-            //banner.image != null ? ImageType.network : ImageType.asset,
+            imageType:
+                banner.image != null ? ImageType.network : ImageType.asset,
             fit: BoxFit.cover,
             borderRadius: AppSizes.borderRadiusMd,
             backgroundColor:
@@ -50,8 +50,8 @@ class BannerRows extends DataTableSource {
         DataCell(Text(banner.targetScreen)),
         DataCell(
           banner.active
-              ? const Icon(Iconsax.eye, color: Colors.grey)
-              : const Icon(Iconsax.eye, color: AppColors.primary),
+              ? const Icon(Iconsax.eye, color: AppColors.primary)
+              : const Icon(Iconsax.eye, color: Colors.grey),
         ),
         DataCell(
           TTableActionButtons(

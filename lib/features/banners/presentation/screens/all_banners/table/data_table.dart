@@ -44,7 +44,7 @@ class BannerDataTable extends StatelessWidget {
             banners:
                 state is DataTableLoadedState
                     ? (state.data as List<BannerModel>)
-                    : [],
+                    : context.read<BannerCubit>().allItems,
           ),
         );
       },

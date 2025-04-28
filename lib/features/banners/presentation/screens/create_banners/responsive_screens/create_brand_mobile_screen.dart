@@ -8,26 +8,26 @@ import 'package:t_store_admin_panel/features/banners/presentation/screens/create
 class CreateBannerMobileScreen extends StatelessWidget {
   const CreateBannerMobileScreen({super.key, required this.bannerCubit});
   final BannerCubit bannerCubit;
-  
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(AppSizes.spaceBtwItems),
+          padding: const EdgeInsets.all(AppSizes.spaceBtwItems),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumb
-              BreadcrumbWithHeading(
+              const BreadcrumbWithHeading(
                 returnToPreviousScreen: true,
                 heading: 'Create Banner',
                 breadcrumbs: [Routes.banners, 'Create Banner'],
               ),
-              SizedBox(height: AppSizes.spaceBtwSections),
+              const SizedBox(height: AppSizes.spaceBtwSections),
 
               // Form
-              CreateBannerForm(),
+              CreateBannerForm(bannerCubit: bannerCubit),
             ],
           ),
         ),

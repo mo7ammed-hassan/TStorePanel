@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
+import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart'
+    show CacheStorageManagementImpl;
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository_impl.dart';
@@ -25,6 +27,7 @@ import 'package:t_store_admin_panel/domain/repositories/user/user_repo.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/sign_in/sign_in_cubit.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
+import 'package:t_store_admin_panel/features/banners/cubits/create_banner/create_banner_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/create_brands/cubits/create_brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/cubit/edit_brand_cubit.dart';
@@ -132,6 +135,19 @@ void setupServiceLocator() {
   getIt.registerFactory<BannerCubit>(
     () => BannerCubit(getIt<GenericRepository<BannerModel>>()),
   );
+  // Register CreateBannersCubit
+  getIt.registerFactory<CreateBannerCubit>(
+    () => CreateBannerCubit(
+      GenericRepositoryImpl(
+        GenericFirebaseServicesImpl(
+          CollectionConstants.banners,
+          (json, [id]) => BannerModel.fromMap(json, id),
+          (banner) => banner.toJson(),
+        ),
+      ),
+      CacheStorageManagementImpl(CollectionConstants.banners, 2),
+    ),
+  );
 
   /// ----Brands----
   // Register BaseFirebaseServices for Brands
@@ -156,9 +172,7 @@ void setupServiceLocator() {
   );
 
   // Register Brand Cubit
-  getIt.registerFactory<BrandCubit>(
-    () => BrandCubit(getIt<BrandRepo>()),
-  );
+  getIt.registerFactory<BrandCubit>(() => BrandCubit(getIt<BrandRepo>()));
   // Register Create Brand Cubit
   getIt.registerFactory<CreateBrandCubit>(
     () => CreateBrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
