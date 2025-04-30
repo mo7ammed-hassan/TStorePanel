@@ -45,17 +45,15 @@ void setupServiceLocator() {
 
   /// ----Authentication----
   // Firebase Services
-  getIt.registerFactory<AuthFirebaseServices>(
+  getIt.registerLazySingleton<AuthFirebaseServices>(
     () => AuthFirebaseServicesImpl(getIt<UserManager>()),
   );
-  getIt.registerFactory<AuthFirestoreService>(
+  getIt.registerLazySingleton<AuthFirestoreService>(
     () => AuthFirestoreServiceImpl(getIt<UserManager>()),
   );
-  // Repositories
-  getIt.registerFactory<AuthenticationRepo>(
+  getIt.registerLazySingleton<AuthenticationRepo>(
     () => AuthenticationRepoImpl(getIt<AuthFirebaseServices>()),
   );
-  // Managers
   getIt.registerFactory<SignInCubit>(
     () =>
         SignInCubit(getIt<AuthenticationRepo>(), getIt<AuthFirestoreService>()),
@@ -66,46 +64,46 @@ void setupServiceLocator() {
   getIt.registerFactory<UserFirebaseServices>(
     () => UserFirebaseServicesImpl(getIt<UserManager>()),
   );
-  // Repositories
   getIt.registerFactory<UserRepo>(
     () => UserRepoImpl(getIt<UserFirebaseServices>()),
   );
-  // Managers
   getIt.registerLazySingleton<UserCubit>(() => UserCubit(getIt<UserRepo>()));
 
+  ///-----------------------------------------------------------------///
   /// ----Side Bar----
   getIt.registerLazySingleton<SidebarCubit>(() => SidebarCubit());
 
+  ///-----------------------------------------------------------------///
   /// ----Media----
   // Firebase Services
   getIt.registerLazySingleton<MediaFirebaseServices>(
     () => MediaFirebaseServicesImpl(),
   );
 
-  // Repositories
   getIt.registerLazySingleton<MediaRepository>(
     () => MediaRepositoryImpl(getIt.get<MediaFirebaseServices>()),
   );
 
-  // Manger
   getIt.registerLazySingleton<MediaCubit>(
     () => MediaCubit(getIt<MediaRepository>()),
   );
   getIt.registerLazySingleton<MediaActionCubit>(() => MediaActionCubit());
 
+  ///-----------------------------------------------------------------///
+  /// ----Dashboard----
   getIt.registerFactory<DashboardCubit>(() => DashboardCubit());
 
-  // Categories
-  getIt.registerFactory<CategoryFirebaseServices>(
+  ///-----------------------------------------------------------------///
+  ///----Categories----
+  getIt.registerLazySingleton<CategoryFirebaseServices>(
     () => CategoryFirebaseServicesImpl(),
   );
-  getIt.registerFactory<CategoryRepo>(
+  getIt.registerLazySingleton<CategoryRepo>(
     () => CategoryRepoImpl(getIt<CategoryFirebaseServices>()),
   );
   getIt.registerFactory<CategoryCubit>(
     () => CategoryCubit(getIt<CategoryRepo>()),
   );
-  // create Category
   getIt.registerFactory<CreateCategoryCubit>(
     () => CreateCategoryCubit(getIt<CategoryRepo>()),
   );
@@ -113,6 +111,7 @@ void setupServiceLocator() {
     () => EditCategoryCubit(getIt<CategoryRepo>()),
   );
 
+  ///-----------------------------------------------------------------///
   ///----Banners----
   // Register BaseFirebaseServices for Banners
   getIt.registerLazySingleton<GenericFirebaseServices<BannerModel>>(
@@ -134,41 +133,26 @@ void setupServiceLocator() {
   getIt.registerFactory<BannerCubit>(
     () => BannerCubit(getIt<GenericRepository<BannerModel>>()),
   );
+
   // Register CreateBannersCubit
   getIt.registerFactory<CreateBannerCubit>(
-    () => CreateBannerCubit(
-      GenericRepositoryImpl(
-        GenericFirebaseServicesImpl(
-          CollectionConstants.banners,
-          (json, [id]) => BannerModel.fromMap(json, id),
-          (banner) => banner.toJson(),
-        ),
-      ),
-    ),
+    () => CreateBannerCubit(getIt<GenericRepository<BannerModel>>()),
   );
   // Register EditBannersCubit
   getIt.registerFactory<EditBannerCubit>(
-    () => EditBannerCubit(
-      GenericRepositoryImpl(
-        GenericFirebaseServicesImpl(
-          CollectionConstants.banners,
-          (json, [id]) => BannerModel.fromMap(json, id),
-          (banner) => banner.toJson(),
-        ),
-      ),
-    ),
+    () => EditBannerCubit(getIt<GenericRepository<BannerModel>>()),
   );
 
+  ///-----------------------------------------------------------------///
+  ///----Brands----
   // Register BrandFirebaseServices
   getIt.registerLazySingleton<BrandFirebaseServices>(
     () => BrandFirebaseServicesImpl(),
   );
-
   // Register Brand Repository
   getIt.registerLazySingleton<BrandRepo>(
     () => BrandRepo(getIt<BrandFirebaseServices>()),
   );
-
   // Register Brand Cubit
   getIt.registerFactory<BrandCubit>(() => BrandCubit(getIt<BrandRepo>()));
   // Register Create Brand Cubit
@@ -179,6 +163,8 @@ void setupServiceLocator() {
   getIt.registerFactory<EditBrandCubit>(
     () => EditBrandCubit(getIt<BrandRepo>(), getIt<CategoryCubit>()),
   );
+
+  ///----------------------------------------------------------------///
 }
 
 /// 🔄 Reset the user manager after logout
