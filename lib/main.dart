@@ -51,6 +51,9 @@ void main() async {
   // Initialize Hive
   await Hive.initFlutter();
 
+  // observer
+  Bloc.observer = MyBlocObserver();
+
   // Main App Start
   runApp(const MyApp());
 }
