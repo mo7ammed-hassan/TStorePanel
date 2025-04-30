@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
@@ -21,9 +20,9 @@ class UserManager {
   Future<void> onReady() async {
     try {
       await _auth.setPersistence(Persistence.LOCAL);
-      debugPrint("✅ Firebase Auth persistence set successfully.");
+      // debugPrint("✅ Firebase Auth persistence set successfully.");
     } catch (e) {
-      debugPrint("❌ Error setting persistence: $e");
+      // debugPrint("❌ Error setting persistence: $e");
     }
   }
 

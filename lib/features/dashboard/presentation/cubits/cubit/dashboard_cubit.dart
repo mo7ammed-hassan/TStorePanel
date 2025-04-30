@@ -101,7 +101,7 @@ class DashboardCubit extends Cubit<DashboardState> {
   ];
   // Calculate weekly sales
   void _calculateWeeklySales() {
-    debugPrint("🔍 _calculateWeeklySales triggered!");
+    //debugPrint("🔍 _calculateWeeklySales triggered!");
     // Reset weekly sales to zero
     weeklySales = List<double>.filled(7, 0.0);
 
@@ -120,48 +120,11 @@ class DashboardCubit extends Cubit<DashboardState> {
         index = index < 0 ? index + 7 : index;
         // add order amount to the weekly sales
         weeklySales[index] += order.totalAmount!;
-
-        debugPrint(
-          'OrderDate : ${order.orderDate}, OrderWeekStart: $orderWeekStart , index : $index',
-        );
       }
     }
-
-    debugPrint('Weekly Sales: $weeklySales');
   }
 
-  // void _calculateWeeklySales() {
-  //   debugPrint("🔍 _calculateWeeklySales triggered!");
-
-  //   // إعادة تعيين المبيعات الأسبوعية
-  //   weeklySales = List<double>.filled(7, 0.0);
-
-  //   final DateTime now = DateTime.now();
-  //   final DateTime startOfWeek = HelperFunctions.getStartOfWeek(now);
-
-  //   for (var order in orders) {
-  //     final DateTime orderDate = order.orderDate!;
-  //     final DateTime orderWeekStart = HelperFunctions.getStartOfWeek(orderDate);
-
-  //     if (orderWeekStart == startOfWeek) {
-  //       int index = orderDate.weekday - 1; // الاثنين = 0، الأحد = 6
-  //       weeklySales[index] += order.totalAmount!;
-
-  //       debugPrint(
-  //         '✅ Order ${order.id} Added: ${order.totalAmount} on Index $index',
-  //       );
-  //     }
-  //   }
-
-  //   debugPrint('📊 Weekly Sales Updated: $weeklySales');
-
-  //   // emit(DashboardUpdated());
-  // }
-
   void _calculateOrdersStatsData() {
-    debugPrint("🔍 _calculateOrdersStatsData triggered!");
-
-    // Reset orders stats data
     ordersStatsData.clear();
 
     // Store the total amount of each status in the map
@@ -172,8 +135,5 @@ class DashboardCubit extends Cubit<DashboardState> {
       ordersStatsData[status] = (ordersStatsData[status] ?? 0) + 1;
       totalAmount[status] = (totalAmount[status] ?? 0) + order.totalAmount!;
     }
-
-    debugPrint('Orders Stats Data: $ordersStatsData');
-    debugPrint('Total Amount: $totalAmount');
   }
 }

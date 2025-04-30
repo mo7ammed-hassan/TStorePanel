@@ -82,9 +82,9 @@ class BuildImageList extends StatelessWidget {
                             }
                           },
                           builder: (context, isSelected) {
-                            debugPrint(
-                              'isSelected: $isSelected ${image.fileName}',
-                            );
+                            // debugPrint(
+                            //   'isSelected: $isSelected ${image.fileName}',
+                            // );
                             return Checkbox(
                               value: image.isSelected,
                               onChanged: (select) {
