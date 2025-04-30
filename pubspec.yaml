@@ -63,15 +63,10 @@ flutter:
   #---------------------LOCAL ASSETS---------------------
   assets:
     - assets/logos/
-    - assets/icons/brands/
-    - assets/icons/categories/
     - assets/icons/payment_methods/
     - assets/images/content/
-    - assets/images/banners/
-    - assets/images/reviews/
     - assets/images/products/
     - assets/images/animations/
-    - assets/images/on_boarding_images/
     - .env
   #---------------------LOCAL FONTS---------------------
   fonts:
@@ -90,7 +85,8 @@ flutter:
           weight: 500
         - asset: assets/fonts/Urbanist-SemiBold.ttf
           weight: 600
-
+          
+  #---------------------LAUNCH ICONS---------------------
 flutter_launcher_icons:
   android: true
   ios: true
