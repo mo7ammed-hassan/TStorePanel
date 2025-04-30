@@ -266,9 +266,4 @@ abstract class BaseDataTableCubit<T extends HasId>
 
     emit(DataTableLoadedState(filteredItems));
   }
-
-  /// Method for updating state
-  void updateState() {
-    emit(DataTableLoadedState(filteredItems));
-  }
 }
