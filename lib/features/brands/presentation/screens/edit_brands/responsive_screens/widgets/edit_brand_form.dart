@@ -32,15 +32,7 @@ class EditBrandForm extends StatelessWidget {
       child: BlocListener<EditBrandCubit, EditBrandStates>(
         listener: (context, state) {
           if (state is EditBrandCompletedState) {
-            final index = brandCubit.allItems.indexWhere(
-              (element) => element.id == state.brand.id,
-            );
-
-            // index != -1
-            brandCubit.allItems[index] = state.brand;
-            brandCubit.filteredItems[index] = state.brand;
-            brandCubit.selectedItems[index] = false;
-            brandCubit.updateState();
+            brandCubit.editItem(state.brand);
           }
         },
         child: Form(

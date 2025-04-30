@@ -63,7 +63,6 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
       },
       (_) {
         CustomDialogs.hideLoader();
-
         Loaders.successSnackBar(
           message: 'Category updated successfully',
           title: 'Success',

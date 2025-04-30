@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
@@ -26,9 +24,6 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
   final List<CategoryModel> selectedBrandCategories = <CategoryModel>[];
   bool isFeatured = false;
   final List<CategoryModel> categories = <CategoryModel>[];
-
-  final CacheStorageManagement<BrandModel> cacheStorageManagement =
-      CacheStorageManagementImpl(CollectionConstants.brands, 3)..init();
 
   bool validateForm() => formKey.currentState?.validate() ?? false;
 
@@ -57,10 +52,6 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
       },
       (brandId) async {
         newBrand.id = brandId;
-        await cacheStorageManagement.storeItem(newBrand);
-        if (!cacheStorageManagement.isCacheValid()) {
-          await cacheStorageManagement.clearCacheStorage();
-        }
 
         CustomDialogs.hideLoader();
         Loaders.successSnackBar(
@@ -75,8 +66,6 @@ class CreateBrandCubit extends Cubit<CreateBrandStates> {
         }
       },
     );
-    // Reset the form after creating the brand
-    // reset();
   }
 
   Future<void> fetchCategories() async {

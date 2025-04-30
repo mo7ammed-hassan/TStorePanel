@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
@@ -29,7 +29,7 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
   }
 
   @override
-  Future<Either<String, void>> deleteItem(BrandModel item) async {
+  Future<Either<String, Unit>> deleteItem(BrandModel item) async {
     if (item.id == null) {
       return const Left("Item ID is null");
     }
@@ -58,12 +58,12 @@ class BrandCubit extends BaseDataTableCubit<BrandModel> {
     }
   }
 
-  fetcCategories() async {
-    getIt<CategoryCubit>().fetchItems().then((value) {
-      if (value.isRight) {
-        categories.clear();
-        categories.addAll(value.right);
-      }
+  Future fetcCategories() async {
+    var result = await getIt<CategoryCubit>().fetchItems();
+
+    result.fold((error) => null, (data) {
+      categories.clear();
+      categories.addAll(data);
     });
   }
 }

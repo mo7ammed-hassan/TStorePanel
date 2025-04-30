@@ -1,7 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
-import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart'
-    show CacheStorageManagementImpl;
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository_impl.dart';
@@ -146,7 +144,6 @@ void setupServiceLocator() {
           (banner) => banner.toJson(),
         ),
       ),
-      CacheStorageManagementImpl(CollectionConstants.banners, 2),
     ),
   );
   // Register EditBannersCubit
@@ -159,21 +156,8 @@ void setupServiceLocator() {
           (banner) => banner.toJson(),
         ),
       ),
-      CacheStorageManagementImpl(CollectionConstants.banners, 2),
     ),
   );
-
-  /// ----Brands----
-  // Register BaseFirebaseServices for Brands
-  // getIt.registerLazySingleton<BrandsFirebaseServices>(
-  //   () => BrandsFirebaseServices(
-  //     GenericFirebaseServicesImpl<BrandModel>(
-  //       CollectionConstants.brands,
-  //       (json, [id]) => BrandModel.fromMap(json, id),
-  //       (brand) => brand.toJson(),
-  //     ),
-  //   ),
-  // );
 
   // Register BrandFirebaseServices
   getIt.registerLazySingleton<BrandFirebaseServices>(

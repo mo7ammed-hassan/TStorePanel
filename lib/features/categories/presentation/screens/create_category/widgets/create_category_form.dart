@@ -23,10 +23,8 @@ class CreateCategoryForm extends StatelessWidget {
     return BlocListener<CreateCategoryCubit, CreateCategoryState>(
       listener: (context, state) {
         if (state is CreateCategorySuccessState) {
-          categoryCubit.allItems.add(state.category);
-          categoryCubit.filteredItems.add(state.category);
-          categoryCubit.selectedItems.add(false);
-          categoryCubit.updateState();
+          categoryCubit.addNewItem(state.category);
+          createCategoryCubit.resetForm();
         }
       },
       child: RoundedContainer(

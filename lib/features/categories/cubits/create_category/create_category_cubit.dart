@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
@@ -15,9 +13,6 @@ class CreateCategoryCubit extends Cubit<CreateCategoryState> {
   CreateCategoryCubit(this.categoryRepo) : super(CreateCategoryInitial());
 
   final CategoryRepo categoryRepo;
-
-  final CacheStorageManagement<CategoryModel> cacheStorageManagement =
-      CacheStorageManagementImpl('categories', 1)..init();
 
   // Form
   final formKey = GlobalKey<FormState>();
@@ -70,11 +65,6 @@ class CreateCategoryCubit extends Cubit<CreateCategoryState> {
           message: 'Category created successfully.',
         );
 
-        // Add to local Storage
-        await cacheStorageManagement.storeItem(category);
-        if (!cacheStorageManagement.isCacheValid()) {
-          await cacheStorageManagement.clearCacheStorage();
-        }
         getIt<MediaCubit>().reset();
 
         emit(CreateCategorySuccessState(category));
@@ -100,9 +90,10 @@ class CreateCategoryCubit extends Cubit<CreateCategoryState> {
     emit(ToggleFeatured(isFeatured));
   }
 
-  // reset all fields
-  void reset() {
-    emit(CreateCategoryInitial());
+  void resetForm() {
+    nameController.clear();
+    imageUrl = '';
+    isFeatured = false;
   }
 
   @override

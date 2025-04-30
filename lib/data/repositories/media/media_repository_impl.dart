@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/data/services/media/media_firebase_services.dart';
@@ -82,10 +82,10 @@ class MediaRepositoryImpl extends MediaRepository {
   }
 
   @override
-  Future<Either<String, void>> deleteImageFromStorage(ImageModel image) async {
+  Future<Either<String, Unit>> deleteImageFromStorage(ImageModel image) async {
     try {
       await _mediaServices.deleteImageFromStorage(image);
-      return const Right(null);
+      return const Right(unit);
     } catch (e) {
       return Left(e.toString());
     }

@@ -23,17 +23,7 @@ class EditBannerForm extends StatelessWidget {
     return BlocListener<EditBannerCubit, EditBannerStates>(
       listener: (context, state) {
         if (state is EditBannerSuccessState) {
-          final index = bannerCubit.allItems.indexWhere(
-            (element) => element.id == state.banner.id,
-          );
-
-          // index != -1
-          bannerCubit.allItems[index] = state.banner;
-          bannerCubit.filteredItems[index] = state.banner;
-          bannerCubit.selectedItems[index] = false;
-
-          /// Method for updating state
-          bannerCubit.updateState();
+          bannerCubit.editItem(state.banner);
         }
       },
       child: RoundedContainer(

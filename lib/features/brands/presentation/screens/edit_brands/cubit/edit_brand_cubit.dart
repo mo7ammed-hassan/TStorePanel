@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
@@ -15,17 +13,11 @@ import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart
 class EditBrandCubit extends Cubit<EditBrandStates> {
   EditBrandCubit(this.brandRepo, this._categoryCubit)
     : super(EditBrandInitialState()) {
-    // Initialize cache storage management
-    cacheStorageManagement.init();
-
-    // Fetch categories
     fetchCategories();
   }
 
   final BrandRepo brandRepo;
   final CategoryCubit _categoryCubit;
-  final CacheStorageManagement<BrandModel> cacheStorageManagement =
-      CacheStorageManagementImpl(CollectionConstants.brands, 3);
 
   final TextEditingController brandNameController = TextEditingController();
   final List<CategoryModel> categories = [];
@@ -77,8 +69,7 @@ class EditBrandCubit extends Cubit<EditBrandStates> {
         Loaders.errorSnackBar(message: error, title: 'Oops!');
         if (!isClosed) emit(EditBrandErrorState(errorMessage: error));
       },
-      (_) async {
-        await cacheStorageManagement.updateItem(updatedBrand);
+      (_) {
         CustomDialogs.hideLoader();
         Loaders.successSnackBar(
           message: 'Brand updated successfully',

@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_cubit.dart';
@@ -25,7 +25,7 @@ class CategoryCubit extends BaseDataTableCubit<CategoryModel> {
   }
 
   @override
-  Future<Either<String, void>> deleteItem(item) async {
+  Future<Either<String, Unit>> deleteItem(item) async {
     return await categoryRepo.deleteCategory(item);
   }
 

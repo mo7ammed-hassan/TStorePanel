@@ -28,15 +28,7 @@ class EditCategoryForm extends StatelessWidget {
     return BlocListener<EditCategoryCubit, EditCategoryState>(
       listener: (context, state) {
         if (state is EditCategorySuccessState) {
-          final index = categoryCubit.allItems.indexWhere(
-            (element) => element.id == category!.id,
-          );
-
-          // index != -1
-          categoryCubit.allItems[index] = state.category;
-          categoryCubit.filteredItems[index] = state.category;
-          categoryCubit.selectedItems[index] = false;
-          categoryCubit.updateState();
+          categoryCubit.editItem(state.category);
         }
       },
       child: RoundedContainer(

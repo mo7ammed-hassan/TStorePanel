@@ -1,16 +1,12 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 abstract class CategoryRepo {
-  // fetrch all categories
   Future<Either<String, List<CategoryModel>>> fetchCategories();
 
-  // create new category
   Future<Either<String, String>> createCategory(CategoryModel category);
 
-  // update category
-  Future<Either<String, void>> updateCategory(CategoryModel category);
+  Future<Either<String, Unit>> updateCategory(CategoryModel category);
 
-  // delete category
-  Future<Either<String, void>> deleteCategory(CategoryModel category);
+  Future<Either<String, Unit>> deleteCategory(CategoryModel category);
 }

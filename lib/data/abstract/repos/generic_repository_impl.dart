@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/services/abstract/generic_firebase_services.dart';
 
@@ -12,7 +12,7 @@ class GenericRepositoryImpl<T> implements GenericRepository<T> {
   }
 
   @override
-  Future<Either<String, void>> deleteItem(T item) async {
+  Future<Either<String, Unit>> deleteItem(T item) async {
     return await _firebaseServices.deleteItem(item);
   }
 
@@ -22,7 +22,7 @@ class GenericRepositoryImpl<T> implements GenericRepository<T> {
   }
 
   @override
-  Future<Either<String, void>> updateItem(T item) async {
+  Future<Either<String, T>> updateItem(T item) async {
     return await _firebaseServices.updateItem(item);
   }
 }

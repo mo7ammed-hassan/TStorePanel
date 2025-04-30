@@ -94,13 +94,14 @@ class SignInCubit extends Cubit<SignInState> {
       email.text.trim(),
       password.text.trim(),
     );
-    if (signInResult.isLeft) {
+
+    if (signInResult.isLeft()) {
       emit(SignInErrorState(signInResult.fold((error) => error, (r) => '')));
       return;
     }
 
     final userResult = await getIt<UserRepo>().fetchUserDetails();
-    if (userResult.isLeft) {
+    if (userResult.isLeft()) {
       emit(SignInErrorState(userResult.fold((error) => error, (r) => '')));
       return;
     }

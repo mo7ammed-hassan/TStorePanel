@@ -26,10 +26,7 @@ class CreateBrandForm extends StatelessWidget {
       child: BlocListener<CreateBrandCubit, CreateBrandStates>(
         listener: (context, state) {
           if (state is CreateBrandSuccessState) {
-            brandCubit.allItems.add(state.brand);
-            brandCubit.filteredItems.add(state.brand);
-            brandCubit.selectedItems.add(false);
-            brandCubit.updateState();
+            brandCubit.addNewItem(state.brand);
             cubit.resetForm();
           }
         },

@@ -1,23 +1,18 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 abstract class CategoryFirebaseServices {
-  // fetrch all categories
   Future<Either<String, List<CategoryModel>>> fetchCategories();
 
-  // create new category
   Future<Either<String, String>> createCategory(CategoryModel category);
 
-  // update category
-  Future<Either<String, void>> updateCategory(CategoryModel category);
+  Future<Either<String, Unit>> updateCategory(CategoryModel category);
 
-  // delete category
-  Future<Either<String, void>> deleteCategory(CategoryModel category);
+  Future<Either<String, Unit>> deleteCategory(CategoryModel category);
 }
 
 class CategoryFirebaseServicesImpl implements CategoryFirebaseServices {
@@ -44,11 +39,11 @@ class CategoryFirebaseServicesImpl implements CategoryFirebaseServices {
   }
 
   @override
-  Future<Either<String, void>> deleteCategory(CategoryModel category) async {
+  Future<Either<String, Unit>> deleteCategory(CategoryModel category) async {
     final docRef = firestore.collection(collectionName).doc(category.id);
     try {
       await docRef.delete();
-      return const Right(null);
+      return const Right(unit);
     } on FirebaseException catch (e) {
       return Left(e.message ?? 'Unknown error');
     } on SocketException catch (e) {
@@ -79,14 +74,14 @@ class CategoryFirebaseServicesImpl implements CategoryFirebaseServices {
   }
 
   @override
-  Future<Either<String, void>> updateCategory(CategoryModel category) async {
+  Future<Either<String, Unit>> updateCategory(CategoryModel category) async {
     try {
       await firestore
           .collection(collectionName)
           .doc(category.id)
           .update(category.toJson());
 
-      return const Right(null);
+      return const Right(unit);
     } on FirebaseException catch (e) {
       return Left(e.message ?? 'Unknown error');
     } on SocketException catch (e) {

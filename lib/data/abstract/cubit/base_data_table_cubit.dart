@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
@@ -17,7 +17,6 @@ abstract class BaseDataTableCubit<T extends HasId>
 
   final List<T> allItems = [];
   final List<T> filteredItems = [];
-
   final List<bool> selectedItems = <bool>[];
 
   final CacheStorageManagement<T> cacheStorageManagement;
@@ -26,7 +25,6 @@ abstract class BaseDataTableCubit<T extends HasId>
   Future<void> init() async {
     // initialize the cache storage management
     await cacheStorageManagement.init();
-    //await cacheStorageManagement.clearCacheStorage();
     await fetchData();
   }
 
@@ -34,7 +32,7 @@ abstract class BaseDataTableCubit<T extends HasId>
   Future<Either<String, List<T>>> fetchItems();
 
   /// Method for deleting data
-  Future<Either<String, void>> deleteItem(T item);
+  Future<Either<String, Unit>> deleteItem(T item);
 
   /// Method for searching data
   bool containSearchQuery(T item, String query);
@@ -43,30 +41,42 @@ abstract class BaseDataTableCubit<T extends HasId>
     emit(DataTableLoadingState());
 
     // Try cache first
-    final cachedData = await cacheStorageManagement.fetchData();
-    if (cachedData.isNotEmpty) {
-      _updateLists(cachedData);
-      emit(DataTableLoadedState(cachedData));
-      return;
-    }
+    final cachedDataResult = await cacheStorageManagement.fetchData();
 
-    // Fetch from Database
-    final result = await fetchItems();
-    if (isClosed) return;
-
-    result.fold(
-      (error) {
-        Loaders.errorSnackBar(title: 'Error', message: error);
-        emit(DataTableFailureState(error));
+    cachedDataResult.fold(
+      (error) async {
+        // If cache fails, fetch data from the server/database
+        await fetchFromServer();
       },
-      (items) async {
-        _updateLists(items);
-        await cacheStorageManagement.storeData(items);
-        emit(DataTableLoadedState(filteredItems));
+      (cachedData) async {
+        if (cachedData.isNotEmpty) {
+          _updateLists(cachedData);
+          emit(DataTableLoadedState(cachedData));
+          return;
+        }
+
+        await fetchFromServer();
       },
     );
   }
 
+  // Fetch from server
+  Future<void> fetchFromServer() async {
+    final result = await fetchItems();
+    result.fold(
+      (error) {
+        Loaders.errorSnackBar(title: 'Error', message: error);
+        if (!isClosed) emit(DataTableFailureState(error));
+      },
+      (items) async {
+        _updateLists(items);
+        await cacheStorageManagement.storeData(items);
+        if (!isClosed) emit(DataTableLoadedState(filteredItems));
+      },
+    );
+  }
+
+  // Update lists with items from the server
   void _updateLists(List<T> items) {
     allItems
       ..clear()
@@ -114,7 +124,7 @@ abstract class BaseDataTableCubit<T extends HasId>
     emit(DataTableLoadedState(filteredItems));
   }
 
-  /// Method for show dialog for deleting data
+  /// Method for showing dialog for deleting data
   Future<void> deleteOnConfirmation(T item) async {
     final result = await CustomDialogs.showConfirmationDialog(
       title: 'Delete Item',
@@ -175,6 +185,85 @@ abstract class BaseDataTableCubit<T extends HasId>
   /// Method for toggling selection
   void toggleSelection(int index, bool? value) {
     selectedItems[index] = value ?? false;
+    emit(DataTableLoadedState(filteredItems));
+  }
+
+  /// Method for adding new item
+  void addNewItem(T item) async {
+    allItems.add(item);
+    filteredItems.add(item);
+    selectedItems.add(false);
+
+    // add item in cache storage
+    final result = await cacheStorageManagement.storeItem(item);
+    if (result.isLeft()) {
+      // remove item from lists
+      allItems.remove(item);
+      filteredItems.remove(item);
+      selectedItems.removeLast();
+      Loaders.errorSnackBar(title: 'Error', message: 'Failed to add item');
+      return;
+    }
+
+    if (!cacheStorageManagement.isCacheValid()) {
+      await cacheStorageManagement.clearCacheStorage();
+    }
+
+    emit(DataTableLoadedState(filteredItems));
+  }
+
+  /// Method for editing an item
+  void editItem(T item) async {
+    final index = allItems.indexWhere((element) => element.id == item.id);
+    if (index != -1) {
+      // edit item in cache storage
+      final result = await cacheStorageManagement.updateItem(item);
+      if (result.isLeft()) {
+        Loaders.errorSnackBar(title: 'Error', message: 'Failed to edit item');
+        return;
+      }
+      // edit item in lists
+      allItems[index] = item;
+      filteredItems[index] = item;
+      selectedItems[index] = false;
+
+      // check if cache is valid then clear cache storage
+      if (!cacheStorageManagement.isCacheValid()) {
+        await cacheStorageManagement.clearCacheStorage();
+      }
+
+      emit(DataTableLoadedState(filteredItems));
+    } else {
+      emit(DataTableFailureState('Item not found'));
+    }
+  }
+
+  /// Method for deleting item by index
+  void deleteItemIndex(int index) async {
+    // check if index is valid then delete item
+    if (index < 0 || index >= allItems.length) {
+      Loaders.errorSnackBar(title: 'Error', message: 'Invalid index');
+      emit(DataTableFailureState('Item not found'));
+      return;
+    }
+
+    // delete item in cache storage
+    final result = await cacheStorageManagement.deleteItem(index);
+    if (result.isLeft()) {
+      Loaders.errorSnackBar(title: 'Error', message: 'Failed to delete item');
+      return;
+    }
+
+    // delete item in lists
+    allItems.removeAt(index);
+    filteredItems.removeAt(index);
+    selectedItems.removeAt(index);
+
+    // check if cache is valid then clear cache storage
+    if (!cacheStorageManagement.isCacheValid()) {
+      await cacheStorageManagement.clearCacheStorage();
+    }
+
     emit(DataTableLoadedState(filteredItems));
   }
 

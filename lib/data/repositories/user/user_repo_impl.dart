@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/data/models/user/user_model.dart';
 import 'package:t_store_admin_panel/data/services/user/user_firebase_services.dart';
@@ -20,10 +20,10 @@ class UserRepoImpl extends UserRepo {
   }
 
   @override
-  Future<Either<String, void>> signOut() async {
+  Future<Either<String, Unit>> signOut() async {
     try {
       await _userFirebaseServices.signOut();
-      return const Right(null);
+      return const Right(unit);
     } catch (e) {
       debugPrint("❌ Error signing out: $e");
       return Left(e.toString());

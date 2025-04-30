@@ -23,12 +23,7 @@ class CreateBannerForm extends StatelessWidget {
     return BlocListener<CreateBannerCubit, CreateBannerStates>(
       listener: (context, state) {
         if (state is CreateBannerSuccessState) {
-          bannerCubit.allItems.add(state.banner);
-          bannerCubit.filteredItems.add(state.banner);
-          bannerCubit.selectedItems.add(false);
-
-          /// Method for updating state
-          bannerCubit.updateState();
+          bannerCubit.addNewItem(state.banner);
           cubit.resetForm();
         }
       },

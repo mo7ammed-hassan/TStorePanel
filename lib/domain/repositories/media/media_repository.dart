@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 
@@ -28,5 +28,5 @@ abstract class MediaRepository {
     required String path,
   });
 
-  Future<Either<String, void>> deleteImageFromStorage(ImageModel image);
+  Future<Either<String, Unit>> deleteImageFromStorage(ImageModel image);
 }

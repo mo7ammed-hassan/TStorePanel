@@ -1,27 +1,15 @@
+import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 
 abstract class CacheStorageManagement<T extends HasId> {
-  // init
-  Future<void> init();
-
-  // Method for fetching data
-  Future<List<T>> fetchData();
-
-  // Method for deleting data
-  Future<void> deleteItem(int index);
-
-  // Method for storage data
-  Future<void> storeData(List<T> items);
-
-  // Store item
-  Future<void> storeItem(T item);
-
-  /// Clear Cache Storage
-  Future<void> clearCacheStorage();
-
-  Future<void> updateItem(T item);
-
+  Future<Either<String, Unit>> init();
+  Future<Either<String, List<T>>> fetchData();
+  Future<Either<String, Unit>> deleteItem(int index);
+  Future<Either<String, Unit>> storeData(List<T> items);
+  Future<Either<String, Unit>> storeItem(T item);
+  Future<Either<String, Unit>> clearCacheStorage();
+  Future<Either<String, Unit>> updateItem(T item);
   bool isCacheValid();
 }
 
@@ -47,60 +35,109 @@ class CacheStorageManagementImpl<T extends HasId>
   }
 
   @override
-  Future<void> init() async {
-    // Register adapter if provided
-    if (_adapter != null && !Hive.isAdapterRegistered(_adapterTypeId)) {
-      Hive.registerAdapter(_adapter);
+  Future<Either<String, Unit>> init() async {
+    try {
+      if (_adapter != null && !Hive.isAdapterRegistered(_adapterTypeId)) {
+        Hive.registerAdapter(_adapter);
+      }
+      _box = await Hive.openBox<dynamic>(_boxName);
+      return right(unit);
+    } catch (e) {
+      return left('Failed to initialize cache: $e');
     }
-
-    // final appDocumentDir =
-    //     await path_provider.getApplicationDocumentsDirectory();
-    // Hive.init(appDocumentDir.path);
-
-    // Open the box for this type
-    _box = await Hive.openBox<dynamic>(_boxName);
   }
 
   @override
-  Future<List<T>> fetchData() async {
+  Future<Either<String, List<T>>> fetchData() async {
     try {
       final timestamp =
           _box.get(_timestampKey, defaultValue: null) as DateTime?;
 
-      // Check if cache is expired
       if (timestamp == null ||
           DateTime.now().isAfter(timestamp.add(_cacheDuration))) {
         await clearCacheStorage();
-        return [];
+        return right([]);
       }
 
       final data = _box.get(_dataKey, defaultValue: []) as List;
-      return data.cast<T>();
+      return right(data.cast<T>());
     } catch (e) {
       await clearCacheStorage();
-      return [];
+      return left('Failed to fetch data from cache: $e');
     }
   }
 
   @override
-  Future<void> storeData(List<T> items) async {
-    await _box.put(_dataKey, items);
-    await _box.put(_timestampKey, DateTime.now());
-  }
-
-  @override
-  Future<void> deleteItem(int index) async {
-    final currentData = await fetchData();
-    if (index >= 0 && index < currentData.length) {
-      currentData.removeAt(index);
-      await storeData(currentData);
+  Future<Either<String, Unit>> storeData(List<T> items) async {
+    try {
+      await _box.put(_dataKey, items);
+      await _box.put(_timestampKey, DateTime.now());
+      return right(unit);
+    } catch (e) {
+      return left('Failed to store data in cache: $e');
     }
   }
 
   @override
-  Future<void> clearCacheStorage() async {
-    await _box.delete(_dataKey);
-    await _box.delete(_timestampKey);
+  Future<Either<String, Unit>> deleteItem(int index) async {
+    final result = await fetchData();
+    return await result.fold((error) => left(error), (currentData) async {
+      try {
+        if (index >= 0 && index < currentData.length) {
+          currentData.removeAt(index);
+          return await storeData(currentData);
+        }
+        return left('Invalid index while deleting item');
+      } catch (e) {
+        return left('Error while deleting item from cache: $e');
+      }
+    });
+  }
+
+  @override
+  Future<Either<String, Unit>> storeItem(T item) async {
+    final result = await fetchData();
+    return await result.fold((error) => left(error), (currentData) async {
+      try {
+        int index = currentData.indexWhere((e) => e.id == item.id);
+        if (index == -1) {
+          currentData.add(item);
+        } else {
+          currentData[index] = item;
+        }
+        return await storeData(currentData);
+      } catch (e) {
+        return left('Error while storing item in cache: $e');
+      }
+    });
+  }
+
+  @override
+  Future<Either<String, Unit>> updateItem(T item) async {
+    final result = await fetchData();
+    return await result.fold((error) => left(error), (currentData) async {
+      try {
+        int index = currentData.indexWhere((e) => e.id == item.id);
+        if (index != -1) {
+          currentData[index] = item;
+          return await storeData(currentData);
+        }
+        return left('Item not found for update');
+      } catch (e) {
+        return left('Failed to update item in cache: $e');
+      }
+    });
+  }
+
+  @override
+  Future<Either<String, Unit>> clearCacheStorage() async {
+    try {
+      await _box.delete(_dataKey);
+      await _box.delete(_timestampKey);
+      return right(unit);
+    } catch (e) {
+      return left('Failed to clear cache: $e');
+    }
   }
 
   @override
@@ -108,32 +145,5 @@ class CacheStorageManagementImpl<T extends HasId>
     final timestamp = _box.get(_timestampKey, defaultValue: null) as DateTime?;
     return timestamp != null &&
         !DateTime.now().isAfter(timestamp.add(_cacheDuration));
-  }
-
-  @override
-  Future<void> storeItem(T item) async {
-    final currentData = await fetchData();
-    // Check if the item already exists in the cache
-    int index = currentData.indexWhere((e) => e.id == item.id);
-    if (index == -1) {
-      // If it doesn't exist, add it to the list
-      currentData.add(item);
-    } else {
-      // If it exists, update the existing item
-      currentData[index] = item;
-    }
-    await storeData(currentData);
-  }
-
-  // update item in cache storage
-  @override
-  Future<void> updateItem(T item) async {
-    final currentData = await fetchData();
-
-    int index = currentData.indexWhere((e) => e.id == item.id);
-    if (index != -1) {
-      currentData[index] = item;
-      await storeData(currentData);
-    }
   }
 }

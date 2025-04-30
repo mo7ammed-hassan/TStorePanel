@@ -1,15 +1,11 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class GenericFirebaseServices<T> {
-  /// fetch all items
   Future<Either<String, List<T>>> fetchItems();
 
-  /// create new item
   Future<Either<String, String>> createItem(T item);
 
-  /// update Item
-  Future<Either<String, void>> updateItem(T item);
+  Future<Either<String, T>> updateItem(T item);
 
-  /// delete Item
-  Future<Either<String, void>> deleteItem(T item);
+  Future<Either<String, Unit>> deleteItem(T item);
 }

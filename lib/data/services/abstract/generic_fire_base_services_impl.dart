@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:t_store_admin_panel/core/errors/firebase_error.dart';
 import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
@@ -31,11 +31,12 @@ class GenericFirebaseServicesImpl<T extends HasId>
 
   /// Deletes an item from the Firestore collection.
   @override
-  Future<Either<String, void>> deleteItem(T item) async {
+  Future<Either<String, Unit>> deleteItem(T item) async {
     if (item.id == null) return const Left("Item has no ID");
 
     return _errorHandler.handleErrorEitherAsync(() async {
       await firestore.collection(collectionPath).doc(item.id).delete();
+      return unit;
     });
   }
 
@@ -49,7 +50,7 @@ class GenericFirebaseServicesImpl<T extends HasId>
   }
 
   @override
-  Future<Either<String, void>> updateItem(T item) async {
+  Future<Either<String, T>> updateItem(T item) async {
     if (item.id == null) return const Left("Item has no ID");
 
     return _errorHandler.handleErrorEitherAsync(() async {
@@ -57,6 +58,8 @@ class GenericFirebaseServicesImpl<T extends HasId>
           .collection(collectionPath)
           .doc(item.id)
           .update(toJson(item));
+
+      return item;
     });
   }
 }

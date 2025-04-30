@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/errors/firebase_error.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_category_model.dart';
@@ -13,7 +13,7 @@ abstract class BrandFirebaseServices {
 
   Future<Either<String, BrandModel>> updateBrand(BrandModel brand);
 
-  Future<Either<String, void>> deleteBrand(BrandModel brand);
+  Future<Either<String, Unit>> deleteBrand(BrandModel brand);
 }
 
 class BrandFirebaseServicesImpl implements BrandFirebaseServices {
@@ -175,7 +175,7 @@ class BrandFirebaseServicesImpl implements BrandFirebaseServices {
   }
 
   @override
-  Future<Either<String, void>> deleteBrand(BrandModel brand) async {
+  Future<Either<String, Unit>> deleteBrand(BrandModel brand) async {
     return _errorHandler.handleErrorEitherAsync(() async {
       WriteBatch batch = _firestore.batch();
 
@@ -198,6 +198,8 @@ class BrandFirebaseServicesImpl implements BrandFirebaseServices {
 
       // Commit the batch
       await batch.commit();
+
+      return unit;
     });
   }
 }

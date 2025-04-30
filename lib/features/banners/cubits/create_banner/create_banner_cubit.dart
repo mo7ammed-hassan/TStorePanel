@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
 import 'package:t_store_admin_panel/core/utils/utils/constants/app_screens.dart';
 import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
 import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
@@ -11,11 +10,9 @@ import 'package:t_store_admin_panel/features/banners/cubits/create_banner/create
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 
 class CreateBannerCubit extends Cubit<CreateBannerStates> {
-  CreateBannerCubit(this._repository, this._cacheStorageManagement)
-    : super(CreateBannerInitialState());
+  CreateBannerCubit(this._repository) : super(CreateBannerInitialState());
 
   final GenericRepository<BannerModel> _repository;
-  final CacheStorageManagement _cacheStorageManagement;
 
   String? imageUrl = '';
   bool active = false;
@@ -53,10 +50,6 @@ class CreateBannerCubit extends Cubit<CreateBannerStates> {
       },
       (bannerId) async {
         newBanner.id = bannerId;
-        await _cacheStorageManagement.storeItem(newBanner);
-        if (!_cacheStorageManagement.isCacheValid()) {
-          await _cacheStorageManagement.clearCacheStorage();
-        }
 
         CustomDialogs.hideLoader();
         Loaders.successSnackBar(

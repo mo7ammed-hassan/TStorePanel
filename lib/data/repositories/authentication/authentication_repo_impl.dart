@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentication_firebase_services.dart';
 import 'package:t_store_admin_panel/domain/repositories/authentication/authentication_repo.dart';
@@ -8,7 +8,6 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
 
   AuthenticationRepoImpl(this._services);
 
-  // LOGIN
   @override
   Future<Either<String, UserCredential>> signIn(
     String email,
@@ -22,7 +21,6 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     }
   }
 
-  // REGISTER
   @override
   Future<Either<String, UserCredential>> signUp(
     String email,

@@ -1,4 +1,4 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/services/brands/brand_firebase_services.dart';
@@ -13,7 +13,7 @@ class BrandRepo implements GenericRepository<BrandModel> {
   }
 
   @override
-  Future<Either<String, void>> deleteItem(item) async {
+  Future<Either<String, Unit>> deleteItem(item) async {
     return await _firebaseServices.deleteBrand(item);
   }
 
@@ -23,7 +23,7 @@ class BrandRepo implements GenericRepository<BrandModel> {
   }
 
   @override
-  Future<Either<String, void>> updateItem(item) async {
+  Future<Either<String, BrandModel>> updateItem(item) async {
     return await _firebaseServices.updateBrand(item);
   }
 }
