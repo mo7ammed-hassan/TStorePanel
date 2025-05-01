@@ -67,6 +67,7 @@ flutter:
     - assets/images/content/
     - assets/images/products/
     - assets/images/animations/
+    - assets/icons/brands/
     - .env
   #---------------------LOCAL FONTS---------------------
   fonts:

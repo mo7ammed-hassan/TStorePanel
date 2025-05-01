@@ -23,12 +23,14 @@ class CacheStorageManagementImpl<T extends HasId>
 
   static const String _dataKey = 'data';
   static const String _timestampKey = 'timestamp';
+  static const String _lastCompactKey = 'last_compact';
+  static const int _cacheDurationInMinutes = 7;
 
   CacheStorageManagementImpl(
     this._boxName,
     this._adapterTypeId, {
     TypeAdapter<T>? adapter,
-    Duration cacheDuration = const Duration(minutes: 7),
+    Duration cacheDuration = const Duration(minutes: _cacheDurationInMinutes),
   }) : _adapter = adapter,
        _cacheDuration = cacheDuration {
     init();
@@ -50,14 +52,7 @@ class CacheStorageManagementImpl<T extends HasId>
   @override
   Future<Either<String, List<T>>> fetchData() async {
     try {
-      final timestamp =
-          _box.get(_timestampKey, defaultValue: null) as DateTime?;
-
-      if (timestamp == null ||
-          DateTime.now().isAfter(timestamp.add(_cacheDuration))) {
-        await clearCacheStorage();
-        return right([]);
-      }
+      await _prepareCache();
 
       final data = _box.get(_dataKey, defaultValue: []) as List;
       return right(data.cast<T>());
@@ -72,6 +67,9 @@ class CacheStorageManagementImpl<T extends HasId>
     try {
       await _box.put(_dataKey, items);
       await _box.put(_timestampKey, DateTime.now());
+
+      await _maybeCompactBox();
+
       return right(unit);
     } catch (e) {
       return left('Failed to store data in cache: $e');
@@ -80,6 +78,8 @@ class CacheStorageManagementImpl<T extends HasId>
 
   @override
   Future<Either<String, Unit>> deleteItem(int index) async {
+    await _prepareCache();
+
     final result = await fetchData();
     return await result.fold((error) => left(error), (currentData) async {
       try {
@@ -96,6 +96,8 @@ class CacheStorageManagementImpl<T extends HasId>
 
   @override
   Future<Either<String, Unit>> storeItem(T item) async {
+    await _prepareCache();
+
     final result = await fetchData();
     return await result.fold((error) => left(error), (currentData) async {
       try {
@@ -114,6 +116,8 @@ class CacheStorageManagementImpl<T extends HasId>
 
   @override
   Future<Either<String, Unit>> updateItem(T item) async {
+    await _prepareCache();
+
     final result = await fetchData();
     return await result.fold((error) => left(error), (currentData) async {
       try {
@@ -134,6 +138,9 @@ class CacheStorageManagementImpl<T extends HasId>
     try {
       await _box.delete(_dataKey);
       await _box.delete(_timestampKey);
+
+      await _box.compact();
+
       return right(unit);
     } catch (e) {
       return left('Failed to clear cache: $e');
@@ -142,8 +149,24 @@ class CacheStorageManagementImpl<T extends HasId>
 
   @override
   bool isCacheValid() {
-    final timestamp = _box.get(_timestampKey, defaultValue: null) as DateTime?;
+    final timestamp = _box.get(_timestampKey) as DateTime?;
     return timestamp != null &&
         !DateTime.now().isAfter(timestamp.add(_cacheDuration));
+  }
+
+  Future<void> _prepareCache() async {
+    if (!isCacheValid()) {
+      await clearCacheStorage();
+    }
+  }
+
+  Future<void> _maybeCompactBox() async {
+    final lastCompact = _box.get(_lastCompactKey) as DateTime?;
+    final now = DateTime.now();
+
+    if (lastCompact == null || now.isAfter(lastCompact.add(_cacheDuration))) {
+      await _box.compact();
+      await _box.put(_lastCompactKey, now);
+    }
   }
 }
