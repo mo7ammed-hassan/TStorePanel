@@ -4,6 +4,7 @@ import 'package:t_store_admin_panel/core/utils/utils/constants/collection_consta
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository_impl.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
+import 'package:t_store_admin_panel/data/models/product/product_model.dart';
 import 'package:t_store_admin_panel/data/repositories/authentication/authentication_repo_impl.dart';
 import 'package:t_store_admin_panel/data/repositories/brands/brand_repo.dart';
 import 'package:t_store_admin_panel/data/repositories/category/category_repo_impl.dart';
@@ -21,6 +22,7 @@ import 'package:t_store_admin_panel/data/services/user/user_manager.dart';
 import 'package:t_store_admin_panel/domain/repositories/authentication/authentication_repo.dart';
 import 'package:t_store_admin_panel/domain/repositories/category/category_repo.dart';
 import 'package:t_store_admin_panel/domain/repositories/media/media_repository.dart';
+import 'package:t_store_admin_panel/domain/repositories/products/product_repo_impl.dart';
 import 'package:t_store_admin_panel/domain/repositories/user/user_repo.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/sign_in/sign_in_cubit.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
@@ -165,6 +167,11 @@ void setupServiceLocator() {
   );
 
   ///----------------------------------------------------------------///
+
+  /// ---- Products ----
+  getIt.registerLazySingleton<GenericRepository<ProductModel>>(
+    () => ProductRepoImpl(getIt<GenericFirebaseServices<ProductModel>>()),
+  );
 }
 
 /// 🔄 Reset the user manager after logout
