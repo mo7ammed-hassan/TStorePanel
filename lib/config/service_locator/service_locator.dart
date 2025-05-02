@@ -38,6 +38,7 @@ import 'package:t_store_admin_panel/features/categories/cubits/edit_category/edi
 import 'package:t_store_admin_panel/features/dashboard/presentation/cubits/cubit/dashboard_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
+import 'package:t_store_admin_panel/features/products/cubits/cubit/product_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -167,11 +168,24 @@ void setupServiceLocator() {
   );
 
   ///----------------------------------------------------------------///
-
   /// ---- Products ----
+  /// Firebase Services
+  getIt.registerLazySingleton<GenericFirebaseServices<ProductModel>>(
+    () => GenericFirebaseServicesImpl<ProductModel>(
+      CollectionConstants.products,
+      (json, [id]) => ProductModel.fromJson(json, id),
+      (product) => product.toJson(),
+    ),
+  );
   getIt.registerLazySingleton<GenericRepository<ProductModel>>(
     () => ProductRepoImpl(getIt<GenericFirebaseServices<ProductModel>>()),
   );
+  getIt.registerFactory<ProductCubit>(
+    () => ProductCubit(getIt<GenericRepository<ProductModel>>()),
+  );
+
+  ///----------------------------------------------------------------///
+  /// ---- Orders ----
 }
 
 /// 🔄 Reset the user manager after logout

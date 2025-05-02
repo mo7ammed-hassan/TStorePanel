@@ -1,15 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/models/product/product_attributes_model.dart';
 import 'package:t_store_admin_panel/data/models/product/product_variation_model.dart';
 
-class ProductModel {
+class ProductModel implements HasId {
+  @override
   final String id;
   final String title;
-  final String thumbnail;
-  final String? images;
+  final String? thumbnail;
+  final List<String?>? images;
   final int stock;
-  final double price;
+  final num price;
   final double? salePrice;
   final String? sku;
   final String productType;
@@ -42,11 +45,16 @@ class ProductModel {
     this.updatedAt,
   });
 
+  String? get formattedCreatedAt =>
+      HelperFunctions.getFormattedDate(createdAt ?? DateTime.now());
+  String? get formattedUpdatedAt =>
+      HelperFunctions.getFormattedDate(updatedAt ?? DateTime.now());
+
   ProductModel copyWith({
     String? id,
     String? title,
     String? thumbnail,
-    String? images,
+    List<String?>? images,
     int? stock,
     double? price,
     double? salePrice,
@@ -101,8 +109,8 @@ class ProductModel {
     'salePrice': salePrice,
     'sku': sku,
     'productType': productType,
-    'productVariations': productVariations,
-    'productAttributes': productAttributes,
+    'productAttributes': productAttributes?.map((e) => e.toJson()).toList(),
+    'productVariations': productVariations?.map((e) => e.toJson()).toList(),
     'isFeatured': isFeatured,
     'brand': brand,
     'description': description,
@@ -111,27 +119,35 @@ class ProductModel {
     'updatedAt': updatedAt != null ? Timestamp.fromDate(updatedAt!) : null,
   };
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-    id: json['id'] as String,
-    title: json['title'] as String,
-    thumbnail: json['thumbnail'] as String,
-    images: json['images'] as String?,
-    stock: json['stock'] as int,
-    price: json['price'] as double,
-    salePrice: json['salePrice'] as double?,
-    sku: json['sku'] as String?,
-    productType: json['productType'] as String,
-    productVariations:
-        json['productVariations'] as List<ProductVariationModel>?,
-    productAttributes:
-        json['productAttributes'] as List<ProductAttributesModel>?,
-    isFeatured: json['isFeatured'] as bool?,
-    brand: json['brand'] as BrandModel?,
-    description: json['description'] as String?,
-    categoryId: json['categoryId'] as String?,
-    createdAt: parseDate(json['createdAt']),
-    updatedAt: parseDate(json['updatedAt']),
-  );
+  factory ProductModel.fromJson(Map<String, dynamic> json, [String? id]) =>
+      ProductModel(
+        id: id ?? json['id'] as String,
+        title: json['title'] as String,
+        thumbnail: json['thumbnail'] as String,
+        images:
+            json['images'] != null ? List<String?>.from(json['images']) : null,
+        stock: json['stock'] as int,
+        price: (json['price'] as num).toDouble(),
+        salePrice: (json['salePrice'] as num?)?.toDouble(),
+        sku: json['sku'] as String?,
+        productType: json['productType'] as String,
+        productAttributes:
+            (json['productAttributes'] as List<dynamic>?)
+                ?.map((e) => ProductAttributesModel.fromJson(e))
+                .toList() ??
+            const [],
+        productVariations:
+            (json['productVariations'] as List<dynamic>?)
+                ?.map((e) => ProductVariationModel.fromJson(e))
+                .toList() ??
+            const [],
+        isFeatured: json['isFeatured'] as bool?,
+        brand: BrandModel.fromMap(json['brand']) as BrandModel?,
+        description: json['description'] as String?,
+        categoryId: json['categoryId'] as String?,
+        createdAt: parseDate(json['createdAt']),
+        updatedAt: parseDate(json['updatedAt']),
+      );
 
   factory ProductModel.fromSnapshot(DocumentSnapshot document) {
     final data = document.data() as Map<String, dynamic>;
@@ -171,5 +187,20 @@ class ProductModel {
         model.brand == brand &&
         model.description == description &&
         model.categoryId == categoryId;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProductModel &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  set id(String? id) {
+    this.id = id;
   }
 }

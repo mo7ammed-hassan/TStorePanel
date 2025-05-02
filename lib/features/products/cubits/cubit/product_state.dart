@@ -9,6 +9,27 @@ sealed class ProductState extends Equatable {
 
 final class ProductInitial extends ProductState {}
 
+final class ProductsLoadingState extends ProductState {}
+
+final class ProductsLoadedState extends ProductState {
+  final List<ProductModel> products;
+  const ProductsLoadedState(this.products);
+
+  @override
+  List<Object> get props => [products];
+}
+
+final class ProductErrorState extends ProductState {
+  final String message;
+  const ProductErrorState(this.message);
+}
+
+final class DeleteItemFailureState extends ProductState {
+  final String error;
+
+  const DeleteItemFailureState(this.error);
+}
+
 final class SelectedThumbnailImage extends ProductState {
   final String? selectedThumbnailImageUrl;
   const SelectedThumbnailImage(this.selectedThumbnailImageUrl);

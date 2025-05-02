@@ -33,11 +33,9 @@ class BrandDataTable extends StatelessWidget {
           dataRowHeight: lgTable ? 96 : 64,
 
           tableheight:
-              lgTable
-                  ? 96 * 11.5
-                  : DeviceUtility.isDesktopScreen(context)
-                  ? 760
-                  : 600,
+              // lgTable
+              //     ? 96 * 11.5:
+              DeviceUtility.isDesktopScreen(context) ? 760 : 600,
           sortAscending: context.select(
             (BrandCubit brand) => brand.sortAscending,
           ),
