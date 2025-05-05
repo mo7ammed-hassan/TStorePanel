@@ -28,7 +28,7 @@ class CreateBannerForm extends StatelessWidget {
         }
       },
       child: RoundedContainer(
-        width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
+        width: DeviceUtilities.isMobileScreen(context) ? double.infinity : 500,
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: Form(
           child: Column(

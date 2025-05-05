@@ -35,7 +35,7 @@ class BrandDataTable extends StatelessWidget {
           tableheight:
               // lgTable
               //     ? 96 * 11.5:
-              DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+              DeviceUtilities.isDesktopScreen(context) ? 760 : 600,
           sortAscending: context.select(
             (BrandCubit brand) => brand.sortAscending,
           ),
@@ -46,7 +46,7 @@ class BrandDataTable extends StatelessWidget {
           columns: [
             DataColumn2(
               label: const Text('Brand'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? null : 200,
               onSort:
                   (columnIndex, ascending) => context
                       .read<BrandCubit>()
@@ -56,11 +56,11 @@ class BrandDataTable extends StatelessWidget {
             const DataColumn2(label: Text('Featured'), fixedWidth: 100),
             DataColumn2(
               label: const Text('Date'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? null : 200,
             ),
             DataColumn2(
               label: const Text('Action'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? 100 : 100,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? 100 : 100,
             ),
           ],
           source: BrandRows(

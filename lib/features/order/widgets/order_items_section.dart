@@ -86,7 +86,7 @@ class OrderItemsSection extends StatelessWidget {
                   ),
                   SizedBox(
                     width:
-                        DeviceUtility.isMobileScreen(context)
+                        DeviceUtilities.isMobileScreen(context)
                             ? AppSizes.xl * 1.4
                             : AppSizes.xl * 2,
                     child: Text(
@@ -96,7 +96,7 @@ class OrderItemsSection extends StatelessWidget {
                   ),
                   SizedBox(
                     width:
-                        DeviceUtility.isMobileScreen(context)
+                        DeviceUtilities.isMobileScreen(context)
                             ? AppSizes.xl * 1.4
                             : AppSizes.xl * 2,
                     child: Text(

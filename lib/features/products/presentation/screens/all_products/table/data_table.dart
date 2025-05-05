@@ -27,11 +27,12 @@ class ProductDataTable extends StatelessWidget {
 
         if (state is ProductsLoadedState) {
           return CustomPaginatedTable(
-            tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+            tableheight: DeviceUtilities.isDesktopScreen(context) ? 760 : 600,
             columns: [
               DataColumn2(
                 label: const Text('product'),
-                fixedWidth: !DeviceUtility.isDesktopScreen(context) ? 300 : 400,
+                fixedWidth:
+                    !DeviceUtilities.isDesktopScreen(context) ? 300 : 400,
               ),
               const DataColumn2(label: Text('Stock')),
               const DataColumn2(label: Text('Brand')),

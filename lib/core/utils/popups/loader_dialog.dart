@@ -13,8 +13,8 @@ class LoaderDialog {
           content: PopScope(
             canPop: false,
             child: SizedBox(
-              width: DeviceUtility.isDesktopScreen(context) ? 150 : 80,
-              height: DeviceUtility.isDesktopScreen(context) ? 150 : 80,
+              width: DeviceUtilities.isDesktopScreen(context) ? 150 : 80,
+              height: DeviceUtilities.isDesktopScreen(context) ? 150 : 80,
               child: const TCircularLoader(),
             ),
           ),

@@ -39,7 +39,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
           /// Mobile Menu
           leading:
-              !DeviceUtility.isDesktopScreen(context)
+              !DeviceUtilities.isDesktopScreen(context)
                   ? IconButton(
                     onPressed: () => scaffoldKey?.currentState?.openDrawer(),
                     icon: const Icon(Iconsax.menu),
@@ -49,7 +49,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           /// Search Field
           titleSpacing: 0,
           title:
-              DeviceUtility.isDesktopScreen(context)
+              DeviceUtilities.isDesktopScreen(context)
                   ? SizedBox(
                     width: 400,
                     child: TextFormField(
@@ -64,7 +64,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           /// Actions
           actions: [
             // Search icon on mobile
-            if (!DeviceUtility.isDesktopScreen(context))
+            if (!DeviceUtilities.isDesktopScreen(context))
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Iconsax.search_normal),
@@ -104,7 +104,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                   },
                 ),
                 const SizedBox(width: AppSizes.sm),
-                if (!DeviceUtility.isMobileScreen(context))
+                if (!DeviceUtilities.isMobileScreen(context))
                   BlocBuilder<UserCubit, UserState>(
                     builder: (context, state) {
                       if (state is UserLoadingState) {
@@ -156,5 +156,5 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize =>
-      Size.fromHeight(DeviceUtility.getAppBarHeight() + 15);
+      Size.fromHeight(DeviceUtilities.getAppBarHeight() + 15);
 }

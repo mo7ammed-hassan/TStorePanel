@@ -52,7 +52,7 @@ class OrderInfoSection extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: DeviceUtility.isTabletScreen(context) ? 2 : 1,
+                flex: DeviceUtilities.isTabletScreen(context) ? 2 : 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

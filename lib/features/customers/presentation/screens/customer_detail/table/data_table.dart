@@ -19,7 +19,7 @@ class CustomOrderTable extends StatelessWidget {
         const DataColumn2(label: Text('Items')),
         DataColumn2(
           label: const Text('Status'),
-          fixedWidth: DeviceUtility.isMobileScreen(context) ? 100 : null,
+          fixedWidth: DeviceUtilities.isMobileScreen(context) ? 100 : null,
         ),
         const DataColumn2(label: Text('Amount'), numeric: true),
       ],

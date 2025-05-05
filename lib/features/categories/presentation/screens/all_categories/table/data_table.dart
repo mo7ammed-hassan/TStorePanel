@@ -28,7 +28,7 @@ class CategoryDataTable extends StatelessWidget {
 
         return CustomPaginatedTable(
           minWidth: 700,
-          tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+          tableheight: DeviceUtilities.isDesktopScreen(context) ? 760 : 600,
           sortAscending: context.select(
             (CategoryCubit category) => category.sortAscending,
           ),

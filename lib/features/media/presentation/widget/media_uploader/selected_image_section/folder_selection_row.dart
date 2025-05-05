@@ -37,9 +37,9 @@ class FolderSelectionRow extends StatelessWidget {
               onPressed: mediaCubit.removeAllSelectedImages,
               child: const FittedBox(child: Text('Remove All')),
             ),
-            if (!DeviceUtility.isMobileScreen(context))
+            if (!DeviceUtilities.isMobileScreen(context))
               const SizedBox(width: AppSizes.spaceBtwItems),
-            if (!DeviceUtility.isMobileScreen(context))
+            if (!DeviceUtilities.isMobileScreen(context))
               UploadButton(
                 onPressed: () => mediaCubit.uploadImagesConfirmation(),
               ),

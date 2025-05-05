@@ -29,7 +29,7 @@ class TransactionSection extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                flex: DeviceUtility.isMobileScreen(context) ? 2 : 1,
+                flex: DeviceUtilities.isMobileScreen(context) ? 2 : 1,
                 child: Row(
                   children: [
                     const TRoundedImage(

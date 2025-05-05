@@ -64,7 +64,7 @@ class WeeklySalesGraph extends StatelessWidget {
                     getTooltipColor: (group) => AppColors.secondary,
                   ),
                   touchCallback:
-                      DeviceUtility.isDesktopScreen(context)
+                      DeviceUtilities.isDesktopScreen(context)
                           ? (barTouchEvent, barTouchResponse) => {}
                           : null,
                 ),

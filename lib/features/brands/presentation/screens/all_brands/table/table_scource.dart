@@ -59,7 +59,7 @@ class BrandRows extends DataTableSource {
               child: Wrap(
                 spacing: AppSizes.xs,
                 direction:
-                    DeviceUtility.isMobileScreen(AppContext.context)
+                    DeviceUtilities.isMobileScreen(AppContext.context)
                         ? Axis.vertical
                         : Axis.horizontal,
                 children:
@@ -69,7 +69,7 @@ class BrandRows extends DataTableSource {
                               (e) => Padding(
                                 padding: EdgeInsets.only(
                                   bottom:
-                                      DeviceUtility.isMobileScreen(
+                                      DeviceUtilities.isMobileScreen(
                                             AppContext.context,
                                           )
                                           ? 0

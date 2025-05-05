@@ -31,8 +31,8 @@ class SidebarCubit extends Cubit<String> {
       changeActiveItem(route);
       changeHoverItem('');
 
-      if (DeviceUtility.isMobileScreen(context)) context.popPage(context);
-      if (DeviceUtility.isTabletScreen(context)) context.popPage(context);
+      if (DeviceUtilities.isMobileScreen(context)) context.popPage(context);
+      if (DeviceUtilities.isTabletScreen(context)) context.popPage(context);
 
       context.pushNamedPage(route);
     }

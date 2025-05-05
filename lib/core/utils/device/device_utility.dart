@@ -5,15 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
 
-class DeviceUtility {
+class DeviceUtilities {
   static bool isIOS() => Platform.isIOS;
   static bool isAndroid() => Platform.isAndroid;
+
+  static double tablet = 768;
+  static double desktop = 1366;
 
   static bool isMobileScreen(BuildContext context) => context.width < 768;
   static bool isTabletScreen(BuildContext context) =>
       context.width >= 768 && context.width < 1366;
-  static bool isDesktopScreen(BuildContext context) =>
-      context.width >= 1366;
+  static bool isDesktopScreen(BuildContext context) => context.width >= 1366;
 
   static void hideKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());

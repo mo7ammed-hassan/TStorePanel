@@ -26,7 +26,7 @@ class MediaContentHeader extends StatelessWidget {
         Flexible(
           child: Row(
             mainAxisAlignment:
-                DeviceUtility.isMobileScreen(context)
+                DeviceUtilities.isMobileScreen(context)
                     ? MainAxisAlignment.spaceBetween
                     : MainAxisAlignment.start,
             children: [
@@ -77,7 +77,11 @@ class MediaContentHeader extends StatelessWidget {
                     child: SizedBox(
                       width: 120,
                       child: ElevatedButton.icon(
-                        onPressed: () => Navigator.pop(context, getIt<MediaActionCubit>().selectedImages),
+                        onPressed:
+                            () => Navigator.pop(
+                              context,
+                              getIt<MediaActionCubit>().selectedImages,
+                            ),
                         icon: const Icon(Iconsax.image),
                         label: const Text('Add'),
                       ),

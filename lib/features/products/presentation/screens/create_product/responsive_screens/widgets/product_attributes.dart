@@ -32,7 +32,7 @@ class ProductAttributes extends StatelessWidget {
         // form to add new attribute
         Form(
           child:
-              DeviceUtility.isDesktopScreen(context)
+              DeviceUtilities.isDesktopScreen(context)
                   ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -127,7 +127,7 @@ class ProductAttributes extends StatelessWidget {
 
   Widget _buildAtrributeButton(context) {
     return SizedBox(
-      width: DeviceUtility.isMobileScreen(context) ? 150 : 100,
+      width: DeviceUtilities.isMobileScreen(context) ? 150 : 100,
       child: ElevatedButton.icon(
         onPressed: () {},
         label: const Text('Add'),

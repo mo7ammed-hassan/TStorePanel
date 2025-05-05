@@ -27,7 +27,7 @@ class EditBrandForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<EditBrandCubit>();
     return RoundedContainer(
-      width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
+      width: DeviceUtilities.isMobileScreen(context) ? double.infinity : 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: BlocListener<EditBrandCubit, EditBrandStates>(
         listener: (context, state) {

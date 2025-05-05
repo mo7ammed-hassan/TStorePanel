@@ -41,7 +41,7 @@ class CreateProductDesktopScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: DeviceUtility.isTabletScreen(context) ? 2 : 3,
+                    flex: DeviceUtilities.isTabletScreen(context) ? 2 : 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

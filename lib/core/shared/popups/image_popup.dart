@@ -27,7 +27,7 @@ class ImagePopup extends StatelessWidget {
           ),
           child: RoundedContainer(
             width:
-                DeviceUtility.isDesktopScreen(context)
+                DeviceUtilities.isDesktopScreen(context)
                     ? MediaQuery.of(context).size.width * 0.5
                     : double.infinity,
             child: Column(
@@ -42,7 +42,7 @@ class ImagePopup extends StatelessWidget {
                         image: image.url,
                         height: MediaQuery.of(context).size.height * 0.4,
                         width:
-                            DeviceUtility.isDesktopScreen(context)
+                            DeviceUtilities.isDesktopScreen(context)
                                 ? MediaQuery.of(context).size.width * 0.5
                                 : double.infinity,
                       ),

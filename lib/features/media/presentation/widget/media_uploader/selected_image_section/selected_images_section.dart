@@ -33,7 +33,7 @@ class SelectedImagesSection extends StatelessWidget {
               const SizedBox(height: AppSizes.spaceBtwSections),
               _buildImagePreview(mediaCubit),
               const SizedBox(height: AppSizes.spaceBtwSections),
-              if (DeviceUtility.isMobileScreen(context))
+              if (DeviceUtilities.isMobileScreen(context))
                 SizedBox(
                   width: double.infinity,
                   child: UploadButton(

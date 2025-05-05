@@ -17,7 +17,7 @@ class OrderDataTable extends StatelessWidget {
         const DataColumn2(label: Text('Items')),
         DataColumn2(
           label: const Text('Status'),
-          fixedWidth: DeviceUtility.isMobileScreen(context) ? 120 : null,
+          fixedWidth: DeviceUtilities.isMobileScreen(context) ? 120 : null,
         ),
         const DataColumn2(label: Text('Amount')),
         const DataColumn2(label: Text('Action'), fixedWidth: 100),

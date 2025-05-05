@@ -14,7 +14,7 @@ class Loaders {
     ScaffoldMessenger.of(AppContext.context).showSnackBar(
       SnackBar(
         width:
-            DeviceUtility.isDesktopScreen(AppContext.context)
+            DeviceUtilities.isDesktopScreen(AppContext.context)
                 ? MediaQuery.of(AppContext.context).size.width * 0.25
                 : null,
         behavior: SnackBarBehavior.floating,
@@ -71,7 +71,7 @@ class Loaders {
     ScaffoldMessenger.of(AppContext.context).showSnackBar(
       SnackBar(
         width:
-            DeviceUtility.isDesktopScreen(AppContext.context)
+            DeviceUtilities.isDesktopScreen(AppContext.context)
                 ? MediaQuery.of(AppContext.context).size.width * 0.25
                 : null,
         behavior: SnackBarBehavior.floating,
