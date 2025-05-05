@@ -100,7 +100,7 @@ class ProductRows extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => cubit.allProducts.length;
+  int get rowCount => products.length;
 
   @override
   int get selectedRowCount => cubit.selectedRows.length;

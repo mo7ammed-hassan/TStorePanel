@@ -19,6 +19,7 @@ class ProductCubit extends Cubit<ProductState> {
   final GenericRepository<ProductModel> productRepo;
 
   final List<ProductModel> allProducts = [];
+  final List<ProductModel> filteredProducts = [];
   final List<bool> selectedRows = [];
   String? selectedThumbnailImageUrl = '';
   List<String> additionalProductImagesUrls = [];
@@ -164,5 +165,21 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductsLoadedState(List.from(allProducts)));
   }
 
- 
+  /// -- search quary --
+  void searchQuary(String quary) {
+    filteredProducts.clear();
+    if (quary.isEmpty) {
+      filteredProducts.addAll(allProducts);
+    } else {
+      filteredProducts.addAll(
+        allProducts
+            .where(
+              (element) =>
+                  element.title.toLowerCase().contains(quary.toLowerCase()),
+            )
+            .toList(),
+      );
+    }
+    emit(ProductsLoadedState((List.from(filteredProducts))));
+  }
 }
