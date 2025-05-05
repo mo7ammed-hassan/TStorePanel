@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
-import 'package:t_store_admin_panel/core/utils/utils/loaders/circular_loader.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/loaders/circular_loader.dart';
 
 class CustomDialogs {
   static showConfirmationDialog({

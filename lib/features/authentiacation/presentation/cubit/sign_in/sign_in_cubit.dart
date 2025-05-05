@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/utils/storage/flutter_secure_storage.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/data/models/user/user_model.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentaication_local_data_source.dart';
 import 'package:t_store_admin_panel/data/services/authentication/authentication_firestore_service.dart';

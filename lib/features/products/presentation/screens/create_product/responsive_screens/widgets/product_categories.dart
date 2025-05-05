@@ -4,7 +4,7 @@ import 'package:multi_select_flutter/util/multi_select_item.dart'
     show MultiSelectItem;
 import 'package:multi_select_flutter/util/multi_select_list_type.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 
 class ProductCategories extends StatelessWidget {

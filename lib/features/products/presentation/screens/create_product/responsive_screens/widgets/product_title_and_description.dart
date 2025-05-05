@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 
 class ProductTitleAndDescription extends StatelessWidget {
   const ProductTitleAndDescription({super.key});
@@ -23,7 +23,7 @@ class ProductTitleAndDescription extends StatelessWidget {
             TextFormField(
               validator:
                   (value) =>
-                      TValidator.validateEmptyText('Product Title', value),
+                      ValidatorFields.validateEmptyText('Product Title', value),
               decoration: const InputDecoration(labelText: 'Product Title'),
             ),
             const SizedBox(height: AppSizes.spaceBtwInputFields),
@@ -37,7 +37,7 @@ class ProductTitleAndDescription extends StatelessWidget {
                 keyboardType: TextInputType.multiline,
                 textAlignVertical: TextAlignVertical.top,
                 validator:
-                    (value) => TValidator.validateEmptyText(
+                    (value) => ValidatorFields.validateEmptyText(
                       'Product Description',
                       value,
                     ),

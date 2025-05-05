@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/shimmer/shimmer_widget.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import '../../../utils/utils/constants/colors.dart';
-import '../../../utils/utils/constants/sizes.dart';
-import '../../../utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
-class TCircularImage extends StatelessWidget {
-  const TCircularImage({
+class CircularImage extends StatelessWidget {
+  const CircularImage({
     super.key,
     required this.image,
     this.width = 56,
@@ -46,7 +46,7 @@ class TCircularImage extends StatelessWidget {
                   ? CachedNetworkImage(
                     width: width,
                     height: height,
-                    imageUrl: image ?? TImages.defaultProductImage,
+                    imageUrl: image ?? AppImages.defaultProductImage,
                     fit: fit,
                     color: (isDark ? AppColors.light : AppColors.dark),
                     progressIndicatorBuilder:
@@ -62,7 +62,7 @@ class TCircularImage extends StatelessWidget {
                     fit: fit,
                     width: width,
                     height: height,
-                    image: AssetImage(image ?? TImages.defaultProductImage),
+                    image: AssetImage(image ?? AppImages.defaultProductImage),
                     color: imageColor,
                   ),
         ),

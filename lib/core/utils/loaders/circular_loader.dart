@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
 
 /// A circular loader widget with customizable foreground and background colors.
 class TCircularLoader extends StatelessWidget {

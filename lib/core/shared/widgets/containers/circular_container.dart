@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
 
 /// A circular container widget with customizable properties
 class CircularContainer extends StatelessWidget {

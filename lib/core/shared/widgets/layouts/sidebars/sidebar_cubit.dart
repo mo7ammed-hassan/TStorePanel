@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
 class SidebarCubit extends Cubit<String> {
   SidebarCubit() : super(Routes.dashboard);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart'
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/text_strings.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart'
     show HelperFunctions;
 
 class LoginHeader extends StatelessWidget {
@@ -20,7 +20,7 @@ class LoginHeader extends StatelessWidget {
             width: 100,
             height: 100,
             image: AssetImage(
-              isDark ? TImages.lightAppLogo : TImages.darkAppLogo,
+              isDark ? AppImages.lightAppLogo : AppImages.darkAppLogo,
             ),
           ),
           const SizedBox(height: AppSizes.spaceBtwSections),

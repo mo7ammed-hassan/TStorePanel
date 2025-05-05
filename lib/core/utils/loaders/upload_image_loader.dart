@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 
 class ImageLoader {
   ImageLoader._();
@@ -29,7 +29,7 @@ class ImageLoader {
                 children: [
                   Flexible(
                     child: Lottie.asset(
-                      TImages.cloudUploading,
+                      AppImages.cloudUploading,
                       width: 300,
                       height: 300,
                     ),

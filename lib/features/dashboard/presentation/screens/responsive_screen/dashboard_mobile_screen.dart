@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/dashboard/widgets/dashboard_card.dart';
 import 'package:t_store_admin_panel/features/dashboard/widgets/pie_chart/order_status_pie_chart.dart';
 import 'package:t_store_admin_panel/features/dashboard/widgets/tables/data_table.dart';

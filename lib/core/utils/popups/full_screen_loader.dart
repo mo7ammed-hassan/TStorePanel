@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 import '../loaders/animation_loader.dart';
 
 /// A utility class for managing a full-screen loading dialog.
-class TFullScreenLoader {
+class FullScreenLoaderWidget {
   /// Open a full-screen loading dialog with a given text and animation.
   /// This method doesn't return anything.
   ///
@@ -28,7 +28,9 @@ class TFullScreenLoader {
                       : AppColors.white,
               width: double.infinity,
               height: double.infinity,
-              child: Center(child: TAnimationLoaderWidget(text: text, animation: animation)),
+              child: Center(
+                child: TAnimationLoaderWidget(text: text, animation: animation),
+              ),
             ),
           ),
     );

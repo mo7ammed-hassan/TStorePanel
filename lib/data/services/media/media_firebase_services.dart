@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 
 abstract class MediaFirebaseServices {

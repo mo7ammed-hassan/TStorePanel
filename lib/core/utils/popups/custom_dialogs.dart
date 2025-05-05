@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
 class CustomDialogs {
   static defaultDialog({

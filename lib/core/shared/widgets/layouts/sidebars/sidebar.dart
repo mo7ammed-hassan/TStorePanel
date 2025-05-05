@@ -6,10 +6,10 @@ import 'package:t_store_admin_panel/config/service_locator/service_locator.dart'
 import 'package:t_store_admin_panel/core/shared/widgets/images/circular_image.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/menu/menu_item.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 
 class Sidebar extends StatelessWidget {
@@ -35,8 +35,9 @@ class Sidebar extends StatelessWidget {
             child: SafeArea(
               child: Column(
                 children: [
-                  TCircularImage(
-                    image: isDark ? TImages.lightAppLogo : TImages.darkAppLogo,
+                  CircularImage(
+                    image:
+                        isDark ? AppImages.lightAppLogo : AppImages.darkAppLogo,
                     width: 100,
                     height: 100,
                     backgroundColor: Colors.transparent,

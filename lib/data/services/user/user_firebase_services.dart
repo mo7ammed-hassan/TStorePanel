@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/errors/firebase_error.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
+import 'package:t_store_admin_panel/core/utils/constants/firebase_collections.dart';
 import 'package:t_store_admin_panel/data/models/user/user_model.dart';
 import 'package:t_store_admin_panel/data/services/user/user_manager.dart';
 
@@ -23,7 +23,7 @@ class UserFirebaseServicesImpl implements UserFirebaseServices {
     try {
       final docSnapshot =
           await _database
-              .collection(CollectionConstants.users)
+              .collection(FirebaseCollections.users)
               .doc(_userManager.user!.uid)
               .get();
 

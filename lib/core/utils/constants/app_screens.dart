@@ -13,7 +13,6 @@ class AppScreens {
   static const String cart = '/cart';
   static const String checkout = '/checkout';
 
-
   static const allAppScreens = [
     splash,
     onboarding,
@@ -29,8 +28,5 @@ class AppScreens {
     cart,
     checkout,
   ];
-  static const allAuthScreens = [
-    login,
-    register,
-  ];
+  static const allAuthScreens = [login, register];
 }

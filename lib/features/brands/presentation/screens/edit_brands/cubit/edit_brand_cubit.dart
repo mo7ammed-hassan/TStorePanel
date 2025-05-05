@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/core/utils/dialogs/show_confirmation_dialog.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/data/repositories/brands/brand_repo.dart';

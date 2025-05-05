@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart'
     show RoundedContainer;
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_additional_images.dart';
 
 class ProductImages extends StatelessWidget {

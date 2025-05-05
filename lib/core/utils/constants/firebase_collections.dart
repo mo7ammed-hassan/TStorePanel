@@ -1,5 +1,5 @@
-class CollectionConstants {
-  const CollectionConstants._();
+class FirebaseCollections {
+  const FirebaseCollections._();
 
   static const String media = 'Banners';
   static const String users = 'Users';

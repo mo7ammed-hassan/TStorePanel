@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_attributes.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_brands.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/responsive_screens/widgets/product_categories.dart';

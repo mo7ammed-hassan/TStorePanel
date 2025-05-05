@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/models/product/product_attributes_model.dart';
@@ -202,5 +203,40 @@ class ProductModel implements HasId {
   @override
   set id(String? id) {
     this.id = id;
+  }
+
+  String calculateProductPrice(ProductModel product) {
+    if (product.productType == ProductType.single.toString()) {
+      double price =
+          (product.salePrice != null && product.salePrice != 0)
+              ? product.salePrice!
+              : product.price.toDouble();
+
+      return price.toDouble().toString();
+    }
+    // calac smallest price & largest price
+    double smallestPrice = double.infinity;
+    double largestPrice = 0;
+
+    product.productVariations?.forEach((element) {
+      double priceToConsider =
+          (element.salePrice != null && element.salePrice! > 0.0)
+              ? element.salePrice!
+              : element.price.toDouble();
+
+      if (priceToConsider < smallestPrice) {
+        smallestPrice = priceToConsider;
+      }
+      if (priceToConsider > largestPrice) {
+        largestPrice = priceToConsider;
+      }
+    });
+
+    String actualPrice =
+        smallestPrice == largestPrice
+            ? largestPrice.toString()
+            : '$smallestPrice - $largestPrice';
+
+    return actualPrice;
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/data/services/media/media_firebase_services.dart';
 import 'package:t_store_admin_panel/domain/repositories/media/media_repository.dart';

@@ -2,8 +2,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/loaders/animation_loader.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
@@ -58,7 +58,7 @@ class BannerDataTable extends StatelessWidget {
         width: 300,
         height: 300,
         text: 'Try adding some categories.',
-        animation: TImages.packaging,
+        animation: AppImages.packaging,
       ),
     );
   }

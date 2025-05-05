@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/full_screen_loader.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/text_strings.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/popups/full_screen_loader.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/sign_in/sign_in_cubit.dart';
 
 class LoginForm extends StatelessWidget {
@@ -28,7 +28,7 @@ class LoginForm extends StatelessWidget {
             // Email
             TextFormField(
               controller: signInCubit.email,
-              validator: TValidator.validateEmail,
+              validator: ValidatorFields.validateEmail,
               decoration: const InputDecoration(
                 labelText: TTexts.email,
                 prefixIcon: Icon(Iconsax.direct_right),
@@ -48,7 +48,7 @@ class LoginForm extends StatelessWidget {
                   controller: signInCubit.password,
                   validator:
                       (value) =>
-                          TValidator.validateEmptyText('Password', value),
+                          ValidatorFields.validateEmptyText('Password', value),
                   obscureText: !state,
                   decoration: InputDecoration(
                     labelText: TTexts.password,
@@ -104,17 +104,17 @@ class LoginForm extends StatelessWidget {
             BlocListener<SignInCubit, SignInState>(
               listener: (context, state) {
                 if (state is SignInLoadingState) {
-                  TFullScreenLoader.openLoadingDialog(
+                  FullScreenLoaderWidget.openLoadingDialog(
                     state.message,
-                    TImages.docerAnimation,
+                    AppImages.docerAnimation,
                   );
                 }
                 if (state is SignInSuccessState) {
-                  TFullScreenLoader.stopLoading();
+                  FullScreenLoaderWidget.stopLoading();
                   signInCubit.redirect();
                 }
                 if (state is SignInErrorState) {
-                  TFullScreenLoader.stopLoading();
+                  FullScreenLoaderWidget.stopLoading();
                   Loaders.errorSnackBar(
                     title: 'Oh Snap!',
                     message: state.error,

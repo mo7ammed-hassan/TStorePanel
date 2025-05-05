@@ -5,12 +5,12 @@ import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/data_table/table_action.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 
@@ -30,7 +30,7 @@ class BrandRows extends DataTableSource {
           Row(
             children: [
               TRoundedImage(
-                image: brand.image ?? TImages.defaultProductImage,
+                image: brand.image ?? AppImages.defaultProductImage,
                 width: 50,
                 height: 50,
                 imageType:

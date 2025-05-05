@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/text_strings.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
 class ResetPasswordWidget extends StatelessWidget {
   const ResetPasswordWidget({super.key});
@@ -28,7 +28,7 @@ class ResetPasswordWidget extends StatelessWidget {
 
         /// Image
         const Image(
-          image: AssetImage(TImages.deliveredEmailIllustration),
+          image: AssetImage(AppImages.deliveredEmailIllustration),
           width: 300,
           height: 300,
         ),

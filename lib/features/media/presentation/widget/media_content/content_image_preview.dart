@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/loaders/animation_loader.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_content/build_image_list.dart';
@@ -68,7 +68,7 @@ class ContentImagePreview extends StatelessWidget {
       width: 300,
       height: 300,
       text: 'Select your Desired folder',
-      animation: TImages.packaging,
+      animation: AppImages.packaging,
     );
   }
 

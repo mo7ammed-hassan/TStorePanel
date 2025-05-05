@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
+import 'package:t_store_admin_panel/core/utils/constants/firebase_collections.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_cubit.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
@@ -11,7 +11,7 @@ class CategoryCubit extends BaseDataTableCubit<CategoryModel> {
     : super(
         DataTableInitial(),
         CacheStorageManagementImpl<CategoryModel>(
-          CollectionConstants.categories,
+          FirebaseCollections.categories,
           1,
           adapter: CategoryModelAdapter(),
         ),

@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
+import 'package:t_store_admin_panel/core/utils/constants/firebase_collections.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository_impl.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
@@ -119,7 +119,7 @@ void setupServiceLocator() {
   // Register BaseFirebaseServices for Banners
   getIt.registerLazySingleton<GenericFirebaseServices<BannerModel>>(
     () => GenericFirebaseServicesImpl<BannerModel>(
-      CollectionConstants.banners,
+      FirebaseCollections.banners,
       (json, [id]) => BannerModel.fromMap(json, id),
       (banner) => banner.toJson(),
     ),
@@ -172,7 +172,7 @@ void setupServiceLocator() {
   /// Firebase Services
   getIt.registerLazySingleton<GenericFirebaseServices<ProductModel>>(
     () => GenericFirebaseServicesImpl<ProductModel>(
-      CollectionConstants.products,
+      FirebaseCollections.products,
       (json, [id]) => ProductModel.fromJson(json, id),
       (product) => product.toJson(),
     ),

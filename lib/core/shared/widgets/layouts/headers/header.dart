@@ -5,11 +5,10 @@ import 'package:t_store_admin_panel/config/service_locator/service_locator.dart'
 import 'package:t_store_admin_panel/core/shared/widgets/images/rounded_image.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/device/device_utlity.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
@@ -94,7 +93,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                         imageUrl:
                             userCubit.userData.profilePicture!.isNotEmpty
                                 ? userCubit.userData.profilePicture!
-                                : TImages.user,
+                                : AppImages.user,
                         isNetworkImage:
                             userCubit.userData.profilePicture!.isNotEmpty
                                 ? true
@@ -157,5 +156,5 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize =>
-      Size.fromHeight(TDeviceUtils.getAppBarHeight() + 15);
+      Size.fromHeight(DeviceUtility.getAppBarHeight() + 15);
 }

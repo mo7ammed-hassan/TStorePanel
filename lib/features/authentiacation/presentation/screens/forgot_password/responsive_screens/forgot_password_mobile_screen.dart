@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/widgets/forgot_password/header_and_form.dart';
 
 class ForgotPasswordMobileScreen extends StatelessWidget {

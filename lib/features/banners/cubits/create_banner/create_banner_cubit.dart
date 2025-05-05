@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/app_screens.dart';
-import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/core/utils/constants/app_screens.dart';
+import 'package:t_store_admin_panel/core/utils/dialogs/show_confirmation_dialog.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';

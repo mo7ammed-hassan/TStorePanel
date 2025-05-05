@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 
@@ -33,9 +33,13 @@ class ProductBrands extends StatelessWidget {
             onSelected: (suggestion) {},
             suggestionsCallback: (String search) {
               return [
-                BrandModel(id: '1', image: TImages.adidasLogo, name: 'Adidas'),
-                BrandModel(id: '2', image: TImages.nikeLogo, name: 'Nike'),
-                BrandModel(id: '3', image: TImages.pumaLogo, name: 'Puma'),
+                BrandModel(
+                  id: '1',
+                  image: AppImages.adidasLogo,
+                  name: 'Adidas',
+                ),
+                BrandModel(id: '2', image: AppImages.nikeLogo, name: 'Nike'),
+                BrandModel(id: '3', image: AppImages.pumaLogo, name: 'Puma'),
               ];
             },
             itemBuilder: (BuildContext context, suggestion) {

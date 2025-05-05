@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/text_strings.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
 class HeaderAndFormForgetPassword extends StatelessWidget {
   const HeaderAndFormForgetPassword({super.key});

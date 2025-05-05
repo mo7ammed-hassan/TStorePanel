@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/uploader_image.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/edit_category/edit_category_cubit.dart';
@@ -50,7 +50,7 @@ class EditCategoryForm extends StatelessWidget {
 
               TextFormField(
                 validator:
-                    (value) => TValidator.validateEmptyText('Name', value),
+                    (value) => ValidatorFields.validateEmptyText('Name', value),
                 decoration: const InputDecoration(
                   labelText: 'Category Name',
                   prefixIcon: Icon(Iconsax.category),
@@ -86,7 +86,7 @@ class EditCategoryForm extends StatelessWidget {
               UploaderImage(
                 width: 80,
                 height: 80,
-                image: cubit.imageUrl ?? TImages.defaultProductImage,
+                image: cubit.imageUrl ?? AppImages.defaultProductImage,
                 imageType:
                     cubit.imageUrl != null
                         ? ImageType.network

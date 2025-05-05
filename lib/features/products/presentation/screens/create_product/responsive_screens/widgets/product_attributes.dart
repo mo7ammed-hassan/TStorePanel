@@ -3,11 +3,11 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 
 class ProductAttributes extends StatelessWidget {
   const ProductAttributes({super.key});
@@ -95,7 +95,7 @@ class ProductAttributes extends StatelessWidget {
   Widget _buildAttributeName() {
     return TextFormField(
       validator:
-          (value) => TValidator.validateEmptyText('Attribute Name', value),
+          (value) => ValidatorFields.validateEmptyText('Attribute Name', value),
       decoration: const InputDecoration(
         labelText: 'Attribute Name',
         hintText: 'Colors, Sizes, Materials.',
@@ -114,7 +114,8 @@ class ProductAttributes extends StatelessWidget {
         keyboardType: TextInputType.multiline,
         textAlignVertical: TextAlignVertical.top,
         validator:
-            (value) => TValidator.validateEmptyText('Attribute Value', value),
+            (value) =>
+                ValidatorFields.validateEmptyText('Attribute Value', value),
         decoration: const InputDecoration(
           labelText: 'Attribute Value',
           hintText: 'Add attributes separated by | Ex: Red | Blue | Green',
@@ -172,7 +173,7 @@ class ProductAttributes extends StatelessWidget {
     return const Column(
       children: [
         RoundedImage(
-          imageUrl: TImages.acerlogo,
+          imageUrl: AppImages.acerlogo,
           width: 150,
           height: 80,
           showShadow: false,
