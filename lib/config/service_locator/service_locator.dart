@@ -74,7 +74,7 @@ void setupServiceLocator() {
 
   ///-----------------------------------------------------------------///
   /// ----Side Bar----
-  getIt.registerLazySingleton<SidebarCubit>(() => SidebarCubit());
+  getIt.registerFactory<SidebarCubit>(() => SidebarCubit());
 
   ///-----------------------------------------------------------------///
   /// ----Media----
