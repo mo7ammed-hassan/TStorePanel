@@ -23,10 +23,14 @@ import 'package:t_store_admin_panel/features/personalization/presentation/screen
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/create_product/create_product_screen.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/edit_product/edit_product_screen.dart';
+import 'package:t_store_admin_panel/layouts/admin_layout.dart';
 import 'package:t_store_admin_panel/test_screen.dart';
 
 class AppRouter {
   static final Map<String, Widget Function(BuildContext)> _routes = {
+    // Admin Layout
+    Routes.adminLayout: (_) => const AdminLayout(),
+
     // Main Screen
     Routes.dashboard: (_) => const DashboardScreen(),
 
@@ -70,9 +74,8 @@ class AppRouter {
     Routes.orderDetail: (_) => const OrderDetailsScreen(),
 
     // Profile & Settings
-     Routes.profile: (_) => const ProfileScreen(),
-     Routes.settings: (_) => const SettingsScreen(),
-
+    Routes.profile: (_) => const ProfileScreen(),
+    Routes.settings: (_) => const SettingsScreen(),
 
     Routes.testScreen: (_) => const TestScreen(),
   };

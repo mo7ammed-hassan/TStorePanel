@@ -15,6 +15,9 @@ class Sidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('============================');
+    print('======SideBar build========');
+    print('============================');
     final isDark = HelperFunctions.isDarkMode(context);
     return Drawer(
       shape: const BeveledRectangleBorder(),

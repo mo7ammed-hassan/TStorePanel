@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: AppContext.navigatorKey,
         initialRoute:
             getIt<AuthFirebaseServices>().alreadyLoggedIn()
-                ? Routes.dashboard
+                ? Routes.adminLayout
                 : Routes.login,
         onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
       ),
