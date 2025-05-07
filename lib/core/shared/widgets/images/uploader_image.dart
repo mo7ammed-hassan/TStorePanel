@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/circular_image.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 
 class UploaderImage extends StatelessWidget {
   const UploaderImage({
@@ -55,7 +55,7 @@ class UploaderImage extends StatelessWidget {
     return Stack(
       children: [
         circular
-            ? TCircularImage(
+            ? CircularImage(
               fit: fit,
               image: image!,
               width: width,

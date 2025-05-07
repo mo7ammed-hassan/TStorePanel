@@ -5,10 +5,10 @@ import 'package:t_store_admin_panel/core/shared/widgets/chip/choice_chip.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/uploader_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/edit_brands/cubit/edit_brand_cubit.dart';
@@ -27,7 +27,7 @@ class EditBrandForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<EditBrandCubit>();
     return RoundedContainer(
-      width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
+      width: DeviceUtilities.isMobileScreen(context) ? double.infinity : 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: BlocListener<EditBrandCubit, EditBrandStates>(
         listener: (context, state) {
@@ -51,7 +51,7 @@ class EditBrandForm extends StatelessWidget {
 
               TextFormField(
                 validator:
-                    (value) => TValidator.validateEmptyText('Name', value),
+                    (value) => ValidatorFields.validateEmptyText('Name', value),
                 controller: cubit.brandNameController,
                 decoration: const InputDecoration(
                   labelText: 'Brand Name',
@@ -101,7 +101,7 @@ class EditBrandForm extends StatelessWidget {
               UploaderImage(
                 width: 80,
                 height: 80,
-                image: cubit.imageUrl ?? TImages.defaultProductImage,
+                image: cubit.imageUrl ?? AppImages.defaultProductImage,
                 imageType:
                     cubit.imageUrl != null
                         ? ImageType.network

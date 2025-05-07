@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/customers/presentation/screens/customer_detail/table/data_table.dart';
 
 class CustomerOrderSection extends StatelessWidget {

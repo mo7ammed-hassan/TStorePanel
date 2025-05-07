@@ -58,9 +58,9 @@ class ProductVariationModel {
         json['sku'] as String?,
         json['image'] as String,
         json['description'] as String?,
-        json['price'] as double,
-        json['salePrice'] as double?,
+        (json['price'] as num).toDouble(),
+        (json['salePrice'] as num?)?.toDouble(),
         json['stock'] as int,
-        json['attributeValues'] as Map<String, String>,
+        Map<String, String>.from(json['attributeValues']),
       );
 }

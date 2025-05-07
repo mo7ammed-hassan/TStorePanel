@@ -5,10 +5,10 @@ import 'package:t_store_admin_panel/core/shared/widgets/chip/choice_chip.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/uploader_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/create_brands/cubits/create_brand_cubit.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/screens/create_brands/cubits/create_brand_states.dart';
@@ -21,7 +21,7 @@ class CreateBrandForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<CreateBrandCubit>();
     return RoundedContainer(
-      width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
+      width: DeviceUtilities.isMobileScreen(context) ? double.infinity : 500,
       padding: const EdgeInsets.all(AppSizes.defaultSpace),
       child: BlocListener<CreateBrandCubit, CreateBrandStates>(
         listener: (context, state) {
@@ -47,7 +47,7 @@ class CreateBrandForm extends StatelessWidget {
               TextFormField(
                 controller: cubit.brandNameController,
                 validator:
-                    (value) => TValidator.validateEmptyText('Name', value),
+                    (value) => ValidatorFields.validateEmptyText('Name', value),
                 decoration: const InputDecoration(
                   labelText: 'Brand Name',
                   prefixIcon: Icon(Iconsax.box),
@@ -108,7 +108,7 @@ class CreateBrandForm extends StatelessWidget {
                 image:
                     cubit.imageUrl != null && cubit.imageUrl!.isNotEmpty
                         ? cubit.imageUrl
-                        : TImages.defaultProductImage,
+                        : AppImages.defaultProductImage,
                 imageType:
                     cubit.imageUrl != null && cubit.imageUrl!.isNotEmpty
                         ? ImageType.network

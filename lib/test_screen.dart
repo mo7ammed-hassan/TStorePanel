@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 
 class UserModel extends Equatable {
   final String username;
@@ -68,7 +68,7 @@ class UserCubit extends Cubit<UserState> {
     _currentUser = const UserModel(
       username: "Mohamed",
       email: "mohamed@example.com",
-      profilePic: TImages.darkAppLogo,
+      profilePic: AppImages.darkAppLogo,
     );
     emit(UserLoadedState(_currentUser));
   }
@@ -92,7 +92,7 @@ class UserCubit extends Cubit<UserState> {
     _currentUser = const UserModel(
       username: "Mohamed",
       email: "mohamed@example.com",
-      profilePic: TImages.darkAppLogo,
+      profilePic: AppImages.darkAppLogo,
     );
   }
 }
@@ -123,7 +123,7 @@ class TestScreen extends StatelessWidget {
                         if (state is UserUpdatedState) {
                           return state.updatedUser.profilePic;
                         }
-                        return TImages.darkAppLogo;
+                        return AppImages.darkAppLogo;
                       },
                       builder: (context, profilePic) {
                         debugPrint("🔄 تحديث الصورة");
@@ -192,9 +192,8 @@ class TestScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           context.read<UserCubit>().updateProfilePic(
-                            TImages.lightAppLogo,
+                            AppImages.lightAppLogo,
                           );
-                         
                         },
                         child: const Text("تحديث الصورة"),
                       ),

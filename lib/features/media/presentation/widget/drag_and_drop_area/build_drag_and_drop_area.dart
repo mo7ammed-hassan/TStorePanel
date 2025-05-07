@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/drag_and_drop_area/drag_and_drop_area.dart';
 
@@ -106,7 +106,7 @@ class MobileDropTarget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(TImages.defaultProductImage, width: 50, height: 50),
+        Image.asset(AppImages.defaultProductImage, width: 50, height: 50),
         const SizedBox(height: AppSizes.spaceBtwItems),
         const Text('Drop Images here'),
         const SizedBox(height: AppSizes.spaceBtwItems),

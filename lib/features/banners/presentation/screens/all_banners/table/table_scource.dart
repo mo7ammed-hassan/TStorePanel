@@ -6,13 +6,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/data_table/table_action.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
 
@@ -36,7 +36,7 @@ class BannerRows extends DataTableSource {
       cells: [
         DataCell(
           TRoundedImage(
-            image: banner.image ?? TImages.defaultProductImage,
+            image: banner.image ?? AppImages.defaultProductImage,
             width: 180,
             height: 100,
             imageType:

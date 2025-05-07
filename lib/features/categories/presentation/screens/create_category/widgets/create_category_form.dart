@@ -4,10 +4,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/uploader_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/create_category/create_category_cubit.dart';
@@ -28,7 +28,7 @@ class CreateCategoryForm extends StatelessWidget {
         }
       },
       child: RoundedContainer(
-        width: DeviceUtility.isMobileScreen(context) ? double.infinity : 500,
+        width: DeviceUtilities.isMobileScreen(context) ? double.infinity : 500,
         padding: const EdgeInsets.all(AppSizes.defaultSpace),
         child: Form(
           key: createCategoryCubit.formKey,
@@ -46,7 +46,7 @@ class CreateCategoryForm extends StatelessWidget {
 
               TextFormField(
                 validator:
-                    (value) => TValidator.validateEmptyText('Name', value),
+                    (value) => ValidatorFields.validateEmptyText('Name', value),
                 controller: createCategoryCubit.nameController,
                 decoration: const InputDecoration(
                   labelText: 'Category Name',
@@ -82,7 +82,7 @@ class CreateCategoryForm extends StatelessWidget {
                 image:
                     createCategoryCubit.imageUrl.isNotEmpty
                         ? createCategoryCubit.imageUrl
-                        : TImages.defaultProductImage,
+                        : AppImages.defaultProductImage,
                 imageType:
                     createCategoryCubit.imageUrl.isNotEmpty
                         ? ImageType.network

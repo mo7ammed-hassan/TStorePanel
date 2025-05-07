@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:t_store_admin_panel/config/routes/routes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
 class Breadcrumb extends StatelessWidget {
   const Breadcrumb({super.key, required this.breadcrumbs});
@@ -13,7 +15,11 @@ class Breadcrumb extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () => context.pushNamedAndRemoveUntilPage(Routes.dashboard),
+          onTap:
+              () => context.read<SidebarCubit>().menuOnTap(
+                context,
+                SidebarRoutes.dashboard,
+              ),
           child: Padding(
             padding: const EdgeInsets.all(AppSizes.xs),
             child: Text(

@@ -2,8 +2,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/loaders/animation_loader.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
 import 'package:t_store_admin_panel/features/banners/cubits/banners/banner_cubit.dart';
@@ -28,13 +28,13 @@ class BannerDataTable extends StatelessWidget {
 
         return CustomPaginatedTable(
           minWidth: 700,
-          tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+          tableheight: DeviceUtilities.isDesktopScreen(context) ? 760 : 600,
           dataRowHeight: 110,
           columns: [
             const DataColumn2(label: Text('Banner'), fixedWidth: 230),
             DataColumn2(
               label: const Text('Redirect Screen'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? 200 : null,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? 200 : null,
             ),
             const DataColumn2(label: Text('Active'), fixedWidth: 100),
             const DataColumn2(label: Text('Action'), fixedWidth: 100),
@@ -58,7 +58,7 @@ class BannerDataTable extends StatelessWidget {
         width: 300,
         height: 300,
         text: 'Try adding some categories.',
-        animation: TImages.packaging,
+        animation: AppImages.packaging,
       ),
     );
   }

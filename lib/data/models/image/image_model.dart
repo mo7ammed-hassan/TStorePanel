@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:t_store_admin_panel/core/utils/utils/formatters/formatter.dart';
+import 'package:t_store_admin_panel/core/utils/formatters/formatter.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class ImageModel {

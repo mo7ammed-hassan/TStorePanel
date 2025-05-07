@@ -5,11 +5,10 @@ import 'package:t_store_admin_panel/config/service_locator/service_locator.dart'
 import 'package:t_store_admin_panel/core/shared/widgets/images/rounded_image.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/shimmer/shimmer_widget.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/device/device_utlity.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/features/authentiacation/presentation/cubit/user/cubit/user_cubit.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
@@ -40,7 +39,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
           /// Mobile Menu
           leading:
-              !DeviceUtility.isDesktopScreen(context)
+              !DeviceUtilities.isDesktopScreen(context)
                   ? IconButton(
                     onPressed: () => scaffoldKey?.currentState?.openDrawer(),
                     icon: const Icon(Iconsax.menu),
@@ -50,7 +49,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           /// Search Field
           titleSpacing: 0,
           title:
-              DeviceUtility.isDesktopScreen(context)
+              DeviceUtilities.isDesktopScreen(context)
                   ? SizedBox(
                     width: 400,
                     child: TextFormField(
@@ -65,7 +64,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           /// Actions
           actions: [
             // Search icon on mobile
-            if (!DeviceUtility.isDesktopScreen(context))
+            if (!DeviceUtilities.isDesktopScreen(context))
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Iconsax.search_normal),
@@ -94,7 +93,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                         imageUrl:
                             userCubit.userData.profilePicture!.isNotEmpty
                                 ? userCubit.userData.profilePicture!
-                                : TImages.user,
+                                : AppImages.user,
                         isNetworkImage:
                             userCubit.userData.profilePicture!.isNotEmpty
                                 ? true
@@ -105,7 +104,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                   },
                 ),
                 const SizedBox(width: AppSizes.sm),
-                if (!DeviceUtility.isMobileScreen(context))
+                if (!DeviceUtilities.isMobileScreen(context))
                   BlocBuilder<UserCubit, UserState>(
                     builder: (context, state) {
                       if (state is UserLoadingState) {
@@ -157,5 +156,5 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize =>
-      Size.fromHeight(TDeviceUtils.getAppBarHeight() + 15);
+      Size.fromHeight(DeviceUtilities.getAppBarHeight() + 15);
 }

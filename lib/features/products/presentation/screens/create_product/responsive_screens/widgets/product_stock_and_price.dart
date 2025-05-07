@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 
 class ProductStockAndPricing extends StatelessWidget {
   const ProductStockAndPricing({super.key});
@@ -18,7 +18,8 @@ class ProductStockAndPricing extends StatelessWidget {
               widthFactor: 0.45,
               child: TextFormField(
                 validator:
-                    (value) => TValidator.validateEmptyText('Stock', value),
+                    (value) =>
+                        ValidatorFields.validateEmptyText('Stock', value),
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: const InputDecoration(
@@ -35,7 +36,8 @@ class ProductStockAndPricing extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     validator:
-                        (value) => TValidator.validateEmptyText('Price', value),
+                        (value) =>
+                            ValidatorFields.validateEmptyText('Price', value),
                     keyboardType: const TextInputType.numberWithOptions(
                       decimal: true,
                     ),
@@ -54,7 +56,8 @@ class ProductStockAndPricing extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     validator:
-                        (value) => TValidator.validateEmptyText('Price', value),
+                        (value) =>
+                            ValidatorFields.validateEmptyText('Price', value),
                     keyboardType: const TextInputType.numberWithOptions(
                       decimal: true,
                     ),

@@ -5,10 +5,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loader_dialog.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loader_dialog.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 
@@ -27,7 +27,7 @@ class ImagePopup extends StatelessWidget {
           ),
           child: RoundedContainer(
             width:
-                DeviceUtility.isDesktopScreen(context)
+                DeviceUtilities.isDesktopScreen(context)
                     ? MediaQuery.of(context).size.width * 0.5
                     : double.infinity,
             child: Column(
@@ -42,7 +42,7 @@ class ImagePopup extends StatelessWidget {
                         image: image.url,
                         height: MediaQuery.of(context).size.height * 0.4,
                         width:
-                            DeviceUtility.isDesktopScreen(context)
+                            DeviceUtilities.isDesktopScreen(context)
                                 ? MediaQuery.of(context).size.width * 0.5
                                 : double.infinity,
                       ),

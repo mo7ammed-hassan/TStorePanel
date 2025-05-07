@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_content/media_content_section.dart';

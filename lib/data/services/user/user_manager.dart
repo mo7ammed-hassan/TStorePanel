@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
 
 class UserManager {
   // Firebase Auth instance
@@ -46,7 +46,7 @@ class UserManager {
     // If user is authenticated (Logged In)
     if (user != null) {
       AppContext.navigatorKey.currentState?.pushReplacementNamed(
-        Routes.dashboard,
+        Routes.adminLayout,
       );
     } else {
       AppContext.navigatorKey.currentState?.pushReplacementNamed(Routes.login);

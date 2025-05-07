@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/storage/cache_storage_mangement.dart';
-import 'package:t_store_admin_panel/core/utils/utils/dialogs/show_confirmation_dialog.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/core/utils/dialogs/show_confirmation_dialog.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/pricing_calculator.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/pricing_calculator.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
 
 class OrderItemsSection extends StatelessWidget {
@@ -47,7 +47,8 @@ class OrderItemsSection extends StatelessWidget {
                                   ? ImageType.network
                                   : ImageType.asset,
                           image:
-                              orderItem.imageUrl ?? TImages.defaultProductImage,
+                              orderItem.imageUrl ??
+                              AppImages.defaultProductImage,
                         ),
                         const SizedBox(width: AppSizes.spaceBtwItems),
 
@@ -85,7 +86,7 @@ class OrderItemsSection extends StatelessWidget {
                   ),
                   SizedBox(
                     width:
-                        DeviceUtility.isMobileScreen(context)
+                        DeviceUtilities.isMobileScreen(context)
                             ? AppSizes.xl * 1.4
                             : AppSizes.xl * 2,
                     child: Text(
@@ -95,7 +96,7 @@ class OrderItemsSection extends StatelessWidget {
                   ),
                   SizedBox(
                     width:
-                        DeviceUtility.isMobileScreen(context)
+                        DeviceUtilities.isMobileScreen(context)
                             ? AppSizes.xl * 1.4
                             : AppSizes.xl * 2,
                     child: Text(

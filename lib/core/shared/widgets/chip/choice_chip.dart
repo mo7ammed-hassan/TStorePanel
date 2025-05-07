@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/circular_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 
 class TChoiceChip extends StatelessWidget {
   const TChoiceChip({super.key, required this.text, required this.isSelected, this.onSelected});

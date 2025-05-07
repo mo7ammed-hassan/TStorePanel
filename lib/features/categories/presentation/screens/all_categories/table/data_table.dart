@@ -2,8 +2,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/loaders/animation_loader.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 import 'package:t_store_admin_panel/features/categories/cubits/category/category_cubit.dart';
@@ -28,7 +28,7 @@ class CategoryDataTable extends StatelessWidget {
 
         return CustomPaginatedTable(
           minWidth: 700,
-          tableheight: DeviceUtility.isDesktopScreen(context) ? 760 : 600,
+          tableheight: DeviceUtilities.isDesktopScreen(context) ? 760 : 600,
           sortAscending: context.select(
             (CategoryCubit category) => category.sortAscending,
           ),
@@ -72,12 +72,12 @@ class CategoryDataTable extends StatelessWidget {
         width: 300,
         height: 300,
         text: 'Try adding some categories.',
-        animation: TImages.packaging,
+        animation: AppImages.packaging,
       ),
     );
   }
 
   Widget _failureWidget(String? error) {
-    return  Center(child: Text( error ?? 'Something went wrong!, Try again.'));
+    return Center(child: Text(error ?? 'Something went wrong!, Try again.'));
   }
 }

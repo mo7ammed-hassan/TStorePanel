@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 
 class MediaFolderDropdown extends StatelessWidget {

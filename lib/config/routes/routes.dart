@@ -1,4 +1,7 @@
 class Routes {
+  // Admin Layout
+  static const String adminLayout = '/admin-layout';
+
   // Auth Routes
   static const String login = '/login';
   static const String forgotPassword = '/forgot-password';
@@ -41,6 +44,11 @@ class Routes {
     brands,
     products,
     banners,
+    orders,
+    settings,
+    profile,
+    customers,
+    login,
   ];
   // Test Screen
   static const String testScreen = '/test-screen';

@@ -2,9 +2,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:t_store_admin_panel/core/utils/utils/exceptions/firebase_auth_exceptions.dart';
-import 'package:t_store_admin_panel/core/utils/utils/exceptions/format_exceptions.dart';
-import 'package:t_store_admin_panel/core/utils/utils/exceptions/platform_exceptions.dart';
+import 'package:t_store_admin_panel/core/utils/exceptions/firebase_auth_exceptions.dart';
+import 'package:t_store_admin_panel/core/utils/exceptions/format_exceptions.dart';
+import 'package:t_store_admin_panel/core/utils/exceptions/platform_exceptions.dart';
 import 'package:t_store_admin_panel/data/models/user/user_model.dart';
 import 'package:t_store_admin_panel/data/services/user/user_manager.dart';
 

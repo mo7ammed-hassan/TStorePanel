@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
 
 class TTableActionButtons extends StatelessWidget {
   const TTableActionButtons({

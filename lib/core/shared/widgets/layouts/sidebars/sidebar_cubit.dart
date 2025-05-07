@@ -1,40 +1,55 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store_admin_panel/config/routes/routes.dart';
+import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_states.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/extensions/sidebar_extension.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
-class SidebarCubit extends Cubit<String> {
-  SidebarCubit() : super(Routes.dashboard);
+class SidebarCubit extends Cubit<SidebarStates> {
+  SidebarCubit() : super(SidebarInitial());
 
-  String activeItem = Routes.dashboard;
-  String hoverItem = '';
+  SidebarRoutes activeItem = SidebarRoutes.dashboard;
+  SidebarRoutes? hoverItem;
 
-  void changeActiveItem(String route) {
-    activeItem = route;
-    emit(route);
-  }
-
-  void changeHoverItem(String route) {
-    if (!isActive(route)) {
-      hoverItem = route;
-      emit(route);
+  void changeActiveItem(SidebarRoutes route) {
+    if (activeItem != route) {
+      activeItem = route;
+      emit(ChangeActiveItemState(route));
     }
   }
 
-  bool isActive(String route) => activeItem == route;
+  void changeHoverItem(SidebarRoutes? route) {
+    if (route != null && hoverItem != route && !isActive(route)) {
+      hoverItem = route;
+      emit(ChangeHoverItemState(route));
+    } else {
+      hoverItem = null;
+      emit(ChangeHoverItemState(null));
+    }
+  }
 
-  bool isHovering(String route) => hoverItem == route;
+  bool isActive(SidebarRoutes route) => activeItem == route;
 
-  void menuOnTap(BuildContext context, String route) {
+  bool isHovering(SidebarRoutes route) => hoverItem == route;
+
+  void menuOnTap(BuildContext context, SidebarRoutes route) {
+    if (route == SidebarRoutes.login) {
+      context.pushNamedAndRemoveUntilPage(route.path);
+      return;
+    }
+
     if (!isActive(route)) {
       changeActiveItem(route);
-      changeHoverItem('');
+      changeHoverItem(null);
 
-      if (DeviceUtility.isMobileScreen(context)) context.popPage(context);
-      if (DeviceUtility.isTabletScreen(context)) context.popPage(context);
-
-      context.pushNamedPage(route);
+      if (DeviceUtilities.isMobileScreen(context) ||
+          DeviceUtilities.isTabletScreen(context)) {
+        context.popPage(context);
+      }
     }
   }
+
+  /// extension to return screen depend on route that passed from sidebar
+  Widget getCurrentScreen() => activeItem.screen;
 }

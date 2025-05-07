@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 
 class ProfileMobileForm extends StatelessWidget {
   const ProfileMobileForm({super.key});
@@ -30,8 +30,10 @@ class ProfileMobileForm extends StatelessWidget {
               children: [
                 TextFormField(
                   validator:
-                      (value) =>
-                          TValidator.validateEmptyText('First Name', value),
+                      (value) => ValidatorFields.validateEmptyText(
+                        'First Name',
+                        value,
+                      ),
                   decoration: const InputDecoration(
                     hintText: 'First Name',
                     label: Text('First Name'),
@@ -43,7 +45,7 @@ class ProfileMobileForm extends StatelessWidget {
                 TextFormField(
                   validator:
                       (value) =>
-                          TValidator.validateEmptyText('Last Name', value),
+                          ValidatorFields.validateEmptyText('Last Name', value),
                   decoration: const InputDecoration(
                     hintText: 'Last Name',
                     label: Text('Last Name'),
@@ -53,7 +55,7 @@ class ProfileMobileForm extends StatelessWidget {
                 const SizedBox(height: AppSizes.spaceBtwInputFields),
 
                 TextFormField(
-                  validator: (value) => TValidator.validateEmail(value),
+                  validator: (value) => ValidatorFields.validateEmail(value),
                   decoration: const InputDecoration(
                     hintText: 'Email',
                     label: Text('Email'),
@@ -64,7 +66,8 @@ class ProfileMobileForm extends StatelessWidget {
                 const SizedBox(height: AppSizes.spaceBtwItems),
 
                 TextFormField(
-                  validator: (value) => TValidator.validatePhoneNumber(value),
+                  validator:
+                      (value) => ValidatorFields.validatePhoneNumber(value),
                   decoration: const InputDecoration(
                     hintText: 'Phone Number',
                     label: Text('Phone Number'),

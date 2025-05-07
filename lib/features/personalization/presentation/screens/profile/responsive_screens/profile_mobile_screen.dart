@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/personalization/presentation/screens/profile/responsive_screens/widgets/profile_mobile_form.dart';
 import 'package:t_store_admin_panel/features/personalization/presentation/screens/profile/widgets/profile_image_section.dart';
 

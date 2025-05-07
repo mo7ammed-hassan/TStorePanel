@@ -5,9 +5,9 @@ import 'package:get/get_utils/get_utils.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
 
 class TransactionSection extends StatelessWidget {
@@ -29,12 +29,12 @@ class TransactionSection extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                flex: DeviceUtility.isMobileScreen(context) ? 2 : 1,
+                flex: DeviceUtilities.isMobileScreen(context) ? 2 : 1,
                 child: Row(
                   children: [
                     const TRoundedImage(
                       imageType: ImageType.asset,
-                      image: TImages.paypal,
+                      image: AppImages.paypal,
                     ),
                     const SizedBox(width: AppSizes.md),
                     Expanded(

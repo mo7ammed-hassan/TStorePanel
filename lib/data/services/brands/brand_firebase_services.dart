@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:t_store_admin_panel/core/errors/firebase_error.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
+import 'package:t_store_admin_panel/core/utils/constants/firebase_collections.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_category_model.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
@@ -19,8 +19,8 @@ abstract class BrandFirebaseServices {
 class BrandFirebaseServicesImpl implements BrandFirebaseServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseErrorHandler _errorHandler = FirebaseErrorHandler();
-  final brandcollection = CollectionConstants.brands;
-  final brandCategoryCollection = CollectionConstants.brandCategories;
+  final brandcollection = FirebaseCollections.brands;
+  final brandCategoryCollection = FirebaseCollections.brandCategories;
 
   @override
   Future<Either<String, String>> createBrand(BrandModel brand) async {
@@ -91,7 +91,7 @@ class BrandFirebaseServicesImpl implements BrandFirebaseServices {
         for (var categoryId in categoryIds) {
           final categoryDoc =
               await _firestore
-                  .collection(CollectionConstants.categories)
+                  .collection(FirebaseCollections.categories)
                   .doc(categoryId)
                   .get();
 

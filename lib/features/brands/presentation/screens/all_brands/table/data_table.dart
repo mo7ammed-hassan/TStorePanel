@@ -2,8 +2,8 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/images_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/loaders/animation_loader.dart';
+import 'package:t_store_admin_panel/core/utils/constants/images.dart';
+import 'package:t_store_admin_panel/core/utils/loaders/animation_loader.dart';
 import 'package:t_store_admin_panel/data/abstract/cubit/base_data_table_states.dart';
 import 'package:t_store_admin_panel/data/models/brands/brand_model.dart';
 import 'package:t_store_admin_panel/features/brands/presentation/cubits/brand_cubit.dart';
@@ -33,11 +33,9 @@ class BrandDataTable extends StatelessWidget {
           dataRowHeight: lgTable ? 96 : 64,
 
           tableheight:
-              lgTable
-                  ? 96 * 11.5
-                  : DeviceUtility.isDesktopScreen(context)
-                  ? 760
-                  : 600,
+              // lgTable
+              //     ? 96 * 11.5:
+              DeviceUtilities.isDesktopScreen(context) ? 760 : 600,
           sortAscending: context.select(
             (BrandCubit brand) => brand.sortAscending,
           ),
@@ -48,7 +46,7 @@ class BrandDataTable extends StatelessWidget {
           columns: [
             DataColumn2(
               label: const Text('Brand'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? null : 200,
               onSort:
                   (columnIndex, ascending) => context
                       .read<BrandCubit>()
@@ -58,11 +56,11 @@ class BrandDataTable extends StatelessWidget {
             const DataColumn2(label: Text('Featured'), fixedWidth: 100),
             DataColumn2(
               label: const Text('Date'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? null : 200,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? null : 200,
             ),
             DataColumn2(
               label: const Text('Action'),
-              fixedWidth: DeviceUtility.isMobileScreen(context) ? 100 : 100,
+              fixedWidth: DeviceUtilities.isMobileScreen(context) ? 100 : 100,
             ),
           ],
           source: BrandRows(
@@ -83,7 +81,7 @@ class BrandDataTable extends StatelessWidget {
         width: 300,
         height: 300,
         text: 'Try adding some brands.',
-        animation: TImages.packaging,
+        animation: AppImages.packaging,
       ),
     );
   }

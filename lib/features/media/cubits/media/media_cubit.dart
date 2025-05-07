@@ -6,13 +6,13 @@ import 'package:flutter_dropzone/flutter_dropzone.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:t_store_admin_panel/core/errors/error_model.dart';
 import 'package:t_store_admin_panel/core/shared/bottom_sheets/media_buttom_sheet.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/text_strings.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/custom_dialogs.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/app_context.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/full_screen_loader.dart';
-import 'package:t_store_admin_panel/core/utils/utils/popups/loaders.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/text_strings.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/popups/custom_dialogs.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/app_context.dart';
+import 'package:t_store_admin_panel/core/utils/popups/full_screen_loader.dart';
+import 'package:t_store_admin_panel/core/utils/popups/loaders.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/domain/repositories/media/media_repository.dart';
 part 'media_state.dart';
@@ -317,7 +317,7 @@ class MediaCubit extends Cubit<MediaState> {
     emit(SelectedImagesLoadedState());
 
     // Stop loader
-    TFullScreenLoader.stopLoading();
+    FullScreenLoaderWidget.stopLoading();
 
     // Check if there are any failed uploads
     if (failedUploads.isEmpty) {

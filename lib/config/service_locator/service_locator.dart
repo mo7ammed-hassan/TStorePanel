@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/collection_constants.dart';
+import 'package:t_store_admin_panel/core/utils/constants/firebase_collections.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository.dart';
 import 'package:t_store_admin_panel/data/abstract/repos/generic_repository_impl.dart';
 import 'package:t_store_admin_panel/data/models/banners/banner_model.dart';
@@ -38,6 +38,7 @@ import 'package:t_store_admin_panel/features/categories/cubits/edit_category/edi
 import 'package:t_store_admin_panel/features/dashboard/presentation/cubits/cubit/dashboard_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/actions/media_action_cubit.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
+import 'package:t_store_admin_panel/features/products/cubits/cubit/product_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -73,7 +74,7 @@ void setupServiceLocator() {
 
   ///-----------------------------------------------------------------///
   /// ----Side Bar----
-  getIt.registerLazySingleton<SidebarCubit>(() => SidebarCubit());
+  getIt.registerFactory<SidebarCubit>(() => SidebarCubit());
 
   ///-----------------------------------------------------------------///
   /// ----Media----
@@ -118,7 +119,7 @@ void setupServiceLocator() {
   // Register BaseFirebaseServices for Banners
   getIt.registerLazySingleton<GenericFirebaseServices<BannerModel>>(
     () => GenericFirebaseServicesImpl<BannerModel>(
-      CollectionConstants.banners,
+      FirebaseCollections.banners,
       (json, [id]) => BannerModel.fromMap(json, id),
       (banner) => banner.toJson(),
     ),
@@ -167,11 +168,24 @@ void setupServiceLocator() {
   );
 
   ///----------------------------------------------------------------///
-
   /// ---- Products ----
+  /// Firebase Services
+  getIt.registerLazySingleton<GenericFirebaseServices<ProductModel>>(
+    () => GenericFirebaseServicesImpl<ProductModel>(
+      FirebaseCollections.products,
+      (json, [id]) => ProductModel.fromJson(json, id),
+      (product) => product.toJson(),
+    ),
+  );
   getIt.registerLazySingleton<GenericRepository<ProductModel>>(
     () => ProductRepoImpl(getIt<GenericFirebaseServices<ProductModel>>()),
   );
+  getIt.registerFactory<ProductCubit>(
+    () => ProductCubit(getIt<GenericRepository<ProductModel>>()),
+  );
+
+  ///----------------------------------------------------------------///
+  /// ---- Orders ----
 }
 
 /// 🔄 Reset the user manager after logout

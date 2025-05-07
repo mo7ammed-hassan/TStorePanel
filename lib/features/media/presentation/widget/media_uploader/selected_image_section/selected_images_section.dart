@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/t_rounded_image.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/media/cubits/media/media_cubit.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_uploader/selected_image_section/folder_selection_row.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/upload_button.dart';
@@ -33,7 +33,7 @@ class SelectedImagesSection extends StatelessWidget {
               const SizedBox(height: AppSizes.spaceBtwSections),
               _buildImagePreview(mediaCubit),
               const SizedBox(height: AppSizes.spaceBtwSections),
-              if (DeviceUtility.isMobileScreen(context))
+              if (DeviceUtilities.isMobileScreen(context))
                 SizedBox(
                   width: double.infinity,
                   child: UploadButton(

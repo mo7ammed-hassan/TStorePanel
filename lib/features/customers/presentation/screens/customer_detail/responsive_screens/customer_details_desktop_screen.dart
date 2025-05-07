@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/customers/presentation/widgets/customer_info_section.dart';
 import 'package:t_store_admin_panel/features/customers/presentation/widgets/customer_order_section.dart';
 import 'package:t_store_admin_panel/features/customers/presentation/widgets/shipping_address_section.dart';

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/data_table/table_header.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
+import 'package:t_store_admin_panel/features/products/cubits/cubit/product_cubit.dart';
 import 'package:t_store_admin_panel/features/products/presentation/screens/all_products/table/data_table.dart';
 
 class ProductTabletScreen extends StatelessWidget {
@@ -34,6 +36,9 @@ class ProductTabletScreen extends StatelessWidget {
                       buttonText: 'Add Product',
                       onPressed:
                           () => context.pushNamedPage(Routes.createProduct),
+                      searchOnChanged:
+                          (query) =>
+                              context.read<ProductCubit>().searchQuary(query),
                     ),
                     const SizedBox(height: AppSizes.spaceBtwItems),
 

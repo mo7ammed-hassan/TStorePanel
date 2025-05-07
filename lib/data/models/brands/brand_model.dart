@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/data/models/abstract/has_id.dart';
 import 'package:t_store_admin_panel/data/models/category/category_model.dart';
 

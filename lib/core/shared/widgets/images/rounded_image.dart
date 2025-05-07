@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/colors.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
-import '../../../utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
+import '../../../utils/constants/sizes.dart';
 
 class RoundedImage extends StatelessWidget {
   final String imageUrl;

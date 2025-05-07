@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/validators/validation.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/validators/validation.dart';
 
 class ProfileForm extends StatelessWidget {
   const ProfileForm({super.key});
@@ -33,7 +33,7 @@ class ProfileForm extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         validator:
-                            (value) => TValidator.validateEmptyText(
+                            (value) => ValidatorFields.validateEmptyText(
                               'First Name',
                               value,
                             ),
@@ -49,7 +49,7 @@ class ProfileForm extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         validator:
-                            (value) => TValidator.validateEmptyText(
+                            (value) => ValidatorFields.validateEmptyText(
                               'Last Name',
                               value,
                             ),
@@ -69,7 +69,8 @@ class ProfileForm extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        validator: (value) => TValidator.validateEmail(value),
+                        validator:
+                            (value) => ValidatorFields.validateEmail(value),
                         decoration: const InputDecoration(
                           hintText: 'Email',
                           label: Text('Email'),
@@ -83,7 +84,8 @@ class ProfileForm extends StatelessWidget {
                     Expanded(
                       child: TextFormField(
                         validator:
-                            (value) => TValidator.validatePhoneNumber(value),
+                            (value) =>
+                                ValidatorFields.validatePhoneNumber(value),
                         decoration: const InputDecoration(
                           hintText: 'Phone Number',
                           label: Text('Phone Number'),

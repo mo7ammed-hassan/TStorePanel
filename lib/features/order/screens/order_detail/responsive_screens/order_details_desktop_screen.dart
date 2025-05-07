@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/breadcrumb/breadcrumb_with_heading.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
 import 'package:t_store_admin_panel/features/order/widgets/billing_address.dart';
 import 'package:t_store_admin_panel/features/order/widgets/contact_section.dart';

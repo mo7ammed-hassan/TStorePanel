@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 
 class TableHeader extends StatelessWidget {
   final Function()? onPressed;
@@ -28,26 +28,32 @@ class TableHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Flexible(
-          flex: DeviceUtility.isDesktopScreen(context) ? 3 : 1,
-          child: showLeftWidget ? Row(
-            children: [
-              Flexible(
-                child: FittedBox(
-                  child: SizedBox(
-                    width: DeviceUtility.isMobileScreen(context) ? null : 200,
-                    child: ElevatedButton(
-                      onPressed: onPressed,
-                      child: FittedBox(child: Text(buttonText!)),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ) : const SizedBox.shrink(),
+          flex: DeviceUtilities.isDesktopScreen(context) ? 3 : 1,
+          child:
+              showLeftWidget
+                  ? Row(
+                    children: [
+                      Flexible(
+                        child: FittedBox(
+                          child: SizedBox(
+                            width:
+                                DeviceUtilities.isMobileScreen(context)
+                                    ? null
+                                    : 200,
+                            child: ElevatedButton(
+                              onPressed: onPressed,
+                              child: FittedBox(child: Text(buttonText!)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                  : const SizedBox.shrink(),
         ),
         const SizedBox(width: AppSizes.md),
         Expanded(
-          flex: DeviceUtility.isDesktopScreen(context) ? 2 : 1,
+          flex: DeviceUtilities.isDesktopScreen(context) ? 2 : 1,
           child: TextFormField(
             controller: searchController,
             onChanged: searchOnChanged,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 
 class ProductVisibilityWidget extends StatelessWidget {
   const ProductVisibilityWidget({super.key});

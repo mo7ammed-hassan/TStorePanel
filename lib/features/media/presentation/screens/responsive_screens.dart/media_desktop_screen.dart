@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_content/media_content_section.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_screen_header.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_uploader/media_uploader_section.dart';

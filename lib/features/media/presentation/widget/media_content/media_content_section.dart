@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/data/models/image/image_model.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_content/content_image_preview.dart';
 import 'package:t_store_admin_panel/features/media/presentation/widget/media_content/media_content_header.dart';

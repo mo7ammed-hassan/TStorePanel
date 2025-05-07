@@ -4,9 +4,9 @@ import 'package:get/get_utils/get_utils.dart';
 
 import 'package:t_store_admin_panel/core/shared/widgets/containers/rounded_container.dart';
 import 'package:t_store_admin_panel/core/utils/device/device_utility.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/enums.dart';
-import 'package:t_store_admin_panel/core/utils/utils/constants/sizes.dart';
-import 'package:t_store_admin_panel/core/utils/utils/helpers/helper_functions.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
+import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
 import 'package:t_store_admin_panel/data/models/order_model.dart';
 
 class OrderInfoSection extends StatelessWidget {
@@ -52,7 +52,7 @@ class OrderInfoSection extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: DeviceUtility.isTabletScreen(context) ? 2 : 1,
+                flex: DeviceUtilities.isTabletScreen(context) ? 2 : 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
