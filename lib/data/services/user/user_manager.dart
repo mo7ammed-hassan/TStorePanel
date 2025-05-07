@@ -46,7 +46,7 @@ class UserManager {
     // If user is authenticated (Logged In)
     if (user != null) {
       AppContext.navigatorKey.currentState?.pushReplacementNamed(
-        Routes.adminLayout,
+        Routes.dashboard,
       );
     } else {
       AppContext.navigatorKey.currentState?.pushReplacementNamed(Routes.login);

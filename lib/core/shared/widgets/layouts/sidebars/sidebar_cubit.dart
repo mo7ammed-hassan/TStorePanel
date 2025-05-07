@@ -47,6 +47,8 @@ class SidebarCubit extends Cubit<SidebarStates> {
           DeviceUtilities.isTabletScreen(context)) {
         context.popPage(context);
       }
+
+      context.pushNamedPage(route.path);
     }
   }
 
