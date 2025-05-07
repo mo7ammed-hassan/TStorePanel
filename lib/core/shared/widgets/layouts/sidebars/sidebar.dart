@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/images/circular_image.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/menu/menu_item.dart';
 import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/constants/images.dart';
 import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/helpers/helper_functions.dart';
@@ -59,42 +59,42 @@ class Sidebar extends StatelessWidget {
                       const MenuItem(
                         itemName: 'Dashboard',
                         icon: Iconsax.status,
-                        route: Routes.dashboard,
+                        route: SidebarRoutes.dashboard,
                       ),
                       const MenuItem(
                         itemName: 'Media',
                         icon: Iconsax.image,
-                        route: Routes.media,
+                        route: SidebarRoutes.media,
                       ),
                       const MenuItem(
                         itemName: 'Categories',
                         icon: Iconsax.category,
-                        route: Routes.categories,
+                        route: SidebarRoutes.categories,
                       ),
                       const MenuItem(
                         itemName: 'Brands',
                         icon: Iconsax.dcube,
-                        route: Routes.brands,
+                        route: SidebarRoutes.brands,
                       ),
                       const MenuItem(
                         itemName: 'Products',
                         icon: Iconsax.shopping_bag,
-                        route: Routes.products,
+                        route: SidebarRoutes.products,
                       ),
                       const MenuItem(
                         itemName: 'Banners',
                         icon: Iconsax.picture_frame,
-                        route: Routes.banners,
+                        route: SidebarRoutes.banners,
                       ),
                       const MenuItem(
                         itemName: 'Customers',
                         icon: Iconsax.profile_2user,
-                        route: Routes.customers,
+                        route: SidebarRoutes.customers,
                       ),
                       const MenuItem(
                         itemName: 'Orders',
                         icon: Iconsax.box,
-                        route: Routes.orders,
+                        route: SidebarRoutes.orders,
                       ),
 
                       // Other Menu Items
@@ -108,12 +108,12 @@ class Sidebar extends StatelessWidget {
                       const MenuItem(
                         itemName: 'Profile',
                         icon: Iconsax.user,
-                        route: Routes.profile,
+                        route: SidebarRoutes.profile,
                       ),
                       const MenuItem(
                         itemName: 'Settings',
                         icon: Iconsax.setting_2,
-                        route: Routes.settings,
+                        route: SidebarRoutes.settings,
                       ),
 
                       GestureDetector(
@@ -121,7 +121,7 @@ class Sidebar extends StatelessWidget {
                         child: const MenuItem(
                           itemName: 'Logout',
                           icon: Iconsax.logout,
-                          route: Routes.login,
+                          route: SidebarRoutes.login,
                         ),
                       ),
                     ],

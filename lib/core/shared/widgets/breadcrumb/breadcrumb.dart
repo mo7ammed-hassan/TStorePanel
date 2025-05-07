@@ -13,7 +13,7 @@ class Breadcrumb extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () => context.pushNamedAndRemoveUntilPage(Routes.dashboard),
+          onTap: () => context.pushNamedAndRemoveUntilPage(Routes.adminLayout),
           child: Padding(
             padding: const EdgeInsets.all(AppSizes.xs),
             child: Text(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
+import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_states.dart';
 import 'package:t_store_admin_panel/core/utils/constants/colors.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 
 class MenuItem extends StatelessWidget {
@@ -13,7 +15,7 @@ class MenuItem extends StatelessWidget {
   });
   final String itemName;
   final IconData icon;
-  final String route;
+  final SidebarRoutes route;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,9 @@ class MenuItem extends StatelessWidget {
           (hovering) =>
               hovering
                   ? menuCubit.changeHoverItem(route)
-                  : menuCubit.changeHoverItem(''),
-      child: BlocBuilder<SidebarCubit, String>(
+                  : menuCubit.changeHoverItem(null),
+      child: BlocBuilder<SidebarCubit, SidebarStates>(
+        buildWhen: (previous, current) => current is ChangeHoverItemState,
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: AppSizes.sm),

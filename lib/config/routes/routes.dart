@@ -44,6 +44,11 @@ class Routes {
     brands,
     products,
     banners,
+    orders,
+    settings,
+    profile,
+    customers,
+    login,
   ];
   // Test Screen
   static const String testScreen = '/test-screen';

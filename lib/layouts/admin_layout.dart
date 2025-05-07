@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t_store_admin_panel/config/service_locator/service_locator.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
+import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_states.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
+import 'package:t_store_admin_panel/core/utils/extensions/sidebar_extension.dart';
 import 'package:t_store_admin_panel/layouts/responsive_layouts/global_desktop_layout.dart';
 import 'package:t_store_admin_panel/layouts/responsive_layouts/global_mobile_layout.dart';
 import 'package:t_store_admin_panel/layouts/responsive_layouts/global_tablet_layout.dart';
@@ -14,16 +16,20 @@ class AdminLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<SidebarCubit>(),
+      create: (context) => SidebarCubit(),
       child: Scaffold(
         backgroundColor: backgroundColor,
-        body: BlocBuilder<SidebarCubit, String>(
+        body: BlocBuilder<SidebarCubit, SidebarStates>(
+          buildWhen: (previous, current) => current is ChangeActiveItemState,
           builder: (context, state) {
-            final screen = context.read<SidebarCubit>().getCurrentScreen();
+            final route =
+                state is ChangeActiveItemState
+                    ? state.route
+                    : SidebarRoutes.dashboard;
             return MainGlobalResponsiveLayout(
-              globalMobileLayout: GlobalMobileLayout(body: screen),
-              globalTabletLayout: GlobalTabletLayout(body: screen),
-              globalDesktopLayout: GlobalDesktopLayout(body: screen),
+              globalMobileLayout: GlobalMobileLayout(body: route.screen),
+              globalTabletLayout: GlobalTabletLayout(body: route.screen),
+              globalDesktopLayout: GlobalDesktopLayout(body: route.screen),
             );
           },
         ),

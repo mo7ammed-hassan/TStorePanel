@@ -1,5 +1,3 @@
-/// Switch of Custom Brand-Text-Size Widget
-///
 enum ProductType { single, variable }
 
 enum TextSizes { small, medium, large }
@@ -24,7 +22,18 @@ enum ImageType { network, memory, file, asset }
 
 enum AppRole { admin, user }
 
-enum ProductVisibility {
-  pubblished,
-  hidden,
+enum ProductVisibility { pubblished, hidden }
+
+enum SidebarRoutes {
+  dashboard,
+  products,
+  orders,
+  media,
+  settings,
+  profile,
+  categories,
+  brands,
+  customers,
+  banners,
+  login,
 }

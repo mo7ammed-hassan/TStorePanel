@@ -34,12 +34,12 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   Future<void> fetchProducts() async {
-    emit(ProductsLoadingState());
+    if (!isClosed) emit(ProductsLoadingState());
 
     var result = await productRepo.fetchItems();
     result.fold(
       (error) {
-        emit(ProductErrorState(error));
+        if (!isClosed) emit(ProductErrorState(error));
       },
       (data) {
         debugPrint('Products Length: ${data.length}');
@@ -49,7 +49,7 @@ class ProductCubit extends Cubit<ProductState> {
         selectedRows
           ..clear()
           ..addAll(List.generate(data.length, (index) => false));
-        emit(ProductsLoadedState(data));
+        if (!isClosed) emit(ProductsLoadedState(data));
       },
     );
   }
@@ -70,8 +70,8 @@ class ProductCubit extends Cubit<ProductState> {
       // update selected thumbnail image
       selectedThumbnailImageUrl = selectedImage.url;
 
-      // emit selected thumbnail image
-      emit(SelectedThumbnailImage(selectedThumbnailImageUrl));
+      // if(!isClosed) emit selected thumbnail image
+      if (!isClosed) emit(SelectedThumbnailImage(selectedThumbnailImageUrl));
 
       // because we select thumbnail image only once .. we must reset the checkbox for this image
       mediaActionCubit.toggleImageCheckBox(selectedImage, false, false);
@@ -94,7 +94,7 @@ class ProductCubit extends Cubit<ProductState> {
     // Handle selected images
     if (selectedImages != null && selectedImages.isNotEmpty) {
       additionalProductImagesUrls = List.from(selectedImages.map((e) => e.url));
-      emit(SelectedAdditionalImage(additionalProductImagesUrls));
+      if (!isClosed) emit(SelectedAdditionalImage(additionalProductImagesUrls));
     }
 
     debugPrint(
@@ -105,7 +105,7 @@ class ProductCubit extends Cubit<ProductState> {
   /// -- Remove Additional Image --
   void removeImage(int index) async {
     additionalProductImagesUrls.removeAt(index);
-    emit(SelectedThumbnailImage(selectedThumbnailImageUrl));
+    if (!isClosed) emit(SelectedThumbnailImage(selectedThumbnailImageUrl));
   }
 
   /// -- show confirmation dialog for deleting --
@@ -136,7 +136,7 @@ class ProductCubit extends Cubit<ProductState> {
           title: 'Error',
           message: 'Failed to delete item.\n$error',
         );
-        emit(DeleteItemFailureState(error));
+        if (!isClosed) emit(DeleteItemFailureState(error));
       },
       (_) {
         removeItemFromList(product);
@@ -147,7 +147,7 @@ class ProductCubit extends Cubit<ProductState> {
           message: 'Your item has been deleted successfully.',
         );
 
-        emit(ProductsLoadedState(List.from(allProducts)));
+        if (!isClosed) emit(ProductsLoadedState(List.from(allProducts)));
       },
     );
   }
@@ -162,7 +162,7 @@ class ProductCubit extends Cubit<ProductState> {
     allProducts.remove(item);
     selectedRows.removeAt(index);
 
-    emit(ProductsLoadedState(List.from(allProducts)));
+    if (!isClosed) emit(ProductsLoadedState(List.from(allProducts)));
   }
 
   /// -- search quary --
@@ -180,6 +180,6 @@ class ProductCubit extends Cubit<ProductState> {
             .toList(),
       );
     }
-    emit(ProductsLoadedState((List.from(filteredProducts))));
+    if (!isClosed) emit(ProductsLoadedState((List.from(filteredProducts))));
   }
 }
