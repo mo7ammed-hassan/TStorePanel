@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store_admin_panel/config/routes/routes.dart';
+import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/constants/images.dart';
 import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/constants/text_strings.dart';
@@ -111,6 +113,10 @@ class LoginForm extends StatelessWidget {
                 }
                 if (state is SignInSuccessState) {
                   FullScreenLoaderWidget.stopLoading();
+                  context.read<SidebarCubit>().menuOnTap(
+                    context,
+                    SidebarRoutes.dashboard,
+                  );
                   signInCubit.redirect();
                 }
                 if (state is SignInErrorState) {
