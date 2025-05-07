@@ -26,6 +26,7 @@ class AdminLayout extends StatelessWidget {
                 state is ChangeActiveItemState
                     ? state.route
                     : SidebarRoutes.dashboard;
+
             return MainGlobalResponsiveLayout(
               globalMobileLayout: GlobalMobileLayout(body: route.screen),
               globalTabletLayout: GlobalTabletLayout(body: route.screen),

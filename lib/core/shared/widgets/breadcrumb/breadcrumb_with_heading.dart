@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:t_store_admin_panel/config/routes/routes.dart';
 import 'package:t_store_admin_panel/core/shared/widgets/header/page_heading.dart';
+import 'package:t_store_admin_panel/core/shared/widgets/layouts/sidebars/sidebar_cubit.dart';
+import 'package:t_store_admin_panel/core/utils/constants/enums.dart';
 import 'package:t_store_admin_panel/core/utils/constants/sizes.dart';
 import 'package:t_store_admin_panel/core/utils/helpers/navigation.dart';
 
@@ -34,8 +36,10 @@ class BreadcrumbWithHeading extends StatelessWidget {
             FittedBox(
               child: InkWell(
                 onTap:
-                    () =>
-                        context.pushNamedAndRemoveUntilPage(Routes.dashboard),
+                    () => context.read<SidebarCubit>().menuOnTap(
+                      context,
+                      SidebarRoutes.dashboard,
+                    ),
                 child: Padding(
                   padding: const EdgeInsets.all(AppSizes.xs),
                   child: Text(
@@ -57,7 +61,7 @@ class BreadcrumbWithHeading extends StatelessWidget {
                           i == breadcrumbs.length - 1
                               ? null
                               : () => context.pushNamedPage(breadcrumbs[i]),
-              
+
                       child: Padding(
                         padding: const EdgeInsets.all(AppSizes.xs),
                         // Format the breadcrumb item capitalize and remove leading '/'
