@@ -98,7 +98,7 @@ class ProductAdditionalImages extends StatelessWidget {
           height: 80,
           width: 80,
           backgroundColor:
-              isDark ? AppColors.darkerGrey : AppColors.primaryBackground,
+              isDark ?const Color.fromARGB(255, 104, 102, 102) : AppColors.primaryBackground,
         );
       },
     );

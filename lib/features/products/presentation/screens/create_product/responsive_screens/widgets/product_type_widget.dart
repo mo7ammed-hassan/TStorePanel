@@ -9,19 +9,32 @@ class ProductTypeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('Product Type', style: Theme.of(context).textTheme.bodyMedium),
-        const SizedBox(width: AppSizes.spaceBtwItems),
-        RadioMenuButton(
-          value: ProductType.single,
-          groupValue: ProductType.single,
-          onChanged: (value) {},
-          child: const Text('Single'),
+        Expanded(
+          child: Text(
+            'Product Type',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
-        RadioMenuButton(
-          value: ProductType.variable,
-          groupValue: ProductType.variable,
-          onChanged: (value) {},
-          child: const Text('Variable'),
+        const SizedBox(width: AppSizes.spaceBtwItems),
+        Flexible(
+          child: FittedBox(
+            child: RadioMenuButton(
+              value: ProductType.single,
+              groupValue: ProductType.single,
+              onChanged: (value) {},
+              child: const Text('Single'),
+            ),
+          ),
+        ),
+        Flexible(
+          child: FittedBox(
+            child: RadioMenuButton(
+              value: ProductType.variable,
+              groupValue: ProductType.variable,
+              onChanged: (value) {},
+              child: const Text('Variable'),
+            ),
+          ),
         ),
       ],
     );
